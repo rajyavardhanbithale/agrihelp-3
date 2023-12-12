@@ -57,7 +57,12 @@ rice = {
       "initialInvestment": "The initial investment in rice cultivation ranges from INR 20,000 to INR 50,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation facilities, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for rice cultivation typically range from INR 15,000 to INR 30,000 per acre. These costs cover water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Rice cultivation can be profitable with careful management. Potential income sources include the sale of rice grains, straw, and by-products. Returns on investment can vary but often result in a net profit of INR 20,000 to INR 50,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://t4.ftcdn.net/jpg/04/73/73/37/360_F_473733756_rS9ps9Ko6RcIj2j7G5FVLei4NdL9717r.jpg",
+        "https://media.istockphoto.com/id/153737841/photo/rice.webp?b=1&s=170667a&w=0&k=20&c=SF6Ks-8AYpbPTnZlGwNCbCFUh-0m3R5sM2hl-C5r_Xc=",
+        "https://images.unsplash.com/photo-1602989106211-81de671c23a9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmljZSUyMGZpZWxkfGVufDB8fDB8fHww"
+      ]
   }
 }
 
@@ -119,7 +124,12 @@ maize = {
       "initialInvestment": "The initial investment in maize cultivation ranges from INR 15,000 to INR 40,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for maize cultivation typically range from INR 12,000 to INR 25,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Maize cultivation can be profitable, with income sources including the sale of maize grains, silage, and other by-products. Returns on investment can vary but often result in a net profit of INR 18,000 to INR 45,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://images.pexels.com/photos/5029646/pexels-photo-5029646.jpeg?cs=srgb&dl=pexels-rajesh-s-balouria-5029646.jpg&fm=jpg",
+        "https://t3.ftcdn.net/jpg/00/78/37/68/360_F_78376843_DWf4xvIua3T0xZPKdmzUuVnpn9oEyTQ2.jpg",
+        "https://i.pinimg.com/736x/d2/a2/36/d2a23675b82096e75dd6dae178bfe095.jpg"
+      ]
   }
 }
 
@@ -175,7 +185,12 @@ chickpea={
       "initialInvestment": "The initial investment in chickpea cultivation ranges from INR 15,000 to INR 30,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for chickpea cultivation typically range from INR 10,000 to INR 20,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Chickpea cultivation can be profitable, with income sources including the sale of chickpea seeds. Returns on investment can vary but often result in a net profit of INR 12,000 to INR 25,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://media.istockphoto.com/id/1161019365/photo/chickpeas-ripening-in-the-field.jpg?s=612x612&w=0&k=20&c=lXqgt6lRjgxdh2GY9VVQWRUCJkW4ysrQcjQNlN3-eXk=",
+        "https://plus.unsplash.com/premium_photo-1675237624857-7d995e29897d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGNoaWNrcGVhc3xlbnwwfHwwfHx8MA%3D%3D",
+        "https://t3.ftcdn.net/jpg/02/36/71/06/360_F_236710608_5IOedmmKzToTBAn2bwPbopw5YRJrXl4S.jpg"
+      ]
   }
 }
 
@@ -234,7 +249,12 @@ kidneybeans= {
       "initialInvestment": "The initial investment in kidney bean cultivation ranges from INR 18,000 to INR 35,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for kidney bean cultivation typically range from INR 12,000 to INR 25,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Kidney bean cultivation can be profitable, with income sources including the sale of kidney beans. Returns on investment can vary but often result in a net profit of INR 15,000 to INR 30,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://i.pinimg.com/474x/c8/ae/07/c8ae07283ff1839ca5b684f6bae8c49c.jpg",
+        "https://cdn.pixabay.com/photo/2022/12/17/19/11/kidney-beans-7662225_640.jpg",
+        "https://media.istockphoto.com/id/118205697/photo/french-beans.jpg?s=612x612&w=0&k=20&c=xOsBYmoxdr49ykC0VvvHB4c9dQCNuflw49GzZIaXGng="
+      ]
   }
 }
 
@@ -293,7 +313,12 @@ pigeonpeas={
       "initialInvestment": "The initial investment in pigeon pea cultivation ranges from INR 20,000 to INR 40,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for pigeon pea cultivation typically range from INR 15,000 to INR 30,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Pigeon pea cultivation can be profitable, with income sources including the sale of pigeon peas. Returns on investment can vary but often result in a net profit of INR 18,000 to INR 35,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://gardenerspath.com/wp-content/uploads/2022/02/How-to-Grow-Pigeon-Peas-Feature.jpg",
+        "https://tastedrecipes.com/wp-content/uploads/2020/04/pigeon-peas.jpg",
+        "https://2.bp.blogspot.com/_0HaYveCOm0A/TDvbL_qR_3I/AAAAAAAAA8g/odJX1LKIsyQ/s400/Red+gram+5.PNG"
+      ]
   }
 }
 
@@ -353,7 +378,12 @@ mothbeans={
       "initialInvestment": "The initial investment in moth bean cultivation ranges from INR 15,000 to INR 25,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for moth bean cultivation typically range from INR 10,000 to INR 20,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Moth bean cultivation can be profitable, with income sources including the sale of moth beans. Returns on investment can vary but often result in a net profit of INR 12,000 to INR 22,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://thepaharilife.com/cdn/shop/products/Soybeans_1200x1200.jpg?v=1597947077",
+        "https://t3.ftcdn.net/jpg/00/93/46/88/360_F_93468849_mMHRNCMVow9kzoL6xigIBjrEKdv1H3St.jpg",
+        "https://t4.ftcdn.net/jpg/03/57/22/93/360_F_357229361_zNsYUtEviitNcha8QQP6WwukBd7rT3KJ.jpg"
+      ]
   }
 }
 
@@ -413,7 +443,12 @@ mungbean={
       "initialInvestment": "The initial investment in mung bean cultivation ranges from INR 10,000 to INR 20,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for mung bean cultivation typically range from INR 8,000 to INR 15,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Mung bean cultivation can be profitable, with income sources including the sale of mung beans. Returns on investment can vary but often result in a net profit of INR 8,000 to INR 18,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://thumbs.dreamstime.com/b/mung-bean-plant-close-up-fruits-scientific-name-vigna-radiata-195861073.jpg",
+        "https://media.istockphoto.com/id/647288162/photo/mung-beans-in-a-bowl.jpg?s=612x612&w=0&k=20&c=58df_gZryIRIVKX-QOYR5hquyqFxhZrVaN8g5BzXfqE=",
+        "https://www.researchgate.net/publication/337481569/figure/fig1/AS:896232671174656@1590689928367/Cover-cropping-of-mung-bean-Vigna-radiata-in-summer-April-June.png"
+      ]
   }
 }
 
@@ -473,7 +508,12 @@ blackgram={
       "initialInvestment": "The initial investment in black gram cultivation ranges from INR 12,000 to INR 22,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for black gram cultivation typically range from INR 8,000 to INR 15,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Black gram cultivation can be profitable, with income sources including the sale of black gram. Returns on investment can vary but often result in a net profit of INR 10,000 to INR 20,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://agritech.tnau.ac.in/agriculture/CropProduction/Pulses/gram.jpeg",
+        "https://t3.ftcdn.net/jpg/03/85/50/44/360_F_385504476_rAoFaLoV5kighPu8KKUtmIsa6naJ5Alm.jpg",
+        "https://images.newindianexpress.com/uploads/user/imagelibrary/2022/3/17/w900X450/Pulses.jpg?w=400&dpr=2.6"
+      ]
   }
 }
 
@@ -532,7 +572,12 @@ lentil={
       "initialInvestment": "The initial investment in lentil cultivation ranges from INR 15,000 to INR 25,000 per acre. This includes expenses for high-quality seeds, land preparation, irrigation, fertilizers, pesticides, and essential equipment.",
       "annualExpenses": "Annual expenses for lentil cultivation typically range from INR 10,000 to INR 20,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, labor, and equipment maintenance.",
       "profitability": "Lentil cultivation can be profitable, with income sources including the sale of lentils. Returns on investment can vary but often result in a net profit of INR 12,000 to INR 22,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://media.istockphoto.com/id/518123460/photo/lentil-organic-plant.jpg?s=612x612&w=0&k=20&c=Zd8qsm-ZAJOeJdEAbY14ZJYkoy3eXFVTDWW3byQzdew=",
+        "https://png.pngtree.com/thumb_back/fh260/background/20220311/pngtree-ingredients-a-bowl-of-lentils-hd-photography-material-image_1032132.jpg",
+        "https://media.istockphoto.com/id/956458060/photo/close-up-of-lentil-plant.jpg?s=612x612&w=0&k=20&c=984-cZ0i-NJl-7B4WJ1zPcaRbPZAFKHaOlsQdHiNLSc="
+      ]
   }
 }
 
@@ -592,7 +637,12 @@ pomegranate={
       "initialInvestment": "The initial investment in establishing a pomegranate orchard ranges from INR 50,000 to INR 1,00,000 per acre. This includes expenses for saplings, land preparation, irrigation infrastructure, fertilizers, and necessary equipment.",
       "annualExpenses": "Annual expenses for pomegranate cultivation typically range from INR 30,000 to INR 50,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, pruning, and labor.",
       "profitability": "Pomegranate cultivation can be profitable, with income sources including the sale of fresh pomegranates and processed products. Returns on investment can vary but often result in a net profit of INR 40,000 to INR 80,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://media.istockphoto.com/id/884148434/photo/pomegranate-trees.jpg?s=612x612&w=0&k=20&c=h7X1DPtPiY-GrMiguVx59IscC0hgUGe4Wg1fG3spIDs=",
+        "https://t3.ftcdn.net/jpg/00/26/76/50/360_F_26765053_pRDiXJPktT6uhzr2YjfqiVP3PTg8wEgc.jpg",
+        "https://www.adama.com/sites/adama_global/files/styles/article_tablet/public/hero-images/pomegranates.jpg?h=0949cd16&itok=Fkypruv0"
+      ]
   }
 }
 
@@ -651,7 +701,12 @@ banana={
       "initialInvestment": "The initial investment in establishing a banana plantation ranges from INR 30,000 to INR 60,000 per acre. This includes expenses for planting material, land preparation, irrigation infrastructure, fertilizers, and necessary equipment.",
       "annualExpenses": "Annual expenses for banana cultivation typically range from INR 20,000 to INR 40,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, pruning, and labor.",
       "profitability": "Banana cultivation can be profitable, with income sources including the sale of fresh bananas. Returns on investment can vary but often result in a net profit of INR 25,000 to INR 50,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://t3.ftcdn.net/jpg/03/80/04/40/360_F_380044050_8MmkUv5aT6CEs4NSNzch4BepNl3lzo2y.jpg",
+        "https://media.istockphoto.com/id/1400057530/photo/bananas-isolated.webp?b=1&s=170667a&w=0&k=20&c=uiSdjIQkTr7S4gEdW_oB_5zfFYhpfe0LP-CryQl49w4=",
+        "https://thumbs.dreamstime.com/b/banana-field-banana-farm-blue-sky-background-agricultural-background-concept-banana-field-banana-farm-blue-sky-103368531.jpg"
+      ]
   }
 }
 
@@ -713,7 +768,12 @@ mango = {
       "initialInvestment": "The initial investment in establishing a mango orchard ranges from INR 50,000 to INR 1,00,000 per acre. This includes expenses for grafted saplings, land preparation, irrigation infrastructure, fertilizers, and necessary equipment.",
       "annualExpenses": "Annual expenses for mango cultivation typically range from INR 30,000 to INR 50,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, pruning, and labor.",
       "profitability": "Mango cultivation can be profitable, with income sources including the sale of fresh mangoes. Returns on investment can vary but often result in a net profit of INR 40,000 to INR 80,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://thumbs.dreamstime.com/b/mango-tree-17752322.jpg",
+        "https://e1.pxfuel.com/desktop-wallpaper/29/663/desktop-wallpaper-mango-fruit-alphonso-mango-thumbnail.jpg",
+        "https://media.istockphoto.com/id/1169014135/photo/mango-trees-on-farm.jpg?s=612x612&w=0&k=20&c=fa0tSSY6WzE4QwmL9aZALPivw5bPib2Y8Ma8Dj1oVmI="
+      ]
   }
 }
 
@@ -775,7 +835,12 @@ grapes = {
       "initialInvestment": "The initial investment in establishing a grape vineyard ranges from INR 1,00,000 to INR 2,00,000 per acre. This includes expenses for grapevines, trellising, irrigation infrastructure, fertilizers, and necessary equipment.",
       "annualExpenses": "Annual expenses for grape cultivation typically range from INR 50,000 to INR 1,00,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, pruning, and labor.",
       "profitability": "Grape cultivation can be profitable, with income sources including the sale of fresh table grapes, raisins, and grapes for wine production. Returns on investment can vary but often result in a net profit of INR 60,000 to INR 1,20,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://nurserylive.com/cdn/shop/products/nurserylive-grape-angoor-plant-seedless-plant.jpg?v=1634220732",
+        "https://media.istockphoto.com/id/172304886/photo/bunch-of-green-grapes-laying.webp?b=1&s=170667a&w=0&k=20&c=4QqihK0xD6aNdx2_mDwbUgu_Fo6A_ZLfP5lBC8RTsT0=",
+        "https://tourdefarm.in/wp-content/uploads/2021/01/IMG_0326-001.jpg"
+      ]
   }
 }
 
@@ -837,7 +902,12 @@ watermelon={
       "initialInvestment": "The initial investment in establishing a watermelon patch ranges from INR 15,000 to INR 30,000 per acre. This includes expenses for seeds or seedlings, land preparation, irrigation infrastructure, fertilizers, and necessary equipment.",
       "annualExpenses": "Annual expenses for watermelon cultivation typically range from INR 10,000 to INR 20,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, pruning, and labor.",
       "profitability": "Watermelon cultivation can be profitable, with income primarily from the sale of fresh watermelons. Returns on investment can vary but often result in a net profit of INR 20,000 to INR 40,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://media.istockphoto.com/id/177109945/photo/watermelone.jpg?s=612x612&w=0&k=20&c=WbYEDJqi_hhYxjG5nGgNIHi5aJtCQgxz4zqwUC5D_9M=",
+        "https://thumbs.dreamstime.com/b/whole-watermelon-slice-white-background-as-package-design-element-45127224.jpg",
+        "https://media.istockphoto.com/id/930721330/photo/harvesting-ripe-watermelons-on-the-field.jpg?s=612x612&w=0&k=20&c=xn9MHWLOKBK6DhiBpo_yHhSxLnWVu9GkHxtwfPgeV-w="
+      ]
   }
 }
 
@@ -899,7 +969,12 @@ muskmelon={
       "initialInvestment": "The initial investment in establishing a muskmelon patch ranges from INR 15,000 to INR 30,000 per acre. This includes expenses for seeds or seedlings, land preparation, irrigation infrastructure, fertilizers, and necessary equipment.",
       "annualExpenses": "Annual expenses for muskmelon cultivation typically range from INR 10,000 to INR 20,000 per acre. These costs cover inputs such as water management, fertilizers, pesticides, pruning, and labor.",
       "profitability": "Muskmelon cultivation can be profitable, with income primarily from the sale of fresh muskmelons. Returns on investment can vary but often result in a net profit of INR 20,000 to INR 40,000 per acre, depending on market prices, yield, and cost efficiency."
-    }
+    },
+    "images": [
+        "https://t3.ftcdn.net/jpg/00/43/56/74/360_F_43567462_gkJKJYAJPTs030gixPgIUv4AjUXksGBP.jpg",
+        "https://c1.wallpaperflare.com/preview/210/814/490/muskmelons-cantaloupes-fruit-melon.jpg",
+        "https://t4.ftcdn.net/jpg/00/14/48/49/360_F_14484920_baveT2A1UDDcYXMUoBBkyRB8oUBJycsQ.jpg"
+      ]
   }
 }
 
@@ -962,7 +1037,12 @@ apple={
       "initialInvestment": "The initial investment in establishing an apple orchard can vary widely based on factors such as orchard size, tree density, and infrastructure. Costs typically range from INR 1,00,000 to INR 5,00,000 per acre.",
       "annualExpenses": "Annual expenses for apple cultivation, including irrigation, fertilizers, pest control, and labor, can range from INR 50,000 to INR 2,00,000 per acre.",
       "profitability": "Apple cultivation can be profitable, with returns depending on factors such as yield, market prices, and orchard management practices. Net profits can range from INR 50,000 to INR 3,00,000 per acre, or more, in successful orchards."
-    }
+    },
+    "images": [
+        "https://c1.wallpaperflare.com/preview/6/839/613/apple-apple-tree-fruit-red.jpg",
+        "https://c4.wallpaperflare.com/wallpaper/567/218/528/apples-fruit-cut-leaf-wallpaper-preview.jpg",
+        "https://i.pinimg.com/originals/7b/20/78/7b2078333337652b76aaaf9dcb679d3f.jpg"
+      ]
   }
 }
 
@@ -1025,7 +1105,12 @@ orange={
       "initialInvestment": "The initial investment in establishing an orange orchard can vary based on factors such as orchard size, tree density, and infrastructure. Costs typically range from INR 50,000 to INR 2,50,000 per acre.",
       "annualExpenses": "Annual expenses for orange cultivation, including irrigation, fertilizers, pest control, and labor, can range from INR 30,000 to INR 1,50,000 per acre.",
       "profitability": "Orange cultivation can be profitable, with returns depending on factors such as yield, market prices, and orchard management practices. Net profits can range from INR 30,000 to INR 1,50,000 per acre, or more, in successful orchards."
-    }
+    },
+    "images": [
+        "https://media.istockphoto.com/id/652206996/photo/orange-tree.webp?b=1&s=170667a&w=0&k=20&c=UQ-d8U19oYHJSCgGxtmWJhB5d9hP5xFafqjUFCrbD64=",
+        "https://media.istockphoto.com/id/1227301369/photo/whole-cross-section-and-quarter-of-fresh-organic-navel-orange-with-leaves-in-perfect-shape-on.webp?b=1&s=170667a&w=0&k=20&c=uimgulwrNTf72rAbIOdLvObEgsJSZoCqWm9Qxojjl7Q=",
+        "https://png.pngtree.com/thumb_back/fw800/background/20230728/pngtree-oranges-on-trees-growing-in-a-field-image_10199134.jpg"
+      ]
   }
 }
 
@@ -1088,7 +1173,12 @@ papaya={
       "initialInvestment": "The initial investment in establishing a papaya plantation can vary based on factors such as plantation size, variety chosen, and infrastructure. Costs typically range from INR 20,000 to INR 50,000 per acre.",
       "annualExpenses": "Annual expenses for papaya cultivation, including irrigation, fertilizers, pest control, and labor, can range from INR 15,000 to INR 30,000 per acre.",
       "profitability": "Papaya cultivation can be profitable, with returns depending on factors such as yield, market prices, and effective management practices. Net profits can range from INR 20,000 to INR 40,000 per acre, or more, in successful plantations."
-    }
+    },
+    "images": [
+        "https://t4.ftcdn.net/jpg/01/26/53/53/360_F_126535374_KOQ7fl6HBFo2JkNUZf6k4PMxOmZuB7ZL.jpg",
+        "https://t3.ftcdn.net/jpg/01/77/22/44/360_F_177224431_6S50Gr64wFWjkDHBGXq7PkaG5kcrgEgd.jpg",
+        "https://previews.123rf.com/images/naazaa/naazaa1311/naazaa131100127/24164485-papaya-field.jpg"
+      ]
   }
 }
 
@@ -1152,7 +1242,12 @@ coconut={
       "initialInvestment": "The initial investment in establishing a coconut plantation can vary based on factors such as plantation size, variety chosen, and infrastructure. Costs typically range from INR 30,000 to INR 1,00,000 per acre.",
       "annualExpenses": "Annual expenses for coconut cultivation, including irrigation, fertilizers, pest control, and labor, can range from INR 20,000 to INR 50,000 per acre.",
       "profitability": "Coconut cultivation can be profitable, with returns depending on factors such as yield, market prices, and effective management practices. Net profits can range from INR 40,000 to INR 1,50,000 per acre, or more, in successful plantations."
-    }
+    },
+    "images": [
+        "https://cdn.pixabay.com/photo/2013/08/14/16/32/coconut-palm-172530_640.jpg",
+        "https://media.istockphoto.com/id/543564492/photo/coconut-with-half-and-leaves-on-white-background.jpg?b=1&s=612x612&w=0&k=20&c=dW2Fx6b2TUNi2Skm7UdKZzs693hehs7DgCrd5ogUApY=",
+        "https://t4.ftcdn.net/jpg/03/40/33/51/360_F_340335138_SgVBzoTaiJpP1zJaoeprKeUlaOmLoJv7.jpg"
+      ]
   }
 }
 
@@ -1214,7 +1309,12 @@ cotton={
       "initialInvestment": "The initial investment in cotton cultivation includes costs for seeds, land preparation, irrigation, fertilizers, and pest control. Initial investments can range from INR 20,000 to INR 50,000 per acre.",
       "annualExpenses": "Annual expenses for cotton cultivation include additional costs for irrigation, fertilizers, pest control, and labor. These can range from INR 15,000 to INR 30,000 per acre.",
       "profitability": "Cotton cultivation can be profitable, with returns influenced by factors such as yield, fiber quality, and market prices. Net profits can range from INR 30,000 to INR 80,000 per acre, or more, in successful cotton farms."
-    }
+    },
+    "images": [
+        "https://c0.wallpaperflare.com/preview/928/612/864/cotton-tajikistan-buttermilk-toimiston.jpg",
+        "https://png.pngtree.com/thumb_back/fh260/background/20210928/pngtree-cotton-white-cotton-flower-background-image_904335.png",
+        "https://media.istockphoto.com/id/157312532/photo/white-ripe-cotton-crop-plants-rows-field-ready-for-harvest.jpg?s=612x612&w=0&k=20&c=hMxmVUdA5iQ6mT4fLtwS4jeFtmjsb2mx_5jXEgtNiVM="
+      ]
   }
 }
 
@@ -1275,7 +1375,12 @@ jute={
       "initialInvestment": "The initial investment in jute cultivation includes costs for seeds, land preparation, irrigation, and pest control. Initial investments can range from INR 15,000 to INR 30,000 per acre.",
       "annualExpenses": "Annual expenses for jute cultivation include additional costs for irrigation, organic fertilizers, pest control, and labor. These can range from INR 10,000 to INR 20,000 per acre.",
       "profitability": "Jute cultivation can be profitable, with returns influenced by factors such as fiber quality, market prices, and efficient management practices. Net profits can range from INR 20,000 to INR 40,000 per acre, or more, in successful jute farms."
-    }
+    },
+    "images": [
+        "https://media.istockphoto.com/id/1416047417/photo/jute-plants-in-the-field-jute-cultivation-in-assam-in-india.jpg?s=612x612&w=0&k=20&c=TV_wV6PNlRLK1DiN4hb_380mwrnG8MELBeef2xcwBb8=",
+        "https://cdn.pixabay.com/photo/2015/10/23/13/37/jute-1003017_640.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Jute_Field.jpg/1200px-Jute_Field.jpg"
+      ]
   }
 }
 coffe={
@@ -1338,7 +1443,11 @@ coffe={
       "initialInvestment": "The initial investment in coffee cultivation includes costs for seeds or seedlings, land preparation, irrigation, and shade management. Initial investments can range from INR 50,000 to INR 1,50,000 per acre.",
       "annualExpenses": "Annual expenses for coffee cultivation include additional costs for irrigation, organic fertilizers, pest control, and labor. These can range from INR 30,000 to INR 80,000 per acre.",
       "profitability": "Coffee cultivation can be profitable, with returns influenced by factors such as altitude, coffee variety, and quality. Net profits can range from INR 40,000 to INR 1,50,000 per acre, or more, in successful coffee plantations."
-    }
+    },
+    "images": [
+        "https://images.unsplash.com/photo-1552346989-e069318e20a5?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmVlJTIwcGxhbnR8ZW58MHx8MHx8fDA%3D",
+        "https://images.unsplash.com/photo-1524350876685-274059332603?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNvZmZlZSUyMGJlYW5zfGVufDB8fDB8fHww",
+        "https://t4.ftcdn.net/jpg/01/67/73/67/360_F_167736741_eyk48TBABBg6PI3Yt93ehcYuwgWecQY6.jpg"
+      ]
   }
 }
-

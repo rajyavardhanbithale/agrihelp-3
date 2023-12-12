@@ -1,14 +1,15 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import "../App.css";
-import { arrowDownCircle, arrowUpCircle } from 'ionicons/icons';
+import { arrowDownCircle, arrowUpCircle, reloadCircleOutline, reloadOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import axios from 'axios';
 
 
 
 export default function Crop() {
-  const [crop, setCrop] = useState({})
+  const [crop, setCrop] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     Nitrogen: '',
@@ -28,6 +29,7 @@ export default function Crop() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
 
     // Validate form fields
@@ -47,6 +49,8 @@ export default function Crop() {
       const response = await axios.get(`http://127.0.0.1:8000/v2/crop/recommendation?${queryParams}`);
       // console.log(response.data); // Handle the response as needed
       setCrop(response.data)
+      setLoading(false)
+      document.getElementById("recommendation").scrollIntoView();
     } catch (error) {
       console.error('Error submitting the form:', error);
     }
@@ -141,8 +145,15 @@ export default function Crop() {
                 <button
                   type="submit"
                   className="ring-1 rounded-full w-1/2 px-4 py-3 ring-gray-900/10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 bg-teal-800 text-white"
+
                 >
-                  Submit
+                  {loading ? (
+                    <span>
+                      <IonIcon icon={reloadOutline} className="animate animate-spin"></IonIcon> 
+                    </span>
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
               </div>
             </form>
@@ -193,7 +204,7 @@ function Result(crop) {
   console.log(crop?.crop);
   return (
     <>
-      <div className="mt-20 w-3/4 mx-auto">
+      <div className="mt-20 w-3/4 mx-auto" id="recommendation">
         <div className="flex justify-center items-center mb-16 ">
           <span className="w-1/2 bg-teal-950 py-6 px-5  text-white text-center text-3xl rounded-2xl font-bold ">RESULT</span>
         </div>

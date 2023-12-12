@@ -29,6 +29,11 @@ body {
 /* *{
   outline: red solid 1px;
 } */
+*{
+  /* outline: red solid 1px; */
+  scroll-behavior: smooth;
+}
+
 
 body {
   font-family: 'Raleway', sans-serif;
