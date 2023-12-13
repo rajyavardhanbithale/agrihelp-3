@@ -60,6 +60,7 @@ class BackendAPI:
         
         self.router.add_api_route(f"/{self.app_version}/" + "search", self.search, methods=["GET"])
         self.router.add_api_route(f"/{self.app_version}/" + "shop-product", self.shopProduct, methods=["GET"])
+        self.router.add_api_route(f"/{self.app_version}/" + "delivery", self.delivery, methods=["GET"])
         
         
         if(os.getenv("ENV")=="DEV"):
@@ -299,7 +300,17 @@ class BackendAPI:
                 return result
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
-                        
+    
+    async def delivery(self):
+        deliveryCollection =  db["delivery"]
+        records = list(deliveryCollection.find())
+        
+        records_list = [
+            {**record, "_id": str(record["_id"])} for record in records
+        ]
+        
+        return records_list
+             
     
 app = FastAPI()
 

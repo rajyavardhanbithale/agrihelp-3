@@ -42,6 +42,9 @@ class GetUser(BaseModel):
     username:str
     password:str
     validationKey:str
+    
+class PlaceOrder(BaseModel):
+    pass
 
 def DatabaseScheme(**kwargs):
     firstname = kwargs.get("username",None)
