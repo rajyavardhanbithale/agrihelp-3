@@ -1,17 +1,20 @@
 'use client'
 import ShopHeader from '@/app/components/shop/ShopHeader';
+import { IonIcon } from '@ionic/react';
 import axios from 'axios';
+import { cartOutline,cart } from 'ionicons/icons';
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
 
 
 
 function Cart() {
-   
-    const [data, setData] = useState([])
+
+    const [data, setData] = useState(null)
     const [productData, setProductData] = useState([]);
     const [total, setTotal] = useState(0);
     const [fakeTotal, setFakeTotal] = useState(0);
+    const [isHidden, setIsHidden] = useState(false);
 
     useEffect(() => {
         const fetchDataForProduct = async (productId) => {
@@ -47,18 +50,21 @@ function Cart() {
         setData(cookieData);
     }, []);
 
+
+
     useEffect(() => {
         const totalPrice = productData.reduce((acc, element) => acc + element.price, 0);
-        setTotal(totalPrice);
+        setTotal(totalPrice.toFixed(2));
 
         const totalPrice1 = productData.reduce((acc, element) => acc + element.originalPrice, 0);
-        setFakeTotal(totalPrice1);
+        setFakeTotal(totalPrice1.toFixed(2));
     }, [productData]);
 
-    console.log(data);
+    console.log(productData);
 
     function removeFromCart(productId) {
-        
+        setIsHidden(true);
+
 
         // Get the current list from the cookie
         const existingList = JSON.parse(Cookies.get('shop') || '[]');
@@ -85,13 +91,29 @@ function Cart() {
 
     return (
         <>
-        <ShopHeader />
-            <section className='md:flex mt-10'>
+            <ShopHeader />
+            <section className={`md:flex mt-10 ${isHidden ? 'opacity-0' : 'opacity-100'}`}>
                 <section className="w-full md:h-[600px] md:w-full md:max-w-[1200px] md:grid-cols-1 gap-3 px-5 pb-10 md:grid">
                     <div className="m-5">
-                        <span className="text-4xl font-bold tracking-wide">Shopping Cart Items</span>
+                        <span className="text-4xl font-bold tracking-wide">Shopping Cart Items <IonIcon icon={cart}></IonIcon></span>
                         <hr />
                     </div>
+
+                    {data === null && (
+                        <div className="mt-28 flex flex-col items-end justify-end">
+                            <div className="bg-white shadow-xl rounded-lg p-6 w-full max-w-md text-center">
+                                <h1 className="text-3xl font-semibold mb-4">Empty Cart</h1>
+                                <p className="text-gray-600 mb-8">There's nothing to show on this page.</p>
+                                <IonIcon icon={cartOutline} className="text-9xl text-teal-600"></IonIcon>
+                                <br />
+                                <br />
+                                <button className="bg-teal-900 text-white px-4 py-2 rounded-md">
+                                    Create Something
+                                </button>
+                            </div>
+                        </div>
+
+                    )}
 
                     <table className="w-full">
                         <tbody>
@@ -125,7 +147,7 @@ function Cart() {
                                                 <div className="flex items-center justify-center">
 
                                                 </div>
-                                                <div onClick={()=>removeFromCart(item?.productId)}>
+                                                <div onClick={() => removeFromCart(item?.productId)}>
 
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -149,39 +171,43 @@ function Cart() {
 
                         </tbody>
                     </table>
+
+
                 </section>
 
-
-                <section className="mx-auto w-full px-4 md:max-w-[400px] m-20">
-                    <div className="">
-                        <div className="border py-5 px-4 shadow-md">
-                            <p className="font-bold">ORDER SUMMARY</p>
-                            {/* Summary details */}
-                            <div className="flex justify-between border-b py-5">
-                                <p>Subtotal</p>
-                                <p>₹ {fakeTotal}</p>
+                {data !== null && (
+                    <section className="mx-auto w-full px-4 md:max-w-[400px] m-20">
+                        <div className="">
+                            <div className="border py-5 px-4 shadow-md">
+                                <p className="font-bold">ORDER SUMMARY</p>
+                                {/* Summary details */}
+                                <div className="flex justify-between border-b py-5">
+                                    <p>Subtotal</p>
+                                    <p>₹ {fakeTotal}</p>
+                                </div>
+                                <div className="flex justify-between border-b py-5">
+                                    <p>You Save</p>
+                                    <p>₹ {fakeTotal - total}</p>
+                                </div>
+                                <div className="flex justify-between border-b py-5">
+                                    <p>Shipping</p>
+                                    <p>{total >= 200 ? "Free" : "₹ 200"}</p>
+                                </div>
+                                <div className="flex justify-between py-5">
+                                    <p>Total</p>
+                                    <p>₹ {total}</p>
+                                </div>
+                                {/* Button */}
+                                <a href="checkout-address.html">
+                                    <button className="w-full rounded-xl bg-teal-900 px-5 py-2 text-white">
+                                        Proceed to checkout
+                                    </button>
+                                </a>
                             </div>
-                            <div className="flex justify-between border-b py-5">
-                                <p>You Save</p>
-                                <p>₹ {fakeTotal - total}</p>
-                            </div>
-                            <div className="flex justify-between border-b py-5">
-                                <p>Shipping</p>
-                                <p>{total >= 200 ? "Free" : "₹ 200"}</p>
-                            </div>
-                            <div className="flex justify-between py-5">
-                                <p>Total</p>
-                                <p>₹ {total}</p>
-                            </div>
-                            {/* Button */}
-                            <a href="checkout-address.html">
-                                <button className="w-full rounded-xl bg-teal-900 px-5 py-2 text-white">
-                                    Proceed to checkout
-                                </button>
-                            </a>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                )}
+
             </section>
 
         </>

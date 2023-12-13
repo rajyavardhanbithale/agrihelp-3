@@ -1,6 +1,5 @@
 import React from 'react';
 import ShopMobileMenu from './ShopHeaderModile';
-import logo from '../../../../public/assets/nav.png';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -17,7 +16,7 @@ function ShopHeader() {
       <a href="/shop">
         <img
           className="cursor-pointer w-20"
-          src="assets/nav.png"
+          src="/assets/nav.png"
           alt="company logo"
         />
       </a>

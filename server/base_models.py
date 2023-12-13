@@ -37,6 +37,11 @@ class UserVerified(BaseModel):
 class UserDelete(BaseModel):
     email:str
     password:str
+    
+class GetUser(BaseModel):
+    username:str
+    password:str
+    validationKey:str
 
 def DatabaseScheme(**kwargs):
     firstname = kwargs.get("username",None)

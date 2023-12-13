@@ -13,7 +13,7 @@ import ShopAbout from '../components/shop/ShopAbout';
 import Cart from './cart/page';
 import Wishlist from './wishlist/page';
 import Contact from './contact/page';
-import Account from './account/page'
+import Account from './checkout/page'
 
 
 
@@ -58,7 +58,8 @@ export default function Shop() {
         <Shopbox />
         <Category />
         <PromoSection />
-        <ProductCard width={80} path={"shop/product/"} />
+        <ProductCard width={80} path={"shop/product/"} title={"Seeds"} totalItem={6} category={"seeds"} />
+        <ProductCard width={80} path={"shop/product/"} title={"Fertilizer"} totalItem={6} category={"fertilizer"} />
                 
       
      

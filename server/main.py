@@ -52,6 +52,7 @@ class BackendAPI:
         self.router.add_api_route(f"/{self.app_version}/" + "forgot-password/{token}", self.forgotPassword, methods=["POST"])
         self.router.add_api_route(f"/{self.app_version}/" + "request-forgot-passowrd", self.generateForgotPassword, methods=["POST"])
         self.router.add_api_route(f"/{self.app_version}/" + "delete", self.delete, methods=["DELETE"])
+        self.router.add_api_route(f"/{self.app_version}/" + "get-user", self.getUser, methods=["POST"])
         
         
         self.router.add_api_route(f"/{self.app_version}/" + "shop-item", self.shopItem, methods=["GET"])
@@ -180,6 +181,24 @@ class BackendAPI:
         client = request.client.host
         delete = delete_user.deleteUser(collection=self.collection,collection_delete=self.collection_delete,ip=client,email=user.email,password=user.password)
         
+    
+    async def getUser(self,user:base_models.GetUser):
+        
+        try:
+            if user.validationKey == os.getenv("VALIDATIONKEY"):
+                result = self.collection.find_one({"username":user.username,"password":user.password})
+                response = {
+                    "firstname": result["firstname"],
+                    "lastname": result["lastname"],
+                    "email": result["email"],
+                    "username": result["username"],
+                    "firstname": result["firstname"],
+                }
+            
+                return response
+        except:
+            raise HTTPException(status_code=401,detail="Unauthorize")    
+    
         
     async def getWeatherToday(self,city:str):
         runner = weather.Weather()
@@ -231,8 +250,11 @@ class BackendAPI:
     # def main(self):
     #     return EventSourceResponse(self.generate_messages(), media_type='text/event-stream')
 
-    async def shopItem(self,item:int):
-        random_records = list(collection.aggregate([{"$sample": {"size": item}}]))
+    async def shopItem(self,item:int,category:str):
+        random_records = list(collection.aggregate([
+            {"$match": {"categories": category}},
+            {"$sample": {"size": item}}  # Adjust the size parameter as needed
+        ]))
 
         records_list = [
             {**record, "_id": str(record["_id"])} for record in random_records
