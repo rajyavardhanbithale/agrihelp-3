@@ -89,8 +89,8 @@ export default function Signup() {
       "originF": "custom",
       "image": data.user?.image
     }
+    
     console.log(constructData);
-    // console.log(constructData);
 
     try {
       const response = await axios.post("http://127.0.0.1:8000/v2/signup", constructData)
@@ -100,17 +100,26 @@ export default function Signup() {
       }
 
     } catch (error) {
+
       const constructLogin = {
         "email": constructData?.email,
         "password": constructData?.password
       }
+
+      const constructGetUser = {
+        "email": constructData?.email,
+        "password": constructData?.password,
+        "validationKey":"token"
+      }
       try {
         
         const response1 = await axios.post("http://127.0.0.1:8000/v2/login", constructLogin)
+        const response2 = await axios.post("http://127.0.0.1:8000/v2/get-user", constructGetUser)
        
-        if (response1.status === 200) {
+        if (response1.status === 200 && response2.status===200) {
           const constructCookie = {
-            "username": constructData?.firstname,
+            "username": response2?.username,
+            "email": constructData?.email,
             "password": constructData?.password,
             "validationKey": "token"
           }

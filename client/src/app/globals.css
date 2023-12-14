@@ -115,4 +115,16 @@ body {
 }
 
 
+@keyframes shake {
+  0% { transform: translateX(0) rotate(0) scale(1); }
+  25% { transform: translateX(-5px) rotate(-45deg) scale(1.2); }
+  50% { transform: translateX(5px) rotate(45deg) scale(1.2); }
+  75% { transform: translateX(-5px) rotate(-45deg) scale(1.2); }
+  100% { transform: translateX(0) rotate(0) scale(1); }
+}
+
+.shake-once {
+  animation: shake 2s ease-in-out; /* Adjust the duration as needed */
+  animation-iteration-count: 1; /* Set to 1 for only one iteration */
+}
 

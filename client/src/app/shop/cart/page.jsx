@@ -2,8 +2,9 @@
 import ShopHeader from '@/app/components/shop/ShopHeader';
 import { IonIcon } from '@ionic/react';
 import axios from 'axios';
-import { cartOutline,cart } from 'ionicons/icons';
+import { cartOutline, cart } from 'ionicons/icons';
 import Cookies from 'js-cookie';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 
@@ -92,12 +93,49 @@ function Cart() {
     return (
         <>
             <ShopHeader />
+            <div className="flex flex-col items-center border-b mt-10 bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+                <a href="#" className="text-2xl font-bold text-gray-800">&nbsp; Shopping Cart Items <IonIcon icon={cart}></IonIcon></a>
+                <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
+                    <div className="relative">
+                        <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
+
+
+
+                            <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">1</a>
+                                <span className="font-semibold text-gray-900">Checkout</span>
+                            </li>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+
+                            <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">2</a>
+                                <span className="font-semibold text-gray-500">Shipping & Payment</span>
+                            </li>
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+
+                            <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">2</a>
+                                <span className="font-semibold text-gray-500">Confirmation</span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <section className={`md:flex mt-10 ${isHidden ? 'opacity-0' : 'opacity-100'}`}>
                 <section className="w-full md:h-[600px] md:w-full md:max-w-[1200px] md:grid-cols-1 gap-3 px-5 pb-10 md:grid">
-                    <div className="m-5">
+                    {/* <div className="m-5">
                         <span className="text-4xl font-bold tracking-wide">Shopping Cart Items <IonIcon icon={cart}></IonIcon></span>
                         <hr />
-                    </div>
+                    </div> */}
 
                     {data === null && (
                         <div className="mt-28 flex flex-col items-end justify-end">
@@ -198,11 +236,11 @@ function Cart() {
                                     <p>₹ {total}</p>
                                 </div>
                                 {/* Button */}
-                                <a href="checkout-address.html">
+                                <Link href="/shop/checkout">
                                     <button className="w-full rounded-xl bg-teal-900 px-5 py-2 text-white">
                                         Proceed to checkout
                                     </button>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </section>

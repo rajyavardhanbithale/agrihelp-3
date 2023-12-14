@@ -12,6 +12,7 @@ class UserSignup(BaseModel):
     ip_origin: str = None
     originF:str = None
     image:str = None
+    billingAddress:str = None   
     
 class UserLogin(BaseModel):
     username:str = None
@@ -39,12 +40,23 @@ class UserDelete(BaseModel):
     password:str
     
 class GetUser(BaseModel):
-    username:str
+    username:str = None
+    email:str = None
     password:str
     validationKey:str
     
 class PlaceOrder(BaseModel):
-    pass
+    orderid:str = None
+    fullname:str
+    email:str
+    orderCart: list
+    cardHolderName: str
+    billingAddress: str
+    state: str
+    zip:str
+    deliveryMethod: str
+    
+    
 
 def DatabaseScheme(**kwargs):
     firstname = kwargs.get("username",None)
@@ -56,6 +68,7 @@ def DatabaseScheme(**kwargs):
     phone_number = kwargs.get("phone_number",None)
     ip = kwargs.get("ip",None)
     verification_id = kwargs.get("verification_id",None)
+    address = kwargs.get("billingAddress",None)
     
     
     otp = kwargs.get("otp",None)
@@ -95,6 +108,7 @@ def DatabaseScheme(**kwargs):
 		},
         "forgot_password_id":None,
 
+        "billingAddress":address,
         "origin":origin
     }
     
@@ -123,6 +137,7 @@ def DatabaseScheme(**kwargs):
         "is_verified" : False,
         "forgot_password_id":None,
         "verification_id": verification_id[0:5]+verification_id[-14:-19:-1][::-1] if len(verification_id)!=0 else None,
+        "billingAddress":address,
         "origin":origin
     }
     print(url)
@@ -131,7 +146,7 @@ def DatabaseScheme(**kwargs):
     
     
 def DatabaseSchemeGoogle(**kwargs):
-    firstname = kwargs.get("username",None)
+    firstname = kwargs.get("firstname",None)
     lastname = kwargs.get("lastname",None)
     username = kwargs.get("username",None)
     email = kwargs.get("email",None)
@@ -139,6 +154,7 @@ def DatabaseSchemeGoogle(**kwargs):
     old_password = kwargs.get("old_password",None)
     phone_number = kwargs.get("phone_number",None)
     ip = kwargs.get("ip",None)
+    address = kwargs.get("billingAddress",None)
     
     origin = kwargs.get("origin","host")
     image = kwargs.get("image",None)
@@ -169,6 +185,7 @@ def DatabaseSchemeGoogle(**kwargs):
    		},
         "is_verified" : True,
         "forgot_password_id":None,
+        "billingAddress":address,
         "origin":origin,
         "image":image
     }   

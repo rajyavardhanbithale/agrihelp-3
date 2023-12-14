@@ -8,19 +8,61 @@ import axios from 'axios';
 
 
 export default function checkout() {
+  const [shippingData, setShippingData] = useState({});
+  const [order, setOrder] = useState(false);
+  const [confirmOrder, setConfirmOrder] = useState(false);
+  const [user, setUser] = useState(null);
+  const [orderID, setOrderID] = useState(null);
+
+  const handleOrderTotalChange = (total) => {
+    setShippingData(total);
+  };
+
+  const handleOrder = (total) => {
+    setOrder(total);
+  };
+
+  const handleUser = (user) => {
+    setUser(user);
+  };
+
+  // console.log('Form Data Submitted:', shippingData);
 
 
+
+  useEffect(() => {
+    const postData = async () => {
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/v2/place-order", shippingData)
+
+        if (response.status == 200) {
+
+          setOrderID(response.data.detail.orderID)
+          setConfirmOrder(true)
+        }
+      } catch (error) {
+
+      }
+    }
+
+    postData()
+
+  }, [order])
+
+  console.log('Form Data Submitted:', orderID);
 
   return (
     <>
-     <OrderSummary></OrderSummary>
-      
+      {!confirmOrder ? <OrderSummary onOrderTotalChange={handleOrderTotalChange} onOrder={handleOrder} onUser={handleUser} /> : <OrderConfirmation user={user} orderid={orderID} ></OrderConfirmation>}
+
+      {/* <OrderConfirmation ></OrderConfirmation> */}
+
     </>
   );
 };
 
 
-function OrderSummary(){
+function OrderSummary(props) {
   const [user, setUser] = useState(null)
   const [jsonData, setJson] = useState(null)
   const [delivery, setDelivery] = useState(null)
@@ -105,16 +147,34 @@ function OrderSummary(){
     }
 
     const postRequest = {
-      fullName: `${user?.firstname} ${user?.lastname}`,
+      fullname: `${user?.firstname} ${user?.lastname}`,
       email: user?.email,
       cardHolderName: formData.cardHolderName,
       billingAddress: formData.billingAddress,
       state: selectedState,
       zip: formData.zip,
-      deliveryMethod: deliveryMet
+      deliveryMethod: deliveryMet,
+      orderCart: data,
+
     }
 
-    console.log('Form Data Submitted:', postRequest);
+    // console.log('Form Data Submitted:', postRequest);
+    handleQuantityChange(postRequest)
+    handleOrder()
+    handleUsers()
+  };
+
+  const handleQuantityChange = (request) => {
+    props.onOrderTotalChange(request);
+  };
+
+  const handleOrder = () => {
+    props.onOrder(true);
+  };
+
+  const handleUsers = () => {
+    props.onUser(user);
+
   };
 
 
@@ -171,41 +231,52 @@ function OrderSummary(){
   };
 
 
-  return(
+  return (
     <>
-      {/* <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
-      <a href="#" className="text-2xl font-bold text-gray-800">sneekpeeks</a>
-      <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
-        <div className="relative">
-          <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
-            <li className="flex items-center space-x-3 text-left sm:space-x-4">
-              <a className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200 text-xs font-semibold text-emerald-700" href="#"
-              ><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg
-                ></a>
-              <span className="font-semibold text-gray-900">Shop</span>
-            </li>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-            <li className="flex items-center space-x-3 text-left sm:space-x-4">
-              <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">2</a>
-              <span className="font-semibold text-gray-900">Shipping</span>
-            </li>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-            <li className="flex items-center space-x-3 text-left sm:space-x-4">
-              <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">3</a>
-              <span className="font-semibold text-gray-500">Payment</span>
-            </li>
-          </ul>
+      <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+        <img
+          className="cursor-pointer w-16"
+          src="/assets/nav.png"
+          alt="company logo"
+        />
+        <a href="#" className="text-2xl font-bold text-gray-800">&nbsp; AGRIHELP</a>
+        <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
+          <div className="relative">
+            <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
+
+
+
+              <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">1</a>
+                <span className="font-semibold text-gray-500">Checkout</span>
+              </li>
+
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+
+              <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">2</a>
+                <span className="font-semibold text-gray-900">Shipping & Payment</span>
+              </li>
+
+
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+
+              <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">3</a>
+                <span className="font-semibold text-gray-500">Confirmation</span>
+              </li>
+
+            </ul>
+          </div>
         </div>
       </div>
-    </div> */}
 
 
-    <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+      <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div className="px-4 pt-8">
           <p className="text-xl font-medium">Order Summary</p>
           <p className="text-gray-400">Check your items. And select a suitable shipping method.</p>
@@ -244,9 +315,9 @@ function OrderSummary(){
                   value={item?.id}
                   defaultChecked={idx === 0}
                 />
-                <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                <span className="peer-checked:border-teal-800 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                 <label
-                  className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                  className="peer-checked:border-2 peer-checked:border-teal-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                   htmlFor={`radio_${idx}`}
                 >
                   <img className="w-14 object-contain" src={item?.image} alt="" />
@@ -266,7 +337,7 @@ function OrderSummary(){
         <form onSubmit={handleSubmit}>
 
 
-          <div className="flex justify-center align-middle mt-auto mb-auto">
+          <div className="flex justify-center align-middle mt-20">
 
             <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0 ">
               <p className="text-xl font-medium">Payment Details</p>
@@ -382,7 +453,7 @@ function OrderSummary(){
               </div>
 
 
-              <button type='submit' className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
+              <button type='submit' className="mt-4 mb-8 w-full rounded-md bg-teal-900 px-6 py-3 font-medium text-white">Place Order</button>
             </div>
           </div>
         </form>
@@ -391,4 +462,98 @@ function OrderSummary(){
 
     </>
   )
+}
+
+
+function OrderConfirmation(props) {
+  const [jsonData, setJson] = useState();
+
+
+
+  return (
+    <>
+      <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+        <img
+          className="cursor-pointer w-16"
+          src="/assets/nav.png"
+          alt="company logo"
+        />
+        <a href="#" className="text-2xl font-bold text-gray-800">&nbsp; AGRIHELP</a>
+        <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
+          <div className="relative">
+            <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
+
+
+
+              <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">1</a>
+                <span className="font-semibold text-gray-500">Checkout</span>
+              </li>
+
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+
+              <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">2</a>
+                <span className="font-semibold text-gray-500">Shipping & Payment</span>
+              </li>
+
+
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+
+              <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">3</a>
+                <span className="font-semibold text-gray-900">Confirmation</span>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="flex-grow">
+        <section className="mt-20 px-4">
+          <div className="flex flex-col gap-4">
+            <p className="capitalize text-center text-3xl font-bold">
+              We Accepted Your Order
+            </p>
+            <div className="text-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="mx-auto my-3 h-[80px] w-[80px] text-teal-500 shake-once"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+                />
+              </svg>
+
+              <p>Thank you, <span className="font-bold capitalize">  {props?.user?.firstname} {props?.user?.lastname}</span></p>
+              <p>You can check your order status on your orders list!</p>
+              <p>Order ID : {props?.orderid}</p>
+
+
+              <div className="mt-10">
+                <a
+                  href="my-order-history.html"
+                  className="mx-auto bg-teal-800 text-white px-5 rounded-lg py-3"
+                >
+                  Track Order
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </>
+  )
+
 }
