@@ -102,7 +102,7 @@ function Cart() {
 
 
                             <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">1</a>
+                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">3</a>
                                 <span className="font-semibold text-gray-900">Checkout</span>
                             </li>
 

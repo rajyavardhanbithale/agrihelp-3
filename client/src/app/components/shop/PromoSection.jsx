@@ -22,7 +22,7 @@ function PromoSection() {
         <img
           className="-mr-5 hidden w-[500px] object-cover md:block rounded-2xl bg-blend-darken"
           src="https://img.freepik.com/free-vector/gradient-colorful-sale-wallpaper_52683-55788.jpg"
-          alt="Rainbow credit card with macbook on a background"
+          alt=" credit card with macbook on a background"
         />
       </section>
     </div>

@@ -95,9 +95,9 @@ function ProductCard(props) {
                   <div>
                     <p className="mt-2 text-xl h-[3.6rem] overflow-hidden">{product?.name}</p>
                     <p className="mt-2">{product?.brand}</p>
-                    <p className="text-lg text-violet-900">
+                    <p className="text-lg text-teal-950 font-semibold">
                       &#8377; {product.price}&nbsp;
-                      <span className="text-sm text-gray-500 line-through">&#8377; {product.originalPrice}</span>
+                      <span className="text-sm text-gray-500 font-semibold line-through">&#8377; {product.originalPrice}</span>
                     </p>
                     <div className="flex items-center text-xl">
                       {[...Array(Math.round(parseFloat(product?.rating)))].map((_, index) => (
