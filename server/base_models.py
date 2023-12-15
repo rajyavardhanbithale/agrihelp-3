@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 import time
+from shop import order_tracking
 
 class UserSignup(BaseModel):
     firstname: str
@@ -45,16 +46,46 @@ class GetUser(BaseModel):
     password:str
     validationKey:str
     
+
+
+    
 class PlaceOrder(BaseModel):
-    orderid:str = None
+    orderID:str = None
     fullname:str
     email:str
     orderCart: list
     cardHolderName: str
     billingAddress: str
+    orderPlacedTimeEPOCH:float = time.time()
+    orderPlacedTime:str =  order_tracking.getTime()
     state: str
     zip:str
     deliveryMethod: str
+    
+    trackingStatus: dict = {
+        "orderID": "",
+        "orderStatus": [
+            {
+                "title": "Order Placed",
+                "date": order_tracking.getTime(),
+                "status": "green",
+                "description": "Your order has been successfully placed. We are preparing your items for shipment.",
+            },
+            {
+                "title": "Processing",
+                "date": f"Expected: {order_tracking.prototypeTime(13.6)}",
+                "status": "gray",
+                "description": "We are currently processing your order and getting it ready for shipment.",
+            },
+            {
+                "title": "Delivery",
+                "date": f"Expected: {order_tracking.prototypeTime(23.6)}",
+                "status": "gray",
+                "description": "",
+            },
+        ]
+    }
+    
     
     
 

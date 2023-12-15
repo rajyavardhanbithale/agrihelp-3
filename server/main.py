@@ -1,13 +1,12 @@
 from fastapi import FastAPI, APIRouter, Request, HTTPException, UploadFile, File
-from fastapi.responses import StreamingResponse
+
 import os
-from dotenv import load_dotenv
+
 from fastapi.middleware.cors import CORSMiddleware
 import pymongo
 import json
 import time
 
-from sse_starlette.sse import EventSourceResponse
 import random
 import time
 
@@ -23,6 +22,7 @@ from verification import sendMail
 
 from ml import fertilizer_reco
 from ml import disease_pred
+from shop import order_tracking
 
 from weather import weather
 
@@ -34,6 +34,7 @@ from bson import ObjectId  # Import ObjectId from bson
 client = MongoClient("mongodb://localhost:27017")
 db = client["agrihelp"]
 collection = db["shop"]
+getCartData = db["orders"]
 
 
 class BackendAPI:
@@ -80,6 +81,9 @@ class BackendAPI:
             f"/{self.app_version}/" + "delivery", self.delivery, methods=["GET"])
         self.router.add_api_route(
             f"/{self.app_version}/" + "place-order", self.placeOrder, methods=["POST"])
+        
+        self.router.add_api_route(
+            f"/{self.app_version}/" + "order-status", self.orderStatus, methods=["GET"])
 
         if (os.getenv("ENV") == "DEV"):
             print("[*] DEV")
@@ -344,15 +348,21 @@ class BackendAPI:
         ]
 
         return records_list
+    
+    
+    
 
     async def placeOrder(self, user: base_models.PlaceOrder):
         deliveryCollection = db["orders"]
 
         orderID = "AGR" + str(random.randint(100000, 999999))
-        user_data = user.dict()
-        user_data["orderid"] = orderID
+        user_data = user.dict() 
+        user_data["orderID"] = orderID
+        
+        user_data["trackingStatus"]["orderID"] = orderID
+   
 
-        insert = deliveryCollection.insert_one(user.dict())
+        insert = deliveryCollection.insert_one(user_data)
         updateAddress = self.collection.update_one(
             {"email": user.email},
             {"$set": {"billingAddress": user.billingAddress}}
@@ -361,6 +371,73 @@ class BackendAPI:
         if insert.acknowledged and updateAddress:
 
             raise HTTPException(status_code=200, detail={"orderID":orderID})
+        
+
+    async def orderStatus(self,orderID:str,method:str,update:str=None):
+        if(method=="get"):
+            result = getCartData.find_one({"orderID": orderID})
+
+            if result is None:
+                raise HTTPException(
+                    status_code=404, detail="Order not found")
+            result["_id"] = str(result["_id"])
+
+            return result["trackingStatus"]
+        
+        elif(method=="update" and update=="process"):
+          
+            result = getCartData.find_one({"orderID": orderID})
+
+            if result is None:
+                raise HTTPException(
+                    status_code=404, detail="Order not fund")
+                
+            result = {
+                "title": "Order Processed",
+                "date": order_tracking.getTime(),
+                "status": "green",
+                "description": "Your order is on its way and out for delivery. Our courier is bringing it to you.",
+            }
+            result1 = {
+                "title": "Delivery",
+                "date": f"Expected: {order_tracking.prototypeTime(15.6)}",
+                "status": "gray",
+                "description":"Out For Delivery"
+            }
+
+            query = getCartData.update_one(
+                    {"orderID": orderID},
+                    {
+                        "$set": {
+                            "trackingStatus.orderStatus.1": result,
+                            "trackingStatus.orderStatus.2": result1,
+                        }
+                    },
+                )   
+
+            raise HTTPException(status_code=200,detail=query.acknowledged)
+        
+        elif(method=="update" and update=="delivery"):
+          
+            result = getCartData.find_one({"orderID": orderID})
+
+            if result is None:
+                raise HTTPException(
+                    status_code=404, detail="Order not fund")
+                
+            result = {
+                "title": "Order Processed",
+                "date": order_tracking.getTime(),
+                "status": "green",
+                "description": "Your order is on its way and out for delivery. Our courier is bringing it to you.",
+            }
+
+            query = getCartData.update_one(
+                {"orderID": orderID},
+                {"$set": {"trackingStatus.orderStatus.1": result}}
+            )       
+
+            raise HTTPException(status_code=200,detail=query.acknowledged)
 
 
 app = FastAPI()
