@@ -79,7 +79,7 @@ class PlaceOrder(BaseModel):
             },
             {
                 "title": "Delivery",
-                "date": f"Expected: {order_tracking.prototypeTime(23.6)}",
+                "date": f"Expected: {order_tracking.prototypeTime(36.6)}",
                 "status": "gray",
                 "description": "",
             },
