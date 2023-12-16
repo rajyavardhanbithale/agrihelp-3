@@ -43,6 +43,9 @@ class BackendAPI:
         self.app_version = "v2"
         self.router.add_api_route(
             f"/{self.app_version}/weather/current", self.getWeatherToday, methods=["GET"])
+        self.router.add_api_route(
+            f"/{self.app_version}/weather/forecast-today", self.getWeatherForecastToday, methods=["GET"])
+        
         # self.router.add_api_route(f"/{self.app_version}/", self.main, methods=["GET"])
         self.router.add_api_route(
             f"/{self.app_version}/weather/forecast", self.getWeatherForecast, methods=["GET"])
@@ -246,10 +249,16 @@ class BackendAPI:
     async def getWeatherToday(self, city: str):
         runner = weather.Weather()
         return runner.weatherToday(city=city)
+    
+    
+    async def getWeatherForecastToday(self, city: str):
+        runner = weather.Weather()
+        return runner.todayForecast(city=city)
 
     async def getWeatherForecast(self, city: str, days: int):
         runner = weather.Weather()
         return runner.weatherForecast(city=city, days=days)
+    
 
     async def cropReccom(self, N, P, K, ph, rain, city):
         from ml import crop_reco
