@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import 'react-step-progress-bar/styles.css';
 
 const OrderTrackingPage = () => {
   const [orderStatus, setOrderStatus] = useState(null)
