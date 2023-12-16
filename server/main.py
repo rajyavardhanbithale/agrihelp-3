@@ -386,30 +386,37 @@ class BackendAPI:
                 raise HTTPException(
                     status_code=404, detail="Order not fund")
 
-            result = {
-                "title": "Order Processed",
-                "date": order_tracking.getTime(),
-                "status": "green",
-                "description": "Your order is on its way and out for delivery. Our courier is bringing it to you.",
-            }
-            result1 = {
-                "title": "Delivery",
-                "date": f"Expected: {order_tracking.prototypeTime(15.6)}",
-                "status": "gray",
-                "description": "Out For Delivery"
-            }
+            if (result["trackingStatus"]["orderStatus"][1]["status"] == "gray" and result["trackingStatus"]["orderStatus"][2]["status"] == "gray"):
+                result = {
+                    "title": "Order Processed",
+                    "date": order_tracking.getTime(),
+                    "status": "green",
+                    "description": "Your order is on its way and out for delivery. Our courier is bringing it to you.",
+                    "icon": "ping"
+                }
+                result1 = {
+                    "title": "Delivery",
+                    "date": f"Expected: {order_tracking.prototypeTime(15.6)}",
+                    "status": "gray",
+                    "description": "Out For Delivery",
+                    "icon": ""
+                }
 
-            query = getCartData.update_one(
-                {"orderID": orderID},
-                {
-                    "$set": {
-                        "trackingStatus.orderStatus.1": result,
-                        "trackingStatus.orderStatus.2": result1,
-                    }
-                },
-            )
+                query = getCartData.update_one(
+                    {"orderID": orderID},
+                    {
+                        "$set": {
+                            "trackingStatus.orderStatus.1": result,
+                            "trackingStatus.orderStatus.2": result1,
+                        }
+                    },
+                )
 
-            raise HTTPException(status_code=200, detail=query.acknowledged)
+                raise HTTPException(status_code=200, detail=query.acknowledged)
+
+            else:
+                raise HTTPException(
+                    status_code=401, detail="Product Already Processed or Delivered")
 
         elif (method == "update" and update == "delivery"):
 
@@ -419,19 +426,34 @@ class BackendAPI:
                 raise HTTPException(
                     status_code=404, detail="Order not fund")
 
-            result1 = {
-                "title": "Delivered",
-                "date": order_tracking.getTime(),
-                "status": "green",
-                "description": f"Order Delivered Successfully at {order_tracking.getTime()} "
-            }
+            if (result["trackingStatus"]["orderStatus"][1]["status"] == "green" and result["trackingStatus"]["orderStatus"][2]["status"] == "gray"):
 
-            query = getCartData.update_one(
-                {"orderID": orderID},
-                {"$set": {"trackingStatus.orderStatus.2": result1}}
-            )
+                result2 = {
+                    "icon": "check"
+                }
+                result1 = {
+                    "title": "Delivered",
+                    "date": order_tracking.getTime(),
+                    "status": "green",
+                    "description": f"Order Delivered Successfully at {order_tracking.getTime()} ",
+                    "icon": "check"
+                }
 
-            raise HTTPException(status_code=200, detail=query.acknowledged)
+                query = getCartData.update_one(
+                    {"orderID": orderID},
+                    {
+                        "$set": {
+                            "trackingStatus.orderStatus.1.icon": "check",
+                            "trackingStatus.orderStatus.2": result1
+                        }
+                    }
+                )
+
+                raise HTTPException(status_code=200, detail=query.acknowledged)
+
+            else:
+                raise HTTPException(
+                    status_code=401, detail="Product Need To Processed or Product is Already Delivered ")
 
 
 app = FastAPI()
@@ -448,3 +470,5 @@ app.add_middleware(
 
 api = BackendAPI()
 app.include_router(api.router)
+
+

@@ -12,17 +12,19 @@ import { IonIcon } from "@ionic/react";
 import { cart } from "ionicons/icons";
 import Cookies from "js-cookie";
 import ShopHeader from "@/app/components/shop/ShopHeader";
+import PopUpModal from "@/app/components/shop/PopUpModal";
+
 
 export default function product() {
-  const [data, setData] = useState({})
- 
-
   const productId = useParams();
 
+  const [data, setData] = useState({})
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+ 
 
   useEffect(() => {
-
-
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/v2/shop-product?productID=${productId.id}`)
@@ -79,15 +81,21 @@ export default function product() {
       Cookies.set('shop', JSON.stringify(updatedList));
 
       console.log(Cookies.get('shop'));
+      openModal();
+      
     } else {
+      openModal();
       console.log('Product already in the cart');
     }
   }
 
 
+
   return (
     <>
       <ShopHeader />
+     
+
       <div>
 
         <section className="container flex-grow mx-auto max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10">
@@ -181,7 +189,7 @@ export default function product() {
 
             </div>
 
-            <div onClick={addToCart} className="mt-7 flex flex-row items-center gap-6 justify-center ">
+            <div onClick={addToCart}  className="mt-7 flex flex-row items-center gap-6 justify-center ">
               <button className="flex h-12 p-6 w-2/3 rounded-xl items-center justify-center bg-teal-700 text-white duration-100 hover:bg-teal-800">
                 <IonIcon
                   icon={cart}
@@ -189,11 +197,9 @@ export default function product() {
                 />
                 Add to cart
               </button>
-              {/* <button className="flex h-12 w-1/3 items-center justify-center bg-amber-400 duration-100 hover:bg-yellow-300">
-         
-              Wishlist
-            </button> */}
+             
             </div>
+            <PopUpModal isOpen={isModalOpen} closeModal={closeModal} itemName={data?.name} />
           </div>
         </section>
         {/* <ProductDetails /> */}

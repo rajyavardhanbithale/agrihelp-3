@@ -5,6 +5,8 @@ import React, { use, useEffect, useState } from 'react';
 import CryptoJS from 'crypto-js';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import Link from 'next/link';
+
 
 
 export default function checkout() {
@@ -539,16 +541,18 @@ function OrderConfirmation(props) {
               <p>You can check your order status on your orders list!</p>
               <p>Order ID : {props?.orderid}</p>
 
-
+             <Link href={`/shop/tracking?track-order=${props?.orderid}`}>
               <div className="mt-10">
-                <a
-                  href="my-order-history.html"
+                <span
+                 
                   className="mx-auto bg-teal-800 text-white px-5 rounded-lg py-3"
                 >
                   Track Order
-                </a>
+                </span>
               </div>
+              </Link>
             </div>
+
           </div>
         </section>
       </div>

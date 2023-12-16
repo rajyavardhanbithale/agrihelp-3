@@ -1,11 +1,22 @@
+'use client'
 import Link from "next/link";
-import AuthNotiy from "../Sections/AuthNotify";
-import Cookies from "js-cookie";
+// import AuthNotiy from "../Sections/AuthNotify";
+// import Cookies from "js-cookie";
+import { useState } from "react";
 
 
 export default function Navbar(props) {
     const auth = props.isAuth;
 
+    const [open, setOpen] = useState(false);
+
+    const handleClickToOpen = () => {
+        setOpen(true);
+    };
+
+    const handleToClose = () => {
+        setOpen(false);
+    };
 
 
     return (
@@ -14,13 +25,13 @@ export default function Navbar(props) {
         //         <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
         //             <div className="flex justify-center align-middle items-center">
         //                 <img src="https://avatars.githubusercontent.com/u/111964247?s=400&u=b924200140787bf3ee6a08d4e04465a3770cac9b&v=4" className="w-10 inline-flex justify-center align-middle items-center bg-slate-800 p-0.5 rounded-xl" alt="" />
-        //                 <a className="flex-none align-middle text-xl font-semibold dark:text-white px-3" href="#">
+        //                 <a className="flex-none align-middle text-xl font-semibold dark:text-white px-3" href={"/"}>
         //                     RAGE
         //                 </a>
         //             </div>
         //             <div className="flex flex-row items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:pl-5">
-        //                 <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href="#">Early Access</a>
-        //                 <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href="#">Generations</a>
+        //                 <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href={"/"}>Early Access</a>
+        //                 <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href={"/"}>Generations</a>
 
         //                 <div className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500">
         //                     {auth ?
@@ -36,30 +47,119 @@ export default function Navbar(props) {
         // </div>
 
         <>
-            <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-teal-800 text-sm py-3">
-                <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
-                    <div className="flex flex-row items-center justify-between">
-                        <a className="flex items-center" href="#">
-                            <img src="/assets/nav.png" className="w-20 filter invert" alt="Logo" />
-                            <span className="ml-4 text-white font-bold text-xl">AGRIHELP</span>
-                        </a>
-                        <div className="sm:hidden">
-                            <button type="button" className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-collapse="#navbar-image-1" aria-controls="navbar-image-1" aria-label="Toggle navigation">
-                                <svg className="hs-collapse-open:hidden flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6" /><line x1="3" x2="21" y1="12" y2="12" /><line x1="3" x2="21" y1="18" y2="18" /></svg>
-                                <svg className="hs-collapse-open:block hidden flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+
+            <section>
+                <header class=" bg-green-500 m-2 rounded-full  absolute inset-x-0 top-0 z-50">
+
+                    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global drop-shadow-2xl">
+                        <div class="flex lg:flex-1">
+                            <a href="/" class="-m-1.5 p-1.5 flex ">
+                                <span class="sr-only">Vedant</span>
+                                <img class="h-8 w-auto" src="" alt="" />
+                            </a>
+                        </div>
+                        <div class="flex lg:hidden">
+                            <button type="button" onClick={handleClickToOpen}
+                                class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                                <span class="sr-only">Open main menu</span>
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
                             </button>
                         </div>
-                    </div>
-                    <div id="navbar-image-1" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
-                        <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
-                            <a className="font-medium text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#" aria-current="page">Temporary Navbar</a>
-                            <a className="font-medium text-white hover:text-gray-400  dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">To</a>
-                            <a className="font-medium text-white hover:text-gray-400  dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Be </a>
-                            <a className="font-medium text-white hover:text-gray-400  dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Removed</a>
+                        <div class="hidden lg:flex lg:gap-x-6 text-white">
+                            <Link href={"/Weather"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Weather</Link>
+                            <Link href={"/Croprecomendation"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Crop Recomendation</Link>
+                            <Link href={"/"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Pest Information</Link>
+                            <Link href={"/"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Fertilizer Recomendation</Link>
+                            <Link href={"/"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Shop</Link>
+                            <Link href={"/"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Chat</Link>
+                            <Link href={"/"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Govt.Scheme</Link>
+                            <Link href={"/"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Feedback</Link>
+                            <Link href={"/"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">About Us</Link>
+
                         </div>
-                    </div>
-                </nav>
-            </header>
+                        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                            <a href={"/"}
+                                class="text-xl font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white">Log
+                                in <span aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </nav>
+
+
+                    <dialog open={open} onClose={handleToClose}>
+                        <div class="" role="dialog" aria-modal="true">
+                            <div class="fixed inset-0 z-50"></div>
+                            <div
+                                class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                                <div class="flex items-center justify-between">
+                                    <a href={"/"} class="-m-1.5 p-1.5">
+                                        <span class="sr-only">AGRI-HELP</span>
+                                        <img class="h-8 w-auto" src="" alt="" />
+                                    </a>
+
+                                    <button onClick={handleToClose} type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+                                        <span class="sr-only">Close menu</span>
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                            aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+
+                                </div>
+
+                                <div class="mt-6 flow-root">
+                                    <div class="-my-6 divide-y divide-gray-500/10">
+
+                                        <div class="space-y-2 py-6">
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Weather</Link>
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Crop Recommendation</Link>
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Pest Information</Link>
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Fertilizer Recommendation</Link>
+                                            <Link href={"/Shop"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Shop</Link>
+                                            <Link href={"/Chat"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Chat</Link>
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Feedback</Link>
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">About</Link>
+
+                                            
+
+
+                                        </div>
+
+                                        <div class="py-6">
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Log in</Link>
+                                            <Link href={"/"}
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Sign Up</Link>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+                </header>
+
+            </section >
         </>
     );
 }

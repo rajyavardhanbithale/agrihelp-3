@@ -70,18 +70,21 @@ class PlaceOrder(BaseModel):
                 "date": order_tracking.getTime(),
                 "status": "green",
                 "description": "Your order has been successfully placed. We are preparing your items for shipment.",
+                "icon": "check",
             },
             {
                 "title": "Processing",
                 "date": f"Expected: {order_tracking.prototypeTime(13.6)}",
                 "status": "gray",
                 "description": "We are currently processing your order and getting it ready for shipment.",
+                "icon": "",
             },
             {
                 "title": "Delivery",
                 "date": f"Expected: {order_tracking.prototypeTime(36.6)}",
                 "status": "gray",
                 "description": "",
+                "icon": "",
             },
         ]
     }
