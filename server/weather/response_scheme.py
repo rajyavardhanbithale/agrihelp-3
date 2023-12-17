@@ -136,7 +136,7 @@ def todayForecast(responseWeatherAPI: str):
             "info": {
                 "time": x["time"],
                 "time_epoch": x["time_epoch"],
-                "time_formatted": datetime.datetime.utcfromtimestamp(x["time_epoch"]).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Asia/Kolkata')).strftime("%I %p"),
+                "time_formatted": datetime.utcfromtimestamp(x["time_epoch"]).replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Asia/Kolkata')).strftime("%I %p"),
                 "temp": x["temp_c"],
 
                 "condition": {

@@ -246,9 +246,9 @@ class BackendAPI:
         except:
             raise HTTPException(status_code=401, detail="Unauthorize")
 
-    async def getWeatherToday(self, city: str):
+    async def getWeatherToday(self, city: str=None,lat:float=None,lon:float=None):
         runner = weather.Weather()
-        return runner.weatherToday(city=city)
+        return runner.weatherToday(city=city,lat=lat,lon=lon)
     
     
     async def getWeatherForecastToday(self, city: str):
@@ -467,7 +467,7 @@ class BackendAPI:
 
 app = FastAPI()
 
-origins = ["http://localhost:3000"]  # Replace with your allowed origins
+origins = ["http://localhost:3000","http://192.168.29.82:3000"]  # Replace with your allowed origins
 
 app.add_middleware(
     CORSMiddleware,

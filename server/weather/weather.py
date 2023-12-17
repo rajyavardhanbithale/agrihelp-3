@@ -20,17 +20,22 @@ class Weather:
         self.OpenKey = os.getenv("OPENWEATHERAPI")
 
     
-    def weatherToday(self,city:str):
+    def weatherToday(self,city:str,lat:float,lon:float):
         # fetch = requests.get("{url}?key={key}&q={city}".format(url=self.urlToday,key=self.key,city=city))
         # parseFetch = fetch.json()
         fetch2 = requests.get("{url}?key={key}&q={city}&days={days}".format(url=self.urlForecast,key=self.key,city=city,days=1))
         parseFetch2 = fetch2.json()
         
-        fetch1 = requests.get("{url}?appid={key}&q={city}".format(url=self.baseUrlWeather,key=self.OpenKey,city=city))
-        parseFetch1 = fetch1.json()
+        
+        if (lat!=None and lon!=None):
+            fetch1 = requests.get("{url}?appid={key}&lat={lat}&lon={lon}".format(url=self.baseUrlWeather,key=self.OpenKey,lat=lat,lon=lon))
+            parseFetch1 = fetch1.json()
+        else:
+            fetch1 = requests.get("{url}?appid={key}&q={city}".format(url=self.baseUrlWeather,key=self.OpenKey,city=city))
+            parseFetch1 = fetch1.json()
         
   
-        ret = response_scheme.returnToday(responseWeatherAPI=parseFetch1,responseOpenWeatherAPI=parseFetch2)
+        ret = response_scheme.returnToday(responseWeatherAPI=parseFetch2,responseOpenWeatherAPI=parseFetch1)
         # print(json.dumps(parseFetch1,indent=4))
         return ret
  

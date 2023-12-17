@@ -31,12 +31,12 @@ body {
   outline: red solid 1px;
 } */
 * {
-  outline: red solid 1px;
+  /* outline: red solid 1px; */
   scroll-behavior: smooth;
 }
 
 
-/* body {
+/* /* body { */
   /* font-family: var(--font-poppins); */
 
   /* background: #181c25; */
