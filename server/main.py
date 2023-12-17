@@ -87,6 +87,9 @@ class BackendAPI:
 
         self.router.add_api_route(
             f"/{self.app_version}/" + "order-status", self.orderStatus, methods=["GET"])
+        
+        self.router.add_api_route(
+            f"/{self.app_version}/" + "gov-scheme", self.govScheme, methods=["GET"])
 
         if (os.getenv("ENV") == "DEV"):
             print("[*] DEV")
@@ -464,6 +467,16 @@ class BackendAPI:
                 raise HTTPException(
                     status_code=401, detail="Product Need To Processed or Product is Already Delivered ")
 
+
+    async def govScheme(self):
+        scheme = db["govScheme"]
+        records = scheme.find()
+
+        records_list = [
+            {**record, "_id": str(record["_id"])} for record in records
+        ]
+
+        return records_list
 
 app = FastAPI()
 

@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "Alipur"
-    ]
+    ],
+    "python.analysis.autoImportCompletions": true
 }
