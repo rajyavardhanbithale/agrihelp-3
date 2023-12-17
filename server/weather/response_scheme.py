@@ -1,8 +1,11 @@
 import datetime
+from datetime import datetime
 import pytz
+import json
+from weather import rain_prediction
 
-def toCelcius(temp: float | int) -> str:
-    return str(round(temp - 273.15, 1))
+def toCelcius(temp: float | int) -> int:
+    return int(round(temp - 273.15, 1))
 
 
 def returnToday(responseWeatherAPI: dict, responseOpenWeatherAPI: dict):
@@ -60,40 +63,62 @@ def returnToday(responseWeatherAPI: dict, responseOpenWeatherAPI: dict):
     return scheme
 
 
-def returnForecast(responseWeatherAPI: str):
+def returnForecast(responseWeatherAPI: dict, responseOpenWeatherAPI: dict):
     return_lst = []
+    rain_list = []
+    
+  
     for x in responseWeatherAPI["forecast"]["forecastday"]:
+        rain_list.append(x["day"]["daily_chance_of_rain"])
+        
+    rain_list.append(responseWeatherAPI["forecast"]["forecastday"][2]["day"]["totalprecip_mm"])
+    get_rain = rain_prediction.rainProbability(rain_list)
+    rain_list.pop(3)
+    rain = rain_list + get_rain
 
-        scheme = {
-            "location": {
-                "name": responseWeatherAPI["location"]["name"],
-                "region": responseWeatherAPI["location"]["region"],
-                "country": responseWeatherAPI["location"]["country"]
-            },
-            "info": {
-                "date": x["date"],
-                "temp": x["day"]["avgtemp_c"],
+    cnt = 0
+    for x in responseOpenWeatherAPI["list"]:
+        
+        timestamp = datetime.utcfromtimestamp(x["dt"]).strftime("%I:%M:%S %p")
+        if (timestamp == "06:00:00 PM"):
+            scheme = {
+                "location": {
+                    "name": responseOpenWeatherAPI["city"]["name"],
+                    "region": responseOpenWeatherAPI["city"]["country"],
+                   
+                },
+                "info": {
+                    "time_epoch": x["dt"],
+                    "time_formatted": datetime.utcfromtimestamp(x["dt"]).strftime("%A %dth %B"),
+                    "time_part":{
+                      "date" : datetime.utcfromtimestamp(x["dt"]).strftime("%d"),   
+                      "day" : datetime.utcfromtimestamp(x["dt"]).strftime("%A"),   
+                      "month" : datetime.utcfromtimestamp(x["dt"]).strftime("%B"),   
+                    },
+                    "main":{
+                        "temp" : toCelcius(x["main"]["temp"]),
+                        "temp_min" : toCelcius(x["main"]["temp_min"]),
+                        "temp_max" : toCelcius(x["main"]["temp_max"]),
+                    },
 
-                "condition": {
-                    "type": x["day"]["condition"]["text"],
-                    "icon": "https" + x["day"]["condition"]["icon"].replace("//", "://"),
-                    "code": 1030
-                },
-                "wind": {
-                    "kmph": x["day"]["avgvis_km"],
-                    "mph": x["day"]["avgvis_miles"],
-                },
-                "precipitation": {
-                    "in_mm": x["day"]["totalprecip_mm"],
-                    "in_in": x["day"]["totalprecip_in"],
-                },
-                "humidity": x["day"]["avghumidity"],
-                "rain": x["day"]["daily_chance_of_rain"],
+                    "condition": {
+                        "type": x["weather"][0]["main"],
+                        "description": x["weather"][0]["description"],
+                        "icon": x["weather"][0]["icon"],
+                    },
+                    "wind": {
+                        "mph": x["wind"]["speed"],
+                    },
+                   
+                    
+                    "clouds": x["clouds"]["all"],
+                    "rain": rain[cnt],
+
+                }
 
             }
-
-        }
-        return_lst.append(scheme)
+            cnt = cnt +1 
+            return_lst.append(scheme)
     return return_lst
 
 
@@ -116,7 +141,7 @@ def todayForecast(responseWeatherAPI: str):
 
                 "condition": {
                     "type": x["condition"]["text"],
-                    "icon": "https" + x["condition"]["icon"].replace("//", "://").replace("64x64","128x128"),
+                    "icon": "https" + x["condition"]["icon"].replace("//", "://").replace("64x64", "128x128"),
                     "code": x["condition"]["code"]
                 },
                 "wind": {
@@ -135,7 +160,9 @@ def todayForecast(responseWeatherAPI: str):
         
         return_lst.append(scheme)
 
-    return return_lst 
+    return return_lst
 
 # todayForecast("1")
 
+
+# print(returnForecast("", ""))
