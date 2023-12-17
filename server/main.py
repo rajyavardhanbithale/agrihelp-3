@@ -251,13 +251,13 @@ class BackendAPI:
         return runner.weatherToday(city=city,lat=lat,lon=lon)
     
     
-    async def getWeatherForecastToday(self, city: str):
+    async def getWeatherForecastToday(self, city: str=None,lat:float=None,lon:float=None):
         runner = weather.Weather()
-        return runner.todayForecast(city=city)
+        return runner.todayForecast(city=city,lat=lat,lon=lon)
 
-    async def getWeatherForecast(self, city: str, days: int):
+    async def getWeatherForecast(self, days:int,city: str=None,lat:float=None,lon:float=None):
         runner = weather.Weather()
-        return runner.weatherForecast(city=city, days=days)
+        return runner.weatherForecast(city=city, days=days,lat=lat,lon=lon)
     
 
     async def cropReccom(self, N, P, K, ph, rain, city):

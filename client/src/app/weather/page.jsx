@@ -46,45 +46,48 @@ export default function main() {
     console.log(userLocation);
 
     useEffect(() => {
-        console.log(userLocation);
-        // const fetchDataForCity = async () => {
-        //     // const param = `/v2/weather/current?city=${city}`;
-        //     // const dataTop = await fetchWeather(param);
-        //     // setDataTop(dataTop);
+       
+        const fetchDataForCity = async () => {
+            const param = `/v2/weather/current?city=${city}`;
+            const dataTop = await fetchWeather(param);
+            setDataTop(dataTop);
 
-        //     // const param1 = `/v2/weather/forecast-today?city=${city}`;
-        //     // const dataMiddle = await fetchWeather(param1);
-        //     // setDataMiddle(dataMiddle);
+            const param1 = `/v2/weather/forecast-today?city=${city}`;
+            const dataMiddle = await fetchWeather(param1);
+            setDataMiddle(dataMiddle);
 
-        //     // const param2 = `/v2/weather/forecast?city=${city}&days=5`;
-        //     // const dataBottom = await fetchWeather(param2);
-        //     // setDataBottom(dataBottom);
-        // };
+            const param2 = `/v2/weather/forecast?city=${city}&days=5`;
+            const dataBottom = await fetchWeather(param2);
+            setDataBottom(dataBottom);
+        };
 
         const fetchDataForLocation = async () => {
             const param = `/v2/weather/current?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}`;
             const dataTop = await fetchWeather(param);
             setDataTop(dataTop);
 
+            const param1 = `/v2/weather/forecast-today?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}`;
+            const dataMiddle = await fetchWeather(param1);
+            setDataMiddle(dataMiddle);
+
+            const param2 = `/v2/weather/forecast?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}&days=5`;
+            const dataBottom = await fetchWeather(param2);
+            setDataBottom(dataBottom);
+
           
         };
 
         if(userLocation){
            fetchDataForLocation()
+        }else{
+            fetchDataForCity()
         }
-        // fetchDataForCity();
-    }, [setUserLocation]);
+     
+    }, [userLocation]);
 
 
 
-    const handleInputChange = (e) => {
-        setTemp(e.target.value);
-    };
-
-    const handleButtonClick = () => {
-        setCity(temp)
-    };
-
+    console.log(dataTop);
 
     return (
         <>
@@ -113,8 +116,9 @@ export default function main() {
             </div>
             <div className="flex flex-col justify-center items-center ">
 
-                {/* <WeatherMiddle data={dataMiddle} />
-                <WeatherBottom data={dataBottom} /> */}
+                <WeatherMiddle data={dataMiddle} />
+                
+                <WeatherBottom data={dataBottom} /> 
 
             </div>
         </>

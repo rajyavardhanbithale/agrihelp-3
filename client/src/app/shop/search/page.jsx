@@ -4,12 +4,16 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import { IonIcon } from '@ionic/react';
-import {  caretDown, caretUp, search } from 'ionicons/icons';
+import { caretDown, caretUp, search } from 'ionicons/icons';
+import { useSearchParams } from 'next/navigation';
 
 
 
 
 export default function Search() {
+    const searchItem = useSearchParams()?.get("category") || null
+
+
     const [item, setItem] = useState([]);
     const [count, setCount] = useState(0);
 
@@ -19,7 +23,14 @@ export default function Search() {
 
     useEffect(() => {
 
-        handleFetch("seeds")
+        const isValidCategory = category.includes(searchItem);
+
+        if (searchItem && isValidCategory) {
+            handleFetch(searchItem);
+        } else {
+            handleFetch("seeds");
+        }
+
 
         return () => {
             // Cleanup code here (if needed)
