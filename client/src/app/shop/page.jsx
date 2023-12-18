@@ -1,70 +1,29 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic'
 
-import ShopHeader from '../components/shop/ShopHeader';
-import ShopNav from '../components/shop/ShopNav';
-import Shopbox from '../components/shop/Shopbox';
-import ProductCarousel from '../components/shop/ProductCarousel';
-import Category from '../components/shop/Category';
-import PromoSection from '../components/shop/PromoSection';
-import ProductCard from '../components/shop/ProductCard';
-import ShopFooter from '../components/shop/ShopFooter';
-import ShopAbout from '../components/shop/ShopAbout';
-import Cart from './cart/page';
-import Wishlist from './wishlist/page';
-import Contact from './contact/page';
-import Account from './checkout/page'
-
-
+const ShopHeader = dynamic(() => import('../components/shop/ShopHeader'));
+const Shopbox = dynamic(() => import('../components/shop/Shopbox'));
+const ProductCarousel = dynamic(() => import('../components/shop/ProductCarousel'));
+const Category = dynamic(() => import('../components/shop/Category'));
+const PromoSection = dynamic(() => import('../components/shop/PromoSection'));
+const ProductCard = dynamic(() => import('../components/shop/ProductCard'));
 
 export default function Shop() {
+  const [error,setError] = useState()
+
+
   return (
     <>
+      <ShopHeader />
+      <ProductCarousel />
+      <Shopbox />
+      <Category />
+      <PromoSection />
+      <ProductCard width={80} path={"shop/product/"} title={"Seeds"} totalItem={6} category={"seeds"} />
+      <ProductCard width={80} path={"shop/product/"} title={"Fertilizer"} totalItem={6} category={"fertilizer"} />
 
-     
-        {/* <Routes>
-          <Route path='/Cart' element={<Cart />} />
-        </Routes>
-        <Routes>
-          <Route path='/wishlist' element={<Wishlist />} />
-        </Routes>
-        <Routes>
-          <Route path='/contact' element={<Contact />} />
-        </Routes>
-        <Routes>
-          <Route path='/Account' element={<Account/>} />
-        </Routes>
-       
-        <Routes>
-          <Route path='/' element={<ProductCarousel />} />
-        </Routes>
-        <Routes>
-          <Route path='/' element={<Shopbox />} />
-        </Routes>
-        <Routes>
-          <Route path='/' element={<Category />} />
-        </Routes>
-        <Routes>
-          <Route path='/' element={<PromoSection />} />
-        </Routes>
-        <Routes>
-          <Route path='/' element={<ProductCard />} />
-        </Routes> */}
-
-        {/* <ShopNav /> */}
-        <ShopHeader />
-        {/* <ShopAbout /> */}
-        <ProductCarousel />
-        <Shopbox />
-        <Category />
-        <PromoSection />
-        <ProductCard width={80} path={"shop/product/"} title={"Seeds"} totalItem={6} category={"seeds"} />
-        <ProductCard width={80} path={"shop/product/"} title={"Fertilizer"} totalItem={6} category={"fertilizer"} />
-                
-      
-     
-       
-       {/* <ShopFooter /> */}
+      {/* <ShopFooter /> */}
 
     </>
   );

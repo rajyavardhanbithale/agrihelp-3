@@ -94,6 +94,10 @@ class BackendAPI:
         self.router.add_api_route(
             f"/{self.app_version}/" + "financial-aid", self.financialAid, methods=["GET"])
 
+        self.router.add_api_route(
+            f"/{self.app_version}/" + "ping", self.ping, methods=["GET"])
+
+
         if (os.getenv("ENV") == "DEV"):
             print("[*] DEV")
             self.client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -498,6 +502,9 @@ class BackendAPI:
         ]
 
         return records_list
+    
+    async def ping(self):
+        raise HTTPException(status_code=200,detail="PING - PONG")
 
 app = FastAPI()
 
