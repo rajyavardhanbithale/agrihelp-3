@@ -68,18 +68,18 @@ function ProductCard(props) {
     <>
       <h2 className="mt-16 mx-auto mb-16 max-w-[1200px] px-8 text-center text-3xl tracking-widest">{props?.title}</h2>
 
-      <div className={`w-[80%] ml-auto mr-auto`}>
+      <div className={`w-[85%] ml-auto mr-auto`}>
         <Slider {...settings}>
           {item?.map((product, idx) => (
             <div key={idx} className="px-2 pb-4 md:px-5">
               <section
                 key={idx}
-                className="flex flex-col w-full md:w-full lg:w-full"
+                className="flex flex-col w-full md:w-full lg:w-full border-gray-600 shadow-lg border-[2px] py-1 px-3 rounded-xl"
               >
                 <div className="flex flex-col">
                   <div className="relative flex items-center justify-center">
                     <img
-                      className="w-48 h-48 object-scale-down"
+                      className="w-48 h-48 object-scale-down mt-3"
                       src={product.images[0]}
                       alt={product.name}
                     />

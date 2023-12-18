@@ -129,7 +129,7 @@ export default function pest() {
                     ) : null}
 
                     {apiData ? (
-                        <div className="w-full p-5 text-2xl text-center md:flex md:justify-between items-center">
+                        <div className="w-full p-5 text-2xl text-center md:flex md:justify-between items-end">
                             <div dangerouslySetInnerHTML={{ __html: apiData }} />
                         </div>
                     ) : null}

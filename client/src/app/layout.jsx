@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
       
           <body className={poppins.className}>
             <Navbar></Navbar>
-            <div className='mt-24'></div>
+            {/* <div className='mt-24'></div> */}
             {children}
           </body>
 

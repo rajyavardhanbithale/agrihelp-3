@@ -49,9 +49,9 @@ export default function Navbar(props) {
         <>
 
             <section>
-                <header class=" bg-green-500 m-2 rounded-full  absolute inset-x-0 top-0 z-50">
+                <header class=" bg-gray-500 bg-opacity-50 m-2 rounded-full  absolute inset-x-0 top-0 z-50">
 
-                    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global drop-shadow-2xl">
+                    <nav class="flex items-center justify-between p-3 lg:px-8" aria-label="Global drop-shadow-2xl">
                         <div class="flex lg:flex-1">
                             <a href="/" class="-m-1.5 p-1.5 flex ">
                                 <span class="sr-only">Vedant</span>
@@ -78,14 +78,15 @@ export default function Navbar(props) {
                                 class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Pest Information</Link>
                             <Link href={"/crop/fertilizer"}
                                 class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Fertilizer Recomendation</Link>
-                            <Link href={"/"}
-                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Shop</Link>
                             <Link href={"/shop"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Shop</Link>
+                            <Link href={"/"}
                                 class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Chat</Link>
-                            <Link href={"/"}
-                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Govt.Scheme</Link>
-                            <Link href={"/"}
-                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Feedback</Link>
+
+                            <Link href={"/gov-scheme"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Scheme</Link>
+                            <Link href={"/financial-aid"}
+                                class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Finance</Link>
                             <Link href={"/login"}
                                 class="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">About Us</Link>
 
@@ -140,7 +141,7 @@ export default function Navbar(props) {
                                             <Link href={"/"}
                                                 class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">About</Link>
 
-                                            
+
 
 
                                         </div>

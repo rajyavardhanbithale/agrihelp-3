@@ -91,6 +91,9 @@ class BackendAPI:
         self.router.add_api_route(
             f"/{self.app_version}/" + "gov-scheme", self.govScheme, methods=["GET"])
 
+        self.router.add_api_route(
+            f"/{self.app_version}/" + "financial-aid", self.financialAid, methods=["GET"])
+
         if (os.getenv("ENV") == "DEV"):
             print("[*] DEV")
             self.client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -265,10 +268,10 @@ class BackendAPI:
 
     async def cropReccom(self, N, P, K, ph, rain, city):
         from ml import crop_reco
-        runner = weather.Weather()
-        getData = runner.weatherToday(city=city)
-        temp, humid = getData["current"]["temp"], getData["current"]["humidity"]
-        return crop_reco.crop_prediction(N=N, P=P, K=K, ph=ph, humidity=humid, rainfall=rain, temperature=temp)
+        # runner = weather.Weather()
+        # getData = runner.weatherToday(city=city,lat=None,lon=None)
+        # temp, humid = getData["current"]["temp"], getData["current"]["humidity"]
+        return crop_reco.crop_prediction(N=N, P=P, K=K, ph=ph, humidity=50, rainfall=rain, temperature=28)
 
     async def fertilizerReccom(self, N: float, P: float, K: float, crop: str):
         return fertilizer_reco.fert_recommend(N=N, P=P, K=K, crop=crop)
@@ -469,10 +472,24 @@ class BackendAPI:
 
 
     async def govScheme(self,category:str):
-        if category=="government":
-            scheme = db["govScheme"]
-        else:
+        if category=="private":
             scheme = db["privateScheme"]
+        else:
+            scheme = db["govScheme"]
+            
+        records = scheme.find()
+
+        records_list = [
+            {**record, "_id": str(record["_id"])} for record in records
+        ]
+
+        return records_list
+
+    async def financialAid(self,category:str):
+        if category=="private":
+            scheme = db["financialAid"]
+        else:
+            scheme = db["govFinancialAid"]
             
         records = scheme.find()
 

@@ -70,13 +70,13 @@ export default function fertilizer() {
         <>
             <div>
                 <div className="flex sm:h-fit md:h-screen">
-                    <img
-                        className="hidden lg:block w-1/2"
-                        src="https://images.pexels.com/photos/12247010/pexels-photo-12247010.jpeg?auto=compress&cs=tinysrgb&w=600"
+                <img
+                        className="hidden lg:block w-1/2 object-cover"
+                        src="https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         alt=""
                     />
 
-                    <div className="flex scale-125 flex-col items-center justify-center align-middle w-full lg:w-1/2 mx-5 my-3">
+                    <div className="flex scale-[1.2] flex-col items-center justify-center align-middle w-full lg:w-1/2 mx-5 my-3">
                         <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
                             <div className="mx-auto max-w-2xl text-center">
                                 <h2 className="text-5xl font-extrabold tracking-tight sm:text-4xl text-teal-900">

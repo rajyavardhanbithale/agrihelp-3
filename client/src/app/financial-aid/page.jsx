@@ -9,12 +9,12 @@ import PopUpModalScheme from './PopUpModalScheme';
 
 
 
-export default function FinancialAid() {
+export default function GovScheme() {
     const [data, setData] = useState({})
     const [isModalOpen, setModalOpen] = useState(false);
     const openModal = () => setModalOpen(true);
     const closeModal = () => setModalOpen(false);
-    const [selectedCategory, setSelectedCategory] = useState("government");
+    const [selectedCategory, setSelectedCategory] = useState("private");
 
     const [item, setItem] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +29,7 @@ export default function FinancialAid() {
     const handleFetch = async (category) => {
         setSelectedCategory(category);
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/v2/gov-scheme?category=${category}`);
+            const response = await axios.get(`http://127.0.0.1:8000/v2/financial-aid?category=${category}`);
             if (response.status === 200) {
                 setItem(response.data);
                 // console.log(item);
@@ -42,7 +42,7 @@ export default function FinancialAid() {
 
     useEffect(() => {
         handleFetch(selectedCategory)
-        setSelectedCategory("government");
+        setSelectedCategory("private");
     }, [])
 
     const showDetail = () => {
@@ -54,25 +54,25 @@ export default function FinancialAid() {
         openModal();
     }
 
-    const category = ["government", "private"]
+    const category = ["private"] //"government", 
 
     return (
         <>
             <div className="mx-auto flex justify-center  items-start px-5 mb-5">
                 <section className="rounded-2xl mt-5 flex justify-between bg-emerald-900 px-5">
                     <div className="py-5 px-2 lg:px-16">
-                        <p className="text-white font-bold">AGRIHELP Scheme</p>
-                        <p className="text-white font-semibold">Contains More than</p>
+                        <p className="text-white font-bold">AGRIHELP </p>
+                        <p className="text-white font-semibold">Financial Aid</p>
 
                         <p className="pt-4 text-white text-2xl">
-                            Browse Scheme
+                            Browse Aid
                         </p>
 
                     </div>
                     <img
-                        className="ml-20 -mr-5 hidden w-[350px] h-[200px]  object-cover md:block rounded-2xl bg-blend-darken"
-                        src="https://www.newsclick.in/sites/default/files/2021-08/Pradhan%20Mantri%20Fasal%20Bima%20Yojana.jpeg"
-                        alt="pmfby"
+                        className="ml-20 -mr-5 hidden w-[300px] h-[200px]  object-cover md:block rounded-2xl bg-blend-darken"
+                        src="https://st3.depositphotos.com/22740078/36504/i/450/depositphotos_365049550-stock-photo-coins-stacked-each-other-close.jpg"
+                        alt="aid"
                     />
 
                 </section>
