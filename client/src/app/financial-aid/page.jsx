@@ -6,6 +6,7 @@ import axios from 'axios';
 import { IonIcon } from '@ionic/react';
 import { caretDown, caretUp, search } from 'ionicons/icons';
 import PopUpModalScheme from './PopUpModalScheme';
+import EndpointError from '../components/EndpointError';
 
 
 
@@ -35,6 +36,7 @@ export default function GovScheme() {
             }
         } catch (error) {
             setError("Error in Fetching Data")
+            setLoading(1)
         }
 
     }
@@ -109,13 +111,14 @@ export default function GovScheme() {
                         </button>
                     ))}
                 </div>
-                <div className="flex mt-20 flex-wrap justify-center text-red-500 text-2xl">
-                    <h1>{error}</h1>
-                </div>
+
+                {error ? (
+                    <EndpointError />
+                ) : (null)}
 
                 <div className={`w-[80%] ml-auto mr-auto`}>
 
-                    {loading ? (
+                    {(loading) ? (
                         <div className="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                             {filteredProducts?.map((product, idx) => (
                                 <div key={idx} className="px-2 pb-4 md:px-5">
@@ -167,31 +170,33 @@ export default function GovScheme() {
                             )}
                         </div>
                     ) : (
-                        <div className="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        error ? (null) : (
+                            <div className="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
-                            {[...Array(4)]?.map((product, idx) => (
-                                <div key={idx} className="px-2 pb-4 md:px-5">
+                                {[...Array(4)]?.map((product, idx) => (
+                                    <div key={idx} className="px-2 pb-4 md:px-5">
 
-                                    <section
-                                        key={idx}
-                                        className="flex flex-col border-gray-600 rounded-xl border-[2px] px-8 w-full md:w-full lg:w-full animate__animated animate__fadeIn"
-                                    >
-                                        <div className="flex flex-col">
-                                            <div className="relative flex items-center justify-center">
-                                                <div className="w-44 h-44 mt-3 bg-gray-300 animate-pulse rounded-lg"></div>
+                                        <section
+                                            key={idx}
+                                            className="flex flex-col border-gray-600 rounded-xl border-[2px] px-8 w-full md:w-full lg:w-full animate__animated animate__fadeIn"
+                                        >
+                                            <div className="flex flex-col">
+                                                <div className="relative flex items-center justify-center">
+                                                    <div className="w-44 h-44 mt-3 bg-gray-300 animate-pulse rounded-lg"></div>
+                                                </div>
+                                                <div>
+                                                    <p className="mt-2 text-xl overflow-hidden rounded-xl h-5 bg-gray-300 animate-pulse"> </p>
+                                                    <p className="mt-2 rounded-xl h-5 bg-gray-300 animate-pulse"></p>
+                                                    <p className="mt-2 mb-4 rounded-xl h-5 bg-gray-300 animate-pulse"></p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p className="mt-2 text-xl overflow-hidden rounded-xl h-5 bg-gray-300 animate-pulse"> </p>
-                                                <p className="mt-2 rounded-xl h-5 bg-gray-300 animate-pulse"></p>
-                                                <p className="mt-2 mb-4 rounded-xl h-5 bg-gray-300 animate-pulse"></p>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
+                                        </section>
+                                    </div>
 
-                            ))}
+                                ))}
 
-                        </div>
+                            </div>
+                        )
                     )}
                 </div>
 

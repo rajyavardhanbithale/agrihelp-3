@@ -4,6 +4,7 @@ import axios from 'axios';
 import WeatherTop from '../components/weather/WeatherTop';
 import WeatherBottom from '../components/weather/WeatherBottom';
 import WeatherMiddle from '../components/weather/WeatherMiddle';
+import EndpointError from '../components/EndpointError';
 
 
 
@@ -112,25 +113,7 @@ export default function main() {
 
 
             {error ? (
-                <div className="flex mt-20 flex-wrap justify-center text-red-500 text-2xl">
-                    <div class="grid h-screen place-content-center bg-white px-4">
-                        <div class="text-center">
-                            <img
-                                src="/assets/error.gif"
-                                alt=""
-                                className="mx-auto my-auto w-64 h-60 rounded-xl shadow-2xl"
-                            />
-                            <h1 class="mt-12 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                                Uh-oh!
-                            </h1>
-
-                            <p class="mt-4 text-gray-500">
-                                Temporary Service Interruption: Internal Server Error - We'll be back
-                                shortly to ensure seamless operations.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <EndpointError/>
             ) : (
                 <>
 
