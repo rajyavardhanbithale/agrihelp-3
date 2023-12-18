@@ -53,7 +53,7 @@ export default function Login() {
             const encrypt = CryptoJS.AES.encrypt(JSON.stringify(constructCookie), secretKey).toString()
             Cookies.set("user", encrypt, { expires: 5 })
 
-            window.location.href = "/"
+            window.location.href = redirect?.get("callback") || "/"
           }
 
         } catch (error) {
@@ -76,7 +76,7 @@ export default function Login() {
   const generateUsernameForGoogleLogin = (firstname, lastname) => {
     return firstname.slice(0, 4) + lastname.slice(0, 3) + Math.floor(Math.random() * 9999) + 1;
   }
-
+  
   const postGoogleLogin = async (data,sessionType) => {
     const splitName = data.user?.name.split(" ")
     const username = generateUsernameForGoogleLogin(splitName[0].toLowerCase(), splitName[1] ? splitName[1].toLowerCase() : "")
@@ -91,7 +91,7 @@ export default function Login() {
       "image": data.user?.image
     }
     
-   
+    
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/signup`, constructData)
 

@@ -6,6 +6,8 @@
 
 Farmer Paradise
 
+## Vulnerability To Remove
+Open-Redirection : /login?callback=url
 
 ## P-o-W
 ❌ ✅
