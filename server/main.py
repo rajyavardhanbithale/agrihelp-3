@@ -468,8 +468,12 @@ class BackendAPI:
                     status_code=401, detail="Product Need To Processed or Product is Already Delivered ")
 
 
-    async def govScheme(self):
-        scheme = db["govScheme"]
+    async def govScheme(self,category:str):
+        if category=="government":
+            scheme = db["govScheme"]
+        else:
+            scheme = db["privateScheme"]
+            
         records = scheme.find()
 
         records_list = [
