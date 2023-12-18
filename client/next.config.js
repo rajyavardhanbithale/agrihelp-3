@@ -9,6 +9,13 @@ const nextConfig = {
     },
     output: "standalone",
 
+    experimental: {
+        turbotrace: {
+            logLevel:'info',
+            logDetail:false
+        }
+    }
+
 }
 
 module.exports = nextConfig

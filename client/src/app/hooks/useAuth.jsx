@@ -9,9 +9,13 @@ export default async function useAuth() {
   const key = 'rar'
 
 
-  const getEncryptedCookie = cookieStore.get("user")
+  const getEncryptedCookie = cookieStore.get("user") || null
 
-  const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie.value, key).toString(CryptoJS.enc.Utf8)
+  if (getEncryptedCookie === null || getEncryptedCookie == undefined){
+    return false
+  }
+
+  const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie.value, key).toString(CryptoJS.enc.Utf8) 
   const jsonDecrypt = JSON.parse(parseEncryptedCookie)
 
   if (jsonDecrypt.validationKey === "token") {
@@ -28,22 +32,32 @@ export default async function useAuth() {
       }
     }
 
-    constructResponse = {
-      "email": "ramiwick5@gmail.com",
-      "password": "&p455w0rd*r463"
-    }
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any additional headers if needed
+          },
+          body: JSON.stringify(constructResponse),
+        });
 
-
-    const fetchData = async () =>{
-        try {
-          const response =  await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/login`,constructResponse)
-          console.log(response.status); 
-        } catch (errors) {
-          console.log("error.status",error?.response?.status);
+        if (response.ok) {
+          // HTTP status in the range 200-299
+          return true;
+        } else {
+          // Handle non-successful response
+          return false;
         }
-    }
+      } catch (error) {
+        // Handle network errors or exceptions
+        return false;
+      }
+    };
 
-    fetchData()
+    // console.log("---------",await fetchData());
+    return await fetchData()
 
   }
 

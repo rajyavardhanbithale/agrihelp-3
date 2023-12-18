@@ -14,7 +14,7 @@ export default async function Home() {
 
 
   
-  console.log(await isLoggedIn);
+  // console.log("////////////",await isLoggedIn);
   return (
     <>
       {/* <Navbar isAuth={isLogin()} />

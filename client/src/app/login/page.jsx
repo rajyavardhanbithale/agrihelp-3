@@ -12,8 +12,12 @@ import '../App.css';
 import Cookies from 'js-cookie';
 import CryptoJS from 'crypto-js';
 import { signIn, useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
-export default function Signup() {
+export default function Login() {
+
+  const redirect = useSearchParams()
+  console.log(redirect);
   const session = useSession()
   const [isLogin, setIsLogin] = useState(false)
   const [showErrors, setShowErrors] = useState(false);

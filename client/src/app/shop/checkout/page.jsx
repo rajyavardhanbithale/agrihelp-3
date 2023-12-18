@@ -235,6 +235,7 @@ function OrderSummary(props) {
 
   return (
     <>
+    
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
         <img
           className="cursor-pointer w-16"
@@ -352,6 +353,7 @@ function OrderSummary(props) {
                     type="text"
                     className="capitalize w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     value={`${user?.firstname} ${user?.lastname}` || ''}
+                    
                    
                   />
                   <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">

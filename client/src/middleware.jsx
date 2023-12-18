@@ -7,7 +7,7 @@ import useAuth from './app/hooks/useAuth'
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
-    const isLog  = useAuth()
+    const isLog  = await useAuth()
     const checkCookie = () => {
        
         try {
@@ -43,24 +43,28 @@ export async function middleware(request) {
     const path = request.nextUrl.pathname
     const isPrivate = path === '/login' || path === '/signup' || path === '/signup/verify'
 
-    if (!await isLog && isPrivate) {
+    if (isLog && isPrivate) {
+        console.log("==========login==========");
         return NextResponse.redirect(new URL('/', request.nextUrl))
     }
-    if (checkCookie() && path === '/signup/verify' && !request.nextUrl.searchParams.get('url')) {
-        return NextResponse.redirect(new URL('/', request.nextUrl))
-    }
+    // if (checkCookie() && path === '/signup/verify' && !request.nextUrl.searchParams.get('url')) {
+    //     return NextResponse.redirect(new URL('/', request.nextUrl))
+    // }
 
-    if (path === '/error' && await checkEndpointStatus()) {
-        return NextResponse.redirect(new URL('/', request.nextUrl))
-    }
+    // if (path === '/error' && await checkEndpointStatus()) {
+    //     return NextResponse.redirect(new URL('/', request.nextUrl))
+    // }
 
-    if (request.nextUrl.pathname.startsWith('/shop') && !await checkEndpointStatus()) {
-        return NextResponse.redirect(new URL('/error', request.nextUrl))
-    }
+    // if (request.nextUrl.pathname.startsWith('/shop') && !await checkEndpointStatus()) {
+    //     return NextResponse.redirect(new URL('/error', request.nextUrl))
+    // }
 
-    console.log(await isLog);
-    if (path === '/shop/checkout' && await isLog) {
+    console.log("-----+++++--------",isLog);
+
+    if (!isLog && path === '/shop/checkout') {
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
         return NextResponse.redirect(new URL('/login', request.nextUrl))
+        
     }
 
 
@@ -68,7 +72,7 @@ export async function middleware(request) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/login', '/signup', '/signup/verify', '/shop/:path*','/shop','/error','/shop/checkout']
+    matcher: ['/login', '/signup', '/shop/checkout','/signup/verify', '/shop/:path*','/shop','/error']
 }
 
 
