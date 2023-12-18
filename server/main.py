@@ -45,7 +45,7 @@ class BackendAPI:
             f"/{self.app_version}/weather/current", self.getWeatherToday, methods=["GET"])
         self.router.add_api_route(
             f"/{self.app_version}/weather/forecast-today", self.getWeatherForecastToday, methods=["GET"])
-        
+
         # self.router.add_api_route(f"/{self.app_version}/", self.main, methods=["GET"])
         self.router.add_api_route(
             f"/{self.app_version}/weather/forecast", self.getWeatherForecast, methods=["GET"])
@@ -87,7 +87,7 @@ class BackendAPI:
 
         self.router.add_api_route(
             f"/{self.app_version}/" + "order-status", self.orderStatus, methods=["GET"])
-        
+
         self.router.add_api_route(
             f"/{self.app_version}/" + "gov-scheme", self.govScheme, methods=["GET"])
 
@@ -96,7 +96,6 @@ class BackendAPI:
 
         self.router.add_api_route(
             f"/{self.app_version}/" + "ping", self.ping, methods=["GET"])
-
 
         if (os.getenv("ENV") == "DEV"):
             print("[*] DEV")
@@ -119,22 +118,25 @@ class BackendAPI:
 
         self.fernet_key = os.getenv("FERNET_KEY", None)
         self.host_name = os.getenv("HOST", None)
+        self.host_main = os.getenv("MAINHOST", None)
 
     async def login(self, user: base_models.UserLogin):
         verify_login_data = login_manager.checkData(
             username=user.username, email=user.email)
+        
+        print(verify_login_data)
         # print(verify_login_data)
         if (verify_login_data):
             login = login_manager.doLogin(collection=self.collection, username=user.username,
                                           password=user.password, email=user.email, verbose=user.verbose)
-            
-           
-            raise HTTPException(status_code=200 if login==True else 401, detail=login)
-        
+
+            raise HTTPException(status_code=200 if login ==
+                                True else 401, detail=login)
+
         return ""
 
     async def signup(self, user: base_models.UserSignup, request: Request):
-        print("sign")
+        
         if self.method == "OTP":
             scheme = base_models.DatabaseScheme(firstname=user.firstname, lastname=user.lastname, username=user.username,
                                                 email=user.email, password=user.password, ip=request.client.host,
@@ -160,18 +162,21 @@ class BackendAPI:
                                                     url_verification=True, origin=user.originF,
                                                     verification_id=verification_token)
 
-                print(verification_token)
+                
         primary_user = check_unique.check_unique(
             collection=self.collection, username=user.username)
         primary_email = check_unique.check_unique(
             collection=self.collection, email=user.email)
+        
+        print(primary_email , primary_user)
 
         if not primary_user and not primary_email:
+            
             inset = self.collection.insert_one(scheme)
             if (inset.acknowledged):
-                if not os.getenv("ENV") == "DEV" and user.originF != "google":
+                if not os.getenv("ENV") == "*" and user.originF != "google":
                     ack = sendMail.sendMail(
-                        receiver=user.email, verification_url=self.host_name+"/v2/verify/"+verification_token)
+                        receiver=user.email, verification_url=self.host_main+verification_token)
                 else:
                     ack = True
                 if ack:
@@ -259,22 +264,20 @@ class BackendAPI:
         except:
             raise HTTPException(status_code=401, detail="Unauthorize")
 
-    async def getWeatherToday(self, city: str=None,lat:float=None,lon:float=None):
+    async def getWeatherToday(self, city: str = None, lat: float = None, lon: float = None):
         runner = weather.Weather()
-        return runner.weatherToday(city=city,lat=lat,lon=lon)
-    
-    
-    async def getWeatherForecastToday(self, city: str=None,lat:float=None,lon:float=None):
-        runner = weather.Weather()
-        return runner.todayForecast(city=city,lat=lat,lon=lon)
+        return runner.weatherToday(city=city, lat=lat, lon=lon)
 
-    async def getWeatherForecast(self, days:int,city: str=None,lat:float=None,lon:float=None):
+    async def getWeatherForecastToday(self, city: str = None, lat: float = None, lon: float = None):
         runner = weather.Weather()
-        return runner.weatherForecast(city=city, days=days,lat=lat,lon=lon)
-    
+        return runner.todayForecast(city=city, lat=lat, lon=lon)
 
-    async def cropReccom(self, N:float, P:float, K:float, ph:float, rain:float, city:str):
-       
+    async def getWeatherForecast(self, days: int, city: str = None, lat: float = None, lon: float = None):
+        runner = weather.Weather()
+        return runner.weatherForecast(city=city, days=days, lat=lat, lon=lon)
+
+    async def cropReccom(self, N: float, P: float, K: float, ph: float, rain: float, city: str):
+
         # runner = weather.Weather()
         # getData = runner.weatherToday(city=city,lat=None,lon=None)
         # temp, humid = getData["current"]["temp"], getData["current"]["humidity"]
@@ -382,10 +385,11 @@ class BackendAPI:
         insert = deliveryCollection.insert_one(user_data)
         updateAddress = self.collection.update_one(
             {"email": user.email},
-            {"$set": {"billingAddress": user.billingAddress}},
-            {"$push":{"orders":orderID}}
+            {
+                "$set": {"billingAddress": user.billingAddress},
+                "$push": {"orders": orderID}
+            },
         )
-        
 
         if insert.acknowledged and updateAddress:
 
@@ -478,13 +482,12 @@ class BackendAPI:
                 raise HTTPException(
                     status_code=401, detail="Product Need To Processed or Product is Already Delivered ")
 
-
-    async def govScheme(self,category:str):
-        if category=="private":
+    async def govScheme(self, category: str):
+        if category == "private":
             scheme = db["privateScheme"]
         else:
             scheme = db["govScheme"]
-            
+
         records = scheme.find()
 
         records_list = [
@@ -493,12 +496,12 @@ class BackendAPI:
 
         return records_list
 
-    async def financialAid(self,category:str):
-        if category=="private":
+    async def financialAid(self, category: str):
+        if category == "private":
             scheme = db["financialAid"]
         else:
             scheme = db["govFinancialAid"]
-            
+
         records = scheme.find()
 
         records_list = [
@@ -506,13 +509,15 @@ class BackendAPI:
         ]
 
         return records_list
-    
+
     async def ping(self):
-        raise HTTPException(status_code=200,detail="PING - PONG")
+        raise HTTPException(status_code=200, detail="PING - PONG")
+
 
 app = FastAPI()
 
-origins = ["http://localhost:3000","http://192.168.29.82:3000"]  # Replace with your allowed origins
+# Replace with your allowed origins
+origins = ["http://localhost:3000", "http://192.168.29.82:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -524,5 +529,3 @@ app.add_middleware(
 
 api = BackendAPI()
 app.include_router(api.router)
-
-

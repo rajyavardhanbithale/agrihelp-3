@@ -1,6 +1,8 @@
 from pymongo.collection import Collection
+from sympy import false
 
 def check_unique(collection:Collection,username:str=None,email:str=None,verbose:bool=None):
+    
     
     if(verbose):
         search = collection.find_one({"username":username,"email":email})
@@ -9,9 +11,14 @@ def check_unique(collection:Collection,username:str=None,email:str=None,verbose:
  
     if(username):
         search = collection.find_one({"username":username})
-        return True if search else False
+        if search and search["is_verified"]:
+            return True 
+        
+        return  False
     
     elif(email):
         search = collection.find_one({"email":email})
-        return True if search else False
-    
+        if search and search["is_verified"]:
+            return True 
+        return False
+

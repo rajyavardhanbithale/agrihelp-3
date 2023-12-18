@@ -59,11 +59,11 @@ export async function middleware(request) {
     //     return NextResponse.redirect(new URL('/error', request.nextUrl))
     // }
 
-    console.log("-----+++++--------",isLog);
+   
 
     if (!isLog && path === '/shop/checkout') {
-        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++");
-        return NextResponse.redirect(new URL('/login', request.nextUrl))
+
+        return NextResponse.redirect(new URL('/login?callback=/shop/checkout', request.nextUrl))
         
     }
 

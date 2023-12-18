@@ -224,7 +224,7 @@ function Cart() {
                                 </div>
                                 <div className="flex justify-between border-b py-5">
                                     <p>You Save</p>
-                                    <p>₹ {fakeTotal - total}</p>
+                                    <p>₹ {(fakeTotal - total).toFixed(2)}</p>
                                 </div>
                                 <div className="flex justify-between border-b py-5">
                                     <p>Shipping</p>

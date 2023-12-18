@@ -13,6 +13,7 @@ def doLogin(collection:Collection,password:str,username:str=None,email=None,verb
     if email:
         login = collection.find_one({"email":email,"password":password})
     
+   
     if(login==None or login["is_verified"]==False):
         return "user not found",False
      

@@ -17,7 +17,7 @@ import { useSearchParams } from 'next/navigation';
 export default function Login() {
 
   const redirect = useSearchParams()
-  console.log(redirect);
+  
   const session = useSession()
   const [isLogin, setIsLogin] = useState(false)
   const [showErrors, setShowErrors] = useState(false);
@@ -125,8 +125,7 @@ export default function Login() {
           }
           const encrypt = CryptoJS.AES.encrypt(JSON.stringify(constructCookie), secretKey).toString()
           Cookies.set("user", encrypt, { expires: 5 })
-          window.location.href = "/"
-
+          window.location.href = redirect?.get("callback") || "/"
         }
       } catch (error) {
         console.log();

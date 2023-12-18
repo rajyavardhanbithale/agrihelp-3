@@ -115,6 +115,7 @@ def sendMail(receiver,verification_url):
     em['SUBJECT'] = SUBJECT
     em.add_alternative(html_content,subtype='html')
 
+    print("[++]")
     with smtplib.SMTP_SSL(SERVER,PORT,context=ssl.create_default_context()) as smtp:
         try:
             smtp.login(SENDER, PASSWORD)
@@ -124,11 +125,11 @@ def sendMail(receiver,verification_url):
             print(f"Error: {e}")
             return False
 
-
+  
     
 # sendMail(receiver="ramiwick5@gmail.com",verification_url="hjk")
 # sendMail(receiver="rajyavardhan@​aol.com",verification_url="hjk")
-sendMail(receiver="bithale05@hotmail.com",verification_url="hjk")
+# sendMail(receiver="bithale05@hotmail.com",verification_url="hjk")
 
 
 

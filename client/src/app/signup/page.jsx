@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonIcon } from '@ionic/react';
 import { personOutline, lockClosedOutline, happyOutline, mailOutline } from 'ionicons/icons';
 import Link from 'next/link';
@@ -49,7 +49,10 @@ export default function Signup() {
           const response = await axios.post('http://127.0.0.1:8000/v2/signup', values);
 
           if (response.status === 200) {
-            // console.log('Form submitted successfully:', response.data);
+            Cookies.remove("next-auth.session-token")
+            Cookies.remove("next-auth.csrf-token")
+            Cookies.remove("next-auth.callback-url")
+            
             const newCookie = {
               "emailTemp": values.email,
               "usernameTemp": values.username,
@@ -77,6 +80,8 @@ export default function Signup() {
 
 
   });
+
+
   const handleSignUp = () => {
 
     setShowErrors(true);
