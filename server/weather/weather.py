@@ -67,7 +67,7 @@ class Weather:
             fetch1 = requests.get("{url}?lat={lat}&lon={lon}&appid={api}".format(url=self.oneCall,lat=lat,lon=lon,api=self.OpenKey))
             parseFetch1 = fetch1.json()
         
-        print(("{url}?lat={lat}&lon={lon}&appid={api}".format(url=self.oneCall,lat=lat,lon=lon,api=self.OpenKey)))
+       
         ret = response_scheme.returnForecast(responseWeatherAPI=parseFetch,responseOpenWeatherAPI=parseFetch1)
         return ret
         # print(json.dumps(ret,indent=4))

@@ -1,12 +1,12 @@
 'use client'
 import Link from "next/link";
-// import AuthNotiy from "../Sections/AuthNotify";
-// import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
 
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import CryptoJS from "crypto-js";
 
 export default function Navbar(props) {
-    const auth = props.isAuth;
+    const [user, setUser] = useState()
 
     const [open, setOpen] = useState(false);
 
@@ -18,49 +18,52 @@ export default function Navbar(props) {
         setOpen(false);
     };
 
-   
-    return (
-        // <div className="flex justify-center w-full">
-        //     <header className="flex flex-wrap sm:justify-start w-3/4 sm:flex-nowrap z-50 text-sm py-4 px-5 navbar__blur">
-        //         <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
-        //             <div className="flex justify-center align-middle items-center">
-        //                 <img src="https://avatars.githubusercontent.com/u/111964247?s=400&u=b924200140787bf3ee6a08d4e04465a3770cac9b&v=4" className="w-10 inline-flex justify-center align-middle items-center bg-slate-800 p-0.5 rounded-xl" alt="" />
-        //                 <a className="flex-none align-middle text-xl font-semibold dark:text-white px-3" href={"/"}>
-        //                     RAGE
-        //                 </a>
-        //             </div>
-        //             <div className="flex flex-row items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:pl-5">
-        //                 <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href={"/"}>Early Access</a>
-        //                 <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href={"/"}>Generations</a>
+    useEffect(() => {
 
-        //                 <div className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500">
-        //                     {auth ?
-        //                         <div> <Link href="/">Dashboard</Link></div>
-        //                         :
-        //                         <div> <Link href="/login">Sign IN</Link></div>
-        //                     }
-        //                 </div>
-        //             </div>
-        //         </nav>
-        //     </header>
-        //     {auth && <AuthNotiy value={auth} />}
-        // </div>
+        const checkUser = () => {
+            const key = 'rar'
+            const getEncryptedCookie = Cookies.get("user")
+
+            if (getEncryptedCookie === null || getEncryptedCookie == undefined) {
+                setUser(false)
+                return
+            }
+            const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie, key).toString(CryptoJS.enc.Utf8)
+            const jsonDecrypt = JSON.parse(parseEncryptedCookie)
+
+            if (jsonDecrypt.validationKey === "token") {
+                setUser(true)
+            }
+
+        }
+
+        checkUser()
+
+    }, [])
+    const handleLogout = () => {
+        Cookies.remove("user")
+        window.location.href = "/"
+    }
+
+    // console.log(user);
+    return (
+
 
         <>
 
             <section>
-                <header className=" bg-gray-500 bg-opacity-50 m-2 rounded-full  absolute inset-x-0 top-0 z-50">
+                <header className=" bg-green-500 bg-opacity-70 m-2 rounded-full  absolute inset-x-0 top-0 z-50">
 
                     <nav className="flex items-center justify-between p-3 lg:px-8" aria-label="Global drop-shadow-2xl">
                         <div className="flex lg:flex-1">
                             <a href="/" className="-m-1.5 p-1.5 flex ">
-                                <span className="sr-only">Vedant</span>
+
                                 <img className="h-8 w-auto" src="" alt="" />
                             </a>
                         </div>
                         <div className="flex lg:hidden">
                             <button type="button" onClick={handleClickToOpen}
-                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white">
                                 <span className="sr-only">Open main menu</span>
                                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
                                     aria-hidden="true">
@@ -92,9 +95,18 @@ export default function Navbar(props) {
 
                         </div>
                         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                            <a href={"/"}
-                                className="text-xl font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white">Log
-                                in <span aria-hidden="true">&rarr;</span></a>
+                            {user ? (
+                                <div onClick={handleLogout} className="text-xl font-semibold leading-6 px-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white">
+                                    Log Out
+                                </div>
+                            ) : (
+                                <Link href={"/login"}>
+                                    <div className="text-xl font-semibold leading-6 px-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white">
+                                        Log In
+                                    </div>
+                                </Link>
+                            )}
+
                         </div>
                     </nav>
 
@@ -103,7 +115,7 @@ export default function Navbar(props) {
                         <div className="" role="dialog" aria-modal="true">
                             <div className="fixed inset-0 z-50"></div>
                             <div
-                                className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                                className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 bg-opacity-70 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                                 <div className="flex items-center justify-between">
                                     <a href={"/"} className="-m-1.5 p-1.5">
                                         <span className="sr-only">AGRI-HELP</span>
@@ -122,24 +134,24 @@ export default function Navbar(props) {
 
                                 <div className="mt-6 flow-root">
                                     <div className="-my-6 divide-y divide-gray-500/10">
-                                        
+
                                         <div className="space-y-2 py-6">
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Weather</Link>
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Crop Recommendation</Link>
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Pest Information</Link>
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Fertilizer Recommendation</Link>
-                                            <Link href={"/Shop"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Shop</Link>
-                                            <Link href={"/Chat"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Chat</Link>
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Feedback</Link>
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">About</Link>
+                                            <Link href={"/weather"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Weather</Link>
+                                            <Link href={"/crop"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Crop Recommendation</Link>
+                                            <Link href={"/crop/pest"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Pest Information</Link>
+                                            <Link href={"/crop/fertilizer"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Fertilizer Recommendation</Link>
+                                            <Link href={"/shop"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Shop</Link>
+                                            <Link href={"/gov-scheme"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Scheme</Link>
+                                            <Link href={"/financial-aid"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Finance</Link>
+                                            <Link href={"/weather"}
+                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-white ">About</Link>
 
 
 
@@ -147,10 +159,19 @@ export default function Navbar(props) {
                                         </div>
 
                                         <div className="py-6">
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Log in</Link>
-                                            <Link href={"/"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Sign Up</Link>
+
+
+                                            {user ? (
+                                                <div onClick={handleLogout} className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-200 hover:bg-green-900 ">
+                                                    Log Out
+                                                </div>
+                                            ) : (
+                                                <Link href={"/login"}>
+                                                    <div className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-200 hover:bg-green-900 ">
+                                                        Log In
+                                                    </div>
+                                                </Link>
+                                            )}
                                         </div>
 
                                     </div>
@@ -159,8 +180,8 @@ export default function Navbar(props) {
                         </div>
                     </dialog>
                 </header>
+            </section>
 
-            </section >
         </>
     );
 }

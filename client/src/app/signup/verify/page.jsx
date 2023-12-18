@@ -86,7 +86,7 @@ export default function Verify() {
   const handleVerify = async () => {
     if (search) {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/v2/verify/${search}`)
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/verify/${search}`)
         if (response.status === 200) {
           setVerify(true)
           window.location.href="/login"

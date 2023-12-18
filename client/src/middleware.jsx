@@ -55,9 +55,9 @@ export async function middleware(request) {
     //     return NextResponse.redirect(new URL('/', request.nextUrl))
     // }
 
-    // if (request.nextUrl.pathname.startsWith('/shop') && !await checkEndpointStatus()) {
-    //     return NextResponse.redirect(new URL('/error', request.nextUrl))
-    // }
+    if (request.nextUrl.pathname.startsWith('/shop') && !await checkEndpointStatus()) {
+        return NextResponse.redirect(new URL('/error', request.nextUrl))
+    }
 
    
 

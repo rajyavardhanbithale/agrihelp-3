@@ -46,7 +46,7 @@ export default function Signup() {
         
       
         try {
-          const response = await axios.post('http://127.0.0.1:8000/v2/signup', values);
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/signup`, values);
 
           if (response.status === 200) {
             Cookies.remove("next-auth.session-token")

@@ -14,7 +14,7 @@ function ProductCard(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/v2/shop-item?item=${props.totalItem}&category=${props.category}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/shop-item?item=${props.totalItem}&category=${props.category}`);
         if (response.status === 200) {
           setItem(response.data);
         }

@@ -43,7 +43,7 @@ export default function Login() {
       if (formik.isValid) {
         setIsLogin(true)
         try {
-          const response = await axios.post('http://127.0.0.1:8000/v2/login', values);
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/login`, values);
           if (response.status === 200) {
             const constructCookie = {
               "username": values.username,
@@ -93,7 +93,7 @@ export default function Login() {
     
    
     try {
-      const response = await axios.post("http://127.0.0.1:8000/v2/signup", constructData)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/signup`, constructData)
 
       if (response.status == 200) {
         
@@ -113,8 +113,8 @@ export default function Login() {
       }
       try {
         
-        const response1 = await axios.post("http://127.0.0.1:8000/v2/login", constructLogin)
-        const response2 = await axios.post("http://127.0.0.1:8000/v2/get-user", constructGetUser)
+        const response1 = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/login`, constructLogin)
+        const response2 = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-user`, constructGetUser)
        
         if (response1.status === 200 && response2.status===200) {
           const constructCookie = {

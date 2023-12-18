@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
       
           <body className={poppins.className}>
-            {/* <Navbar></Navbar> */}
+            <Navbar></Navbar>
             {/* <div className='mt-24'></div> */}
             {children}
           </body>
