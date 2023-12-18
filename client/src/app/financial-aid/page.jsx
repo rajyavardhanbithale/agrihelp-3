@@ -81,11 +81,11 @@ export default function GovScheme() {
             <div className="bg-white">
 
                 <div className="flex justify-center pt-8">
-                    <div className="w-3/6">
+                    <div className="md:w-3/6 lg:w-3/12 w-3/4">
                         <div className="relative">
                             <input
                                 type="text"
-                                className="w-full h-10 pl-4 pr-10 text-sm rounded-full focus:outline-none focus:shadow-outline"
+                                className="w-full border-gray-600 border-2 h-10 pl-4 pr-10 text-sm rounded-full focus:outline-none focus:shadow-outline"
                                 placeholder="Search products..."
                                 value={null}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -104,7 +104,7 @@ export default function GovScheme() {
                     {category.map((item, idx) => (
                         <button
                             key={idx}
-                            className={`hidden sm:inline-block mx-2 px-4 py-2 rounded-3xl capitalize ${selectedCategory === item ? 'bg-teal-900 text-white' : 'bg-gray-200'}`}
+                            className={` mx-2 px-4 py-2 rounded-3xl capitalize ${selectedCategory === item ? 'bg-teal-900 text-white' : 'bg-gray-200'}`}
                             onClick={() => handleFetch(item)}
                         >
                             {item}

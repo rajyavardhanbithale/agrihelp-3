@@ -113,7 +113,10 @@ export default function main() {
 
 
             {error ? (
-                <EndpointError/>
+                <div className='mt-40'>
+
+                    <EndpointError />
+                </div>
             ) : (
                 <>
 

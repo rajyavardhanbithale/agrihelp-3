@@ -22,11 +22,11 @@ from verification import sendMail
 
 from ml import fertilizer_reco
 from ml import disease_pred
+from ml import crop_reco
+
 from shop import order_tracking
-
-from weather import weather
-
 from shop import scheme
+from weather import weather
 from pymongo import MongoClient
 from bson import ObjectId  # Import ObjectId from bson
 
@@ -267,7 +267,7 @@ class BackendAPI:
     
 
     async def cropReccom(self, N:float, P:float, K:float, ph:float, rain:float, city:str):
-        from ml import crop_reco
+       
         # runner = weather.Weather()
         # getData = runner.weatherToday(city=city,lat=None,lon=None)
         # temp, humid = getData["current"]["temp"], getData["current"]["humidity"]
