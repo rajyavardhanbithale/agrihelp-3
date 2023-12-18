@@ -143,6 +143,7 @@ def DatabaseScheme(**kwargs):
         "forgot_password_id":None,
 
         "billingAddress":address,
+        "orders": [],
         "origin":origin
     }
     
@@ -172,9 +173,10 @@ def DatabaseScheme(**kwargs):
         "forgot_password_id":None,
         "verification_id": verification_id[0:5]+verification_id[-14:-19:-1][::-1] if len(verification_id)!=0 else None,
         "billingAddress":address,
+        "orders": [],
         "origin":origin
     }
-    print(url)
+   
     return DbSchemeURL if url else DbSchemeOTP 
     
     
@@ -220,8 +222,9 @@ def DatabaseSchemeGoogle(**kwargs):
         "is_verified" : True,
         "forgot_password_id":None,
         "billingAddress":address,
+        "orders": [],
+        "image":image,
         "origin":origin,
-        "image":image
     }   
     
     return DbSchemeGoogle

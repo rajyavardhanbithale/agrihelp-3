@@ -25,11 +25,6 @@ export default function WeatherMiddle(props) {
         };
     }, []);
 
-
-
-    console.log(element)
-
-
     useEffect(() => {
         if (screenWidth <= 500) {
             setElement(3)
@@ -44,13 +39,11 @@ export default function WeatherMiddle(props) {
         }
     }, [screenWidth])
 
-
-
     const settings = {
         // dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 7, // Number of slides to show at a time
+        slidesToShow: 7, 
         slidesToScroll: 1,
         responsive: [
             {
@@ -84,13 +77,6 @@ export default function WeatherMiddle(props) {
 
     };
     const data = props?.data
-
-    console.log(data);
-
-    console.log("curr:", firstVisibleIndex);
-    console.log("next:", lastVisibleIndex);
-
-
     return (
         <>
             <div className="mt-10 w-full justify-between sm:max-w-[748px] lg:max-w-[70%] ">

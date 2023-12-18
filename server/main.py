@@ -370,7 +370,6 @@ class BackendAPI:
 
     async def placeOrder(self, user: base_models.PlaceOrder):
         deliveryCollection = db["orders"]
-
         orderID = "AGR" + str(random.randint(100000, 999999))
         user_data = user.dict()
         user_data["orderID"] = orderID
@@ -380,8 +379,10 @@ class BackendAPI:
         insert = deliveryCollection.insert_one(user_data)
         updateAddress = self.collection.update_one(
             {"email": user.email},
-            {"$set": {"billingAddress": user.billingAddress}}
+            {"$set": {"billingAddress": user.billingAddress}},
+            {"$push":{"orders":orderID}}
         )
+        
 
         if insert.acknowledged and updateAddress:
 

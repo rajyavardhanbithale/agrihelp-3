@@ -27,13 +27,13 @@ export default function product() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/v2/shop-product?productID=${productId.id}`)
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/shop-product?productID=${productId.id}`)
         if (response.status === 200) {
           setData(response.data)
         }
 
       } catch (error) {
-        console.log(error);
+
       }
     }
 
@@ -80,12 +80,12 @@ export default function product() {
       // Set the updated list back in the cookie
       Cookies.set('shop', JSON.stringify(updatedList));
 
-      console.log(Cookies.get('shop'));
+     
       openModal();
       
     } else {
       openModal();
-      console.log('Product already in the cart');
+
     }
   }
 

@@ -2,7 +2,7 @@
 import Link from "next/link";
 // import AuthNotiy from "../Sections/AuthNotify";
 // import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function Navbar(props) {
@@ -18,7 +18,7 @@ export default function Navbar(props) {
         setOpen(false);
     };
 
-
+   
     return (
         // <div className="flex justify-center w-full">
         //     <header className="flex flex-wrap sm:justify-start w-3/4 sm:flex-nowrap z-50 text-sm py-4 px-5 navbar__blur">
@@ -62,7 +62,7 @@ export default function Navbar(props) {
                             <button type="button" onClick={handleClickToOpen}
                                 class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
                                 <span class="sr-only">Open main menu</span>
-                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
                                     aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -112,7 +112,7 @@ export default function Navbar(props) {
 
                                     <button onClick={handleToClose} type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
                                         <span class="sr-only">Close menu</span>
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
                                             aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                         </svg>
@@ -122,7 +122,7 @@ export default function Navbar(props) {
 
                                 <div class="mt-6 flow-root">
                                     <div class="-my-6 divide-y divide-gray-500/10">
-
+                                        
                                         <div class="space-y-2 py-6">
                                             <Link href={"/"}
                                                 class="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-900 hover:bg-white ">Weather</Link>

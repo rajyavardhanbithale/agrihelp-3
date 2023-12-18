@@ -40,11 +40,11 @@ export default function Signup() {
     }),
 
     onSubmit: async (values) => {
-      console.log(values)
+     
       if (formik.isValid) {
       
         
-        console.log(values);
+      
         try {
           const response = await axios.post('http://127.0.0.1:8000/v2/signup', values);
 

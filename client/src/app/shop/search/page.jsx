@@ -75,10 +75,10 @@ export default function Search() {
         setSelectedCategory(category);
 
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/v2/shop-item?item=95&category=${category}`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/shop-item?item=95&category=${category}`);
             if (response.status === 200) {
                 setItem(response.data);
-                console.log(item);
+               
             }
         } catch (error) {
             console.error(error);

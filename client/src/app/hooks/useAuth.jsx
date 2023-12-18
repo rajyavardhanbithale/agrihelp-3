@@ -15,8 +15,6 @@ export default async function useAuth() {
     const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie.value, key).toString(CryptoJS.enc.Utf8)
     const jsonDecrypt = JSON.parse(parseEncryptedCookie)
 
-    
-    // checking if cookie is valid or not
     if (jsonDecrypt.validationKey === "token") {
       const constructResponse = {
         "username" : jsonDecrypt?.username,

@@ -10,9 +10,7 @@ import { arrowBackCircle, arrowForward, arrowForwardCircle } from 'ionicons/icon
 
 
 function ProductCard(props) {
-  console.log(props.width);
   const [item, setItem] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {

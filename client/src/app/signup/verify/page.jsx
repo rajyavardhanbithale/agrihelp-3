@@ -16,7 +16,6 @@ export default function Verify() {
 
   const searchParams = useSearchParams()
   const search = searchParams.get('url')
-  console.log(search);
 
   const [getCookie, setGetCookie] = useState(null);
   const [isError, setError] = useState("")
@@ -46,7 +45,6 @@ export default function Verify() {
 
   }, []);
 
-  console.log(getCookie);
 
 
   // useEffect(() => {

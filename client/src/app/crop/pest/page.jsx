@@ -14,10 +14,6 @@ export default function pest() {
     const [apiData, setApiData] = useState(null);
     const [error, setError] = useState(null);
 
-    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT);
-
-
-
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
 
@@ -31,20 +27,20 @@ export default function pest() {
     useEffect(() => {
         const uploadAndPostData = async () => {
             if (file) {
-                setLoading(true); // Set loading to true while processing
+                setLoading(true);
 
                 const formData = new FormData();
                 formData.append('file', file);
 
                 try {
-                    // Step 1: Upload the image
+                   
                     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/crop/defect`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
                     });
 
-                    console.log('Image successfully uploaded:', response.data);
+                    console.log('Image successfully uploaded:');
                     if (response.status === 200) {
                         setLoading(false)
                         setApiData(response.data)

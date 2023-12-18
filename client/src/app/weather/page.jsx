@@ -45,8 +45,6 @@ export default function main() {
         }
     }, []);
 
-    console.log(userLocation);
-
     useEffect(() => {
 
         const fetchDataForCity = async () => {
@@ -86,10 +84,6 @@ export default function main() {
         }
 
     }, [userLocation]);
-
-
-
-    console.log(dataTop);
 
     return (
         <>

@@ -27,11 +27,11 @@ const OrderTrackingPage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/v2/order-status?method=get&orderID=${orderNumber}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/order-status?method=get&orderID=${orderNumber}`);
       if (response.status === 200) {
         setOrderStatus(response.data);
         setError(null)
-        console.log(response.data);
+
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -47,7 +47,7 @@ const OrderTrackingPage = () => {
     const id = trackingID?.get("track-order") || null;
     setOrderNumber(id);
     setOrderNumber1(id);
-    
+
 
     if (id === null) {
       setIsUrl(false)
@@ -72,7 +72,7 @@ const OrderTrackingPage = () => {
     }
 
   }, [orderNumber, orderNumber1]);
-  // AGR801073
+
 
 
 
@@ -100,12 +100,12 @@ const OrderTrackingPage = () => {
                           <IonIcon icon={checkmarkCircleSharp} className="mt-1  text-xl font-bold"></IonIcon>
                         ) : status?.icon === "ping" ? (
                           <div>
-                          <IonIcon icon={checkmarkCircleSharp} className="absolute right-1 top-1 text-xl font-bold"></IonIcon>
+                            <IonIcon icon={checkmarkCircleSharp} className="absolute right-1 top-1 text-xl font-bold"></IonIcon>
                             <span class="flex h-4 w-4">
                               <span class="motion-safe:animate-ping duration-1000 absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-90"></span>
 
                             </span>
-                            
+
                           </div>
 
                         ) : (null)}

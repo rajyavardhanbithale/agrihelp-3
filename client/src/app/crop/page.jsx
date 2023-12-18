@@ -264,7 +264,7 @@ const CollapsibleSection = ({ title, content }) => {
 
 
 function Result(crop) {
-  console.log(crop?.crop);
+
   return (
     <>
       <div className="mt-20 w-3/4 mx-auto" id="recommendation">

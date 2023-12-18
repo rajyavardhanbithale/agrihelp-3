@@ -38,12 +38,9 @@ export default function Signup() {
 
       if (formik.isValid) {
         setIsLogin(true)
-        // console.log(values);
         try {
           const response = await axios.post('http://127.0.0.1:8000/v2/login', values);
-
           if (response.status === 200) {
-            // console.log('Form submitted successfully:', response.data);
             const constructCookie = {
               "username": values.username,
               "password": values.password,
@@ -78,10 +75,10 @@ export default function Signup() {
 
   const postGoogleLogin = async (data,sessionType) => {
     const splitName = data.user?.name.split(" ")
-    const username = generateUsernameForGoogleLogin(splitName[0].toLowerCase(), splitName[1].toLowerCase())
+    const username = generateUsernameForGoogleLogin(splitName[0].toLowerCase(), splitName[1] ? splitName[1].toLowerCase() : "")
     const constructData = {
       "firstname": splitName[0].toLowerCase(),
-      "lastname": splitName[1].toLowerCase(),
+      "lastname": splitName[1] ? splitName[1].toLowerCase() : "",
       "username": username,
       "email": data?.user?.email,
       "password": "&p455w0rd*r463",
@@ -90,13 +87,12 @@ export default function Signup() {
       "image": data.user?.image
     }
     
-    console.log(constructData);
-
+   
     try {
       const response = await axios.post("http://127.0.0.1:8000/v2/signup", constructData)
 
       if (response.status == 200) {
-        console.log();
+        
       }
 
     } catch (error) {
@@ -125,7 +121,6 @@ export default function Signup() {
           }
           const encrypt = CryptoJS.AES.encrypt(JSON.stringify(constructCookie), secretKey).toString()
           Cookies.set("user", encrypt, { expires: 5 })
-          console.log("okokokokokokokokokok");
           window.location.href = "/"
 
         }

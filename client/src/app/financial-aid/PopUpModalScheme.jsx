@@ -15,7 +15,6 @@ export default function PopUpModalScheme(props) {
 
   const item = props?.data
 
-  console.log(item);
 
   return (
     <>

@@ -20,7 +20,7 @@ function Cart() {
     useEffect(() => {
         const fetchDataForProduct = async (productId) => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/v2/shop-product?productID=${productId}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/shop-product?productID=${productId}`);
                 if (response.status === 200) {
                     const productInfo = response.data;
                     setProductData((prevData) => [...prevData, productInfo]);
@@ -61,7 +61,6 @@ function Cart() {
         setFakeTotal(totalPrice1.toFixed(2));
     }, [productData]);
 
-    console.log(productData);
 
     function removeFromCart(productId) {
         setIsHidden(true);

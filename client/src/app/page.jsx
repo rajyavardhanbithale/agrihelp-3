@@ -34,9 +34,8 @@ export default async function Home() {
     }
 
   } 
-
-  // console.log("tryrt",isLogin());
- 
+  
+  console.log(isLoggedIn);
   return (
     <>
       {/* <Navbar isAuth={isLogin()} />

@@ -7,8 +7,6 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
 export default function AuthNotiy(props) {
-
-
     const notify = () => {
 
         toast.success("Hello " + props.value + ", you are now logged in.", {
@@ -24,9 +22,7 @@ export default function AuthNotiy(props) {
     }
 
     useEffect(() => {
-        
         const getCookie = Cookies.get("__fnotify") 
-        console.log(getCookie);
         const decryptCookie = getCookie ? CryptoJS.AES.decrypt(getCookie, "rar").toString(CryptoJS.enc.Utf8) : undefined 
         if (getCookie===undefined || !decryptCookie==="NotificationDone") {
             notify() 

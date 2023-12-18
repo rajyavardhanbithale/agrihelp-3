@@ -28,14 +28,10 @@ export default function checkout() {
     setUser(user);
   };
 
-  // console.log('Form Data Submitted:', shippingData);
-
-
-
   useEffect(() => {
     const postData = async () => {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/v2/place-order", shippingData)
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/place-order`, shippingData)
 
         if (response.status == 200) {
 
@@ -51,7 +47,7 @@ export default function checkout() {
 
   }, [order])
 
-  console.log('Form Data Submitted:', orderID);
+
 
   return (
     <>
@@ -97,32 +93,36 @@ function OrderSummary(props) {
 
   useEffect(() => {
     const key = 'rar';
-    const getEncryptedCookie = Cookies.get('user');
+    const getEncryptedCookie = Cookies.get('user') || null;
     const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie, key).toString(CryptoJS.enc.Utf8);
     const jsonDecrypt = JSON.parse(parseEncryptedCookie);
     setJson(jsonDecrypt)
 
   }, [])
 
+
+
   useEffect(() => {
-    const fetch = async () => {
+
+    const fetchData = async () => {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/v2/get-user", jsonData)
-        const response1 = await axios.get("http://127.0.0.1:8000/v2/delivery")
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/get-user`, jsonData);
+        const response1 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/delivery`);
 
         if (response.status === 200) {
-          setUser(response.data)
-          setDelivery(response1.data)
-          setDeliveryMet(response1?.data?.[0]?.id)
+          setUser(response.data);
+          setDelivery(response1.data);
+          setDeliveryMet(response1?.data?.[0]?.id);
         }
-
       } catch (error) {
-
+        console.error('Error fetching data:', error);
       }
+    };
 
-    }
-    fetch()
-  }, [jsonData])
+    fetchData(); // Call the async function
+
+  }, [jsonData]);
+
 
   const handleStateChange = (event) => {
     const selectedState = event.target.value;
@@ -160,7 +160,7 @@ function OrderSummary(props) {
 
     }
 
-    // console.log('Form Data Submitted:', postRequest);
+    
     handleQuantityChange(postRequest)
     handleOrder()
     handleUsers()
@@ -185,7 +185,7 @@ function OrderSummary(props) {
   useEffect(() => {
     const fetchDataForProduct = async (productId) => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/v2/shop-product?productID=${productId}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/shop-product?productID=${productId}`);
         if (response.status === 200) {
           const productInfo = response.data;
           setProductData((prevData) => [...prevData, productInfo]);
@@ -352,7 +352,7 @@ function OrderSummary(props) {
                     type="text"
                     className="capitalize w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     value={`${user?.firstname} ${user?.lastname}` || ''}
-                    onChange={null}
+                   
                   />
                   <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                     <IonIcon icon={personOutline}></IonIcon>
@@ -365,7 +365,7 @@ function OrderSummary(props) {
                     type="text"
                     className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     value={user?.email || ''}
-                    onChange={null}
+                   
                   />
                   <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                     <IonIcon icon={mailOutline}></IonIcon>
@@ -541,15 +541,15 @@ function OrderConfirmation(props) {
               <p>You can check your order status on your orders list!</p>
               <p>Order ID : {props?.orderid}</p>
 
-             <Link href={`/shop/tracking?track-order=${props?.orderid}`}>
-              <div className="mt-10">
-                <span
-                 
-                  className="mx-auto bg-teal-800 text-white px-5 rounded-lg py-3"
-                >
-                  Track Order
-                </span>
-              </div>
+              <Link href={`/shop/tracking?track-order=${props?.orderid}`}>
+                <div className="mt-10">
+                  <span
+
+                    className="mx-auto bg-teal-800 text-white px-5 rounded-lg py-3"
+                  >
+                    Track Order
+                  </span>
+                </div>
               </Link>
             </div>
 
