@@ -58,7 +58,7 @@ export default function Search() {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            if (count < 180) {
+            if (count < 300) {
                 setCount((prevCount) => prevCount + 1);
             } else {
                 clearInterval(timer); // Stop the counter when it reaches 100
