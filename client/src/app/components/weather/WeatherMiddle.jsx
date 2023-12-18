@@ -146,7 +146,7 @@ const WeatherDataChart = (props) => {
 
     return (
         <>
-            <div class="-mt-10  lg:max-w-[100%] w-[90%] ml-5 md:ml-0 md:w-full justify-between sm:max-w-[708px] ">
+            <div className="-mt-10  lg:max-w-[100%] w-[90%] ml-5 md:ml-0 md:w-full justify-between sm:max-w-[708px] ">
                 <div className="flex flex-row gap-5 my-5 md:flex md:gap-10 overflow-x-auto max-h-screen">
                     <div className="chart-container" style={{ width: '100%' }}>
                         <ResponsiveContainer width="100%" height={200}>

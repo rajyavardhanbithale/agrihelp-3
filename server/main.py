@@ -127,7 +127,9 @@ class BackendAPI:
         if (verify_login_data):
             login = login_manager.doLogin(collection=self.collection, username=user.username,
                                           password=user.password, email=user.email, verbose=user.verbose)
-            raise HTTPException(status_code=200, detail=login)
+            
+            raise HTTPException(status_code=200 if login[1] else 401 , detail=login)
+        
         return ""
 
     async def signup(self, user: base_models.UserSignup, request: Request):

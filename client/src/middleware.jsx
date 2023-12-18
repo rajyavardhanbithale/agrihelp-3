@@ -3,9 +3,11 @@ import { NextResponse } from 'next/server'
 import CryptoJS from 'crypto-js'
 import axios from 'axios'
 import EndpointError from './app/components/EndpointError'
+import useAuth from './app/hooks/useAuth'
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
+    const isLog  = useAuth()
     const checkCookie = () => {
        
         try {
@@ -35,11 +37,13 @@ export async function middleware(request) {
             return false
         }
     };
-    
+
+   
+
     const path = request.nextUrl.pathname
     const isPrivate = path === '/login' || path === '/signup' || path === '/signup/verify'
 
-    if (checkCookie() && isPrivate) {
+    if (!await isLog && isPrivate) {
         return NextResponse.redirect(new URL('/', request.nextUrl))
     }
     if (checkCookie() && path === '/signup/verify' && !request.nextUrl.searchParams.get('url')) {
@@ -54,8 +58,8 @@ export async function middleware(request) {
         return NextResponse.redirect(new URL('/error', request.nextUrl))
     }
 
-    
-    if (path === '/shop/checkout' && !checkCookie()) {
+    console.log(await isLog);
+    if (path === '/shop/checkout' && await isLog) {
         return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
 

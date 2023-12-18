@@ -69,7 +69,7 @@ export default function pest() {
                         alt=""
                     />
                     <div className="flex  flex-col items-center py-56 w-full lg:w-1/2 mx-5 my-3">
-                        <div class="flex flex-col items-center justify-center h-screen tracking-wider">
+                        <div className="flex flex-col items-center justify-center h-screen tracking-wider">
                             <span className="text-5xl text-teal-900 font-bold">Pest Finder</span>
                             <span className="text-3xl text-teal-900 capitalize mt-2">upload image of infected leaf </span>
 

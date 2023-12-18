@@ -101,8 +101,8 @@ const OrderTrackingPage = () => {
                         ) : status?.icon === "ping" ? (
                           <div>
                             <IonIcon icon={checkmarkCircleSharp} className="absolute right-1 top-1 text-xl font-bold"></IonIcon>
-                            <span class="flex h-4 w-4">
-                              <span class="motion-safe:animate-ping duration-1000 absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-90"></span>
+                            <span className="flex h-4 w-4">
+                              <span className="motion-safe:animate-ping duration-1000 absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-90"></span>
 
                             </span>
 

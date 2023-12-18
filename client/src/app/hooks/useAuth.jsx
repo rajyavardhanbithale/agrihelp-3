@@ -6,37 +6,46 @@ import axios from 'axios';
 
 export default async function useAuth() {
   const cookieStore = cookies()
-
   const key = 'rar'
-  
-  try {
-    const getEncryptedCookie = cookieStore.get("user")
 
-    const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie.value, key).toString(CryptoJS.enc.Utf8)
-    const jsonDecrypt = JSON.parse(parseEncryptedCookie)
 
-    if (jsonDecrypt.validationKey === "token") {
-      const constructResponse = {
-        "username" : jsonDecrypt?.username,
-        "password" : jsonDecrypt?.password
+  const getEncryptedCookie = cookieStore.get("user")
+
+  const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie.value, key).toString(CryptoJS.enc.Utf8)
+  const jsonDecrypt = JSON.parse(parseEncryptedCookie)
+
+  if (jsonDecrypt.validationKey === "token") {
+    let constructResponse;
+    if (jsonDecrypt?.username) {
+      constructResponse = {
+        "username": jsonDecrypt?.username,
+        "password": jsonDecrypt?.password
       }
- 
-      const response = await axios.post('http://127.0.0.1:8000/v2/login',constructResponse)
-
-      if(response.status===200){
-        return true
-
+    } else {
+      constructResponse = {
+        "email": jsonDecrypt?.email,
+        "password": jsonDecrypt?.password
       }
-      
     }
-    return undefined
-  } 
-  catch(error) { 
-    return false
+
+    constructResponse = {
+      "email": "ramiwick5@gmail.com",
+      "password": "&p455w0rd*r463"
+    }
+
+
+    const fetchData = async () =>{
+        try {
+          const response =  await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/login`,constructResponse)
+          console.log(response.status); 
+        } catch (errors) {
+          console.log("error.status",error?.response?.status);
+        }
+    }
+
+    fetchData()
+
   }
-
-  return undefined
-
 
 
 
