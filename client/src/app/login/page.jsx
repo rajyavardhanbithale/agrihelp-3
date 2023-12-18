@@ -258,13 +258,13 @@ export default function Login() {
                   Login With Google
                 </button>
 
-                <button onClick={() => signIn("facebook")} className="mt-6 bg-slate-200 px-5 py-2 rounded-xl font-semibold ">
+                {/* <button onClick={() => signIn("facebook")} className="mt-6 bg-slate-200 px-5 py-2 rounded-xl font-semibold ">
                   <IonIcon
                     icon={logoFacebook}
                     className=" text-gray-900 align-middle mb-0.5 px-2"
                   />
                   Login With facebook
-                </button>
+                </button> */}
               </div>
             </>
           </div>
