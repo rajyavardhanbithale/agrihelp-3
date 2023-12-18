@@ -11,9 +11,7 @@ export default function fertilizer() {
     const [crop, setCrop] = useState(null)
     const [loading, setLoading] = useState(false)
     const [selectedCrop, setSelectedCrop] = useState('');
-
-
-
+    const [error, setError] = useState(null);
     const cropList = ['rice', 'maize', 'chickpea', 'kidneybeans', 'pigeonpeas', 'mothbeans', 'mungbean', 'blackgram', 'lentil', 'pomegranate', 'banana', 'mango', 'grapes', 'watermelon', 'muskmelon', 'apple', 'orange', 'papaya', 'coconut', 'cotton', 'jute', 'coffee']
 
     const [formData, setFormData] = useState({
@@ -49,22 +47,19 @@ export default function fertilizer() {
             setLoading(false)
             return;
         }
-
-        // Make the POST request using axios
+        
         const queryParams = `N=${formData.Nitrogen}&P=${formData.Phosphorus}&K=${formData.Potassium}&crop=${selectedCrop}`;
-
-        // Make the GET request using axios
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/v2/fertilizer/recommendation?${queryParams}`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/fertilizer/recommendation?${queryParams}`);
             // console.log(response.data); // Handle the response as needed
             setCrop(response.data)
             setLoading(false)
             document.getElementById("recommendation").scrollIntoView();
         } catch (error) {
-            console.error('Error submitting the form:', error);
+            setError('Error in Fetching Data from Server');
+            setLoading(false)
         }
     };
-
 
     return (
         <>
@@ -75,7 +70,6 @@ export default function fertilizer() {
                         src="https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         alt=""
                     />
-
                     <div className="flex scale-[1.2] flex-col items-center justify-center align-middle w-full lg:w-1/2 mx-5 my-3">
                         <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
                             <div className="mx-auto max-w-2xl text-center">
@@ -152,6 +146,7 @@ export default function fertilizer() {
                                 </button>
                             </div>
                         </form>
+                        <span className="text-red-500 text-xl">{error}</span>
                     </div>
 
                 </div>
@@ -171,15 +166,7 @@ export default function fertilizer() {
                 </div>
 
                 <div id="recommendation" className="p-20"></div>
-
-
-
             </div>
-
-
-
-
-
         </>
     )
 }

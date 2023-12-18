@@ -1,5 +1,6 @@
 'use client'
 
+
 import { IonIcon } from "@ionic/react";
 import axios from "axios";
 import { imageOutline, reloadOutline } from "ionicons/icons";
@@ -11,6 +12,11 @@ export default function pest() {
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [apiData, setApiData] = useState(null);
+    const [error, setError] = useState(null);
+
+    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT);
+
+
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -32,7 +38,7 @@ export default function pest() {
 
                 try {
                     // Step 1: Upload the image
-                    const response = await axios.post('http://127.0.0.1:8000/v2/crop/defect', formData, {
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/crop/defect`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
@@ -42,12 +48,12 @@ export default function pest() {
                     if (response.status === 200) {
                         setLoading(false)
                         setApiData(response.data)
-                        document.getElementById("recommendation").scrollIntoView();
+                        document.getElementById("recommendation")?.scrollIntoView();
                     }
 
                     setLoading(false);
                 } catch (error) {
-                    console.error('Error uploading image or pushing data to API:', error);
+                    setError('Error in Uploading Image to Server ');
                     setLoading(false);
                 }
             }
@@ -109,8 +115,14 @@ export default function pest() {
                                 </label>
                                 {file && (
                                     <div className="mt-4 flex flex-col w-full gap-3 justify-center text-center">
-                                        <h4 className="text-lg font-semibold">{loading ? "Uploading Image" : "Image Uploaded"}</h4>
-                                        <p className="text-gray-700">{loading ? "Fetching Result .. " : "Found Result"}</p>
+                                        {!error &&
+                                            <div>
+
+                                                <h4 className="text-lg font-semibold">{loading ? "Uploading Image" : "Image Uploaded"}</h4>
+                                                <p className="text-gray-700">{(loading) ? "Fetching Result .. " : "Found Result"}</p>
+                                            </div>
+                                        }
+                                        <p className="text-red-600 text-xl">{error}</p>
                                     </div>
                                 )}
 
@@ -135,7 +147,7 @@ export default function pest() {
                     ) : null}
                 </div>
 
-                <div id="recommendation" className="p-20"></div>
+               <div id="recommendation" className="p-20"></div>
 
 
 

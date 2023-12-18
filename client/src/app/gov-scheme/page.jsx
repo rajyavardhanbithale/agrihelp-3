@@ -12,30 +12,31 @@ import PopUpModalScheme from './PopUpModalScheme';
 export default function FinancialAid() {
     const [data, setData] = useState({})
     const [isModalOpen, setModalOpen] = useState(false);
-    const openModal = () => setModalOpen(true);
-    const closeModal = () => setModalOpen(false);
     const [selectedCategory, setSelectedCategory] = useState("government");
-
     const [item, setItem] = useState([]);
+    const [loading, setLoading] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [error, setError] = useState(null);
+
+
+    const closeModal = () => setModalOpen(false);
+    const openModal = () => setModalOpen(true);
+
     const filteredProducts = item
         .filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
-
-
-
 
 
 
     const handleFetch = async (category) => {
         setSelectedCategory(category);
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/v2/gov-scheme?category=${category}`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/gov-scheme?category=${category}`);
             if (response.status === 200) {
                 setItem(response.data);
-                // console.log(item);
+                setLoading(1)
             }
         } catch (error) {
-            console.error(error);
+            setError("Error in Loading Data")
         }
 
     }
@@ -110,60 +111,92 @@ export default function FinancialAid() {
                         </button>
                     ))}
                 </div>
+                <div className="flex mt-20 flex-wrap justify-center text-red-500 text-2xl">
+                    <h1>{error}</h1>
+                </div>
 
                 <div className={`w-[80%] ml-auto mr-auto`}>
-                    <div className="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        {filteredProducts?.map((product, idx) => (
+                    {loading ? (
 
-                            <div key={idx} className="px-2 pb-4 md:px-5">
+                        <div className="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {filteredProducts?.map((product, idx) => (
 
-                                <section
-                                    key={idx}
-                                    className="flex flex-col border-gray-600 rounded-xl border-[2px] px-8 w-full md:w-full lg:w-full"
-                                >
-                                    <div className="flex flex-col">
-                                        <div className="relative flex items-center justify-center">
-                                            <img
-                                                className="w-48 h-48 object-scale-down mt-5"
-                                                src={product.image}
-                                                alt={product.name}
-                                            />
-                                            <div className="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
+                                <div key={idx} className="px-2 pb-4 md:px-5">
 
-                                            </div>
+                                    <section
+                                        key={idx}
+                                        className="flex flex-col border-gray-600 rounded-xl border-[2px] px-8 w-full md:w-full lg:w-full"
+                                    >
+                                        <div className="flex flex-col">
+                                            <div className="relative flex items-center justify-center">
+                                                <img
+                                                    className="w-48 h-48 object-scale-down mt-5"
+                                                    src={product.image}
+                                                    alt={product.name}
+                                                />
+                                                <div className="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
 
-                                        </div>
-                                        <div>
-                                            <p className="mt-2 text-xl h-[3.6rem] overflow-hidden">{product?.name}</p>
-                                            <p className="mt-2">{product?.brand}</p>
-                                            <p className="text-lg text-teal-950 font-semibold">
-                                                From  : {product?.openDate} -
-                                                <br></br>
-                                                <span className="text-lg text-gray-500 font-semibold"> {product?.closeDate}</span>
-                                            </p>
-
-                                            <div  >
-
-                                                <button onClick={() => handleButtonClick(product)}
-                                                    className={`rounded-2xl my-5 h-10 w-full ${product?.isOpen ? "bg-teal-600" : "bg-teal-950"} text-gray-50 hover:bg-teal-800 transition duration-500 ease-in-out`}>
-                                                    {product?.isOpen ? (
-                                                        <span>View</span>
-                                                    ) : (
-                                                        <span className="line-through">Registration Closed</span>
-                                                    )}
-                                                </button>
+                                                </div>
 
                                             </div>
+                                            <div>
+                                                <p className="mt-2 text-xl h-[3.6rem] overflow-hidden">{product?.name}</p>
+                                                <p className="mt-2">{product?.brand}</p>
+                                                <p className="text-lg text-teal-950 font-semibold">
+                                                    From  : {product?.openDate} -
+                                                    <br></br>
+                                                    <span className="text-lg text-gray-500 font-semibold"> {product?.closeDate}</span>
+                                                </p>
 
+                                                <div  >
+
+                                                    <button onClick={() => handleButtonClick(product)}
+                                                        className={`rounded-2xl my-5 h-10 w-full ${product?.isOpen ? "bg-teal-600" : "bg-teal-950"} text-gray-50 hover:bg-teal-800 transition duration-500 ease-in-out`}>
+                                                        {product?.isOpen ? (
+                                                            <span>View</span>
+                                                        ) : (
+                                                            <span className="line-through">Registration Closed</span>
+                                                        )}
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
                                         </div>
-                                    </div>
-                                </section>
-                            </div>
-                        ))}
-                        {isModalOpen && (
-                            <PopUpModalScheme data={data} isOpen={isModalOpen} closeModal={closeModal} />
-                        )}
-                    </div>
+                                    </section>
+                                </div>
+                            ))}
+                            {isModalOpen && (
+                                <PopUpModalScheme data={data} isOpen={isModalOpen} closeModal={closeModal} />
+                            )}
+                        </div>
+                    ) : (
+                        <div className="container mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+                            {[...Array(4)]?.map((product, idx) => (
+                                <div key={idx} className="px-2 pb-4 md:px-5">
+
+                                    <section
+                                        key={idx}
+                                        className="flex flex-col border-gray-600 rounded-xl border-[2px] px-8 w-full md:w-full lg:w-full animate__animated animate__fadeIn"
+                                    >
+                                        <div className="flex flex-col">
+                                            <div className="relative flex items-center justify-center">
+                                                <div className="w-44 h-44 mt-3 bg-gray-300 animate-pulse rounded-lg"></div>
+                                            </div>
+                                            <div>
+                                                <p className="mt-2 text-xl overflow-hidden rounded-xl h-5 bg-gray-300 animate-pulse"> </p>
+                                                <p className="mt-2 rounded-xl h-5 bg-gray-300 animate-pulse"></p>
+                                                <p className="mt-2 mb-4 rounded-xl h-5 bg-gray-300 animate-pulse"></p>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+
+                            ))}
+
+                        </div>
+                    )}
                 </div>
 
             </div>

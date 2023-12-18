@@ -14,15 +14,16 @@ export default function main() {
     const [temp, setTemp] = useState(null)
     const [city, setCity] = useState("pune")
     const [userLocation, setUserLocation] = useState(null);
+    const [error, setError] = useState(null);
 
     const fetchWeather = async (param) => {
         try {
-            const response = await axios.get(`http://192.168.29.82:8000${param}`)
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}${param}`)
             if (response.status === 200) {
                 return response.data
             }
         } catch (error) {
-
+            setError(1)
         }
     }
 
@@ -46,43 +47,43 @@ export default function main() {
     console.log(userLocation);
 
     useEffect(() => {
-       
+
         const fetchDataForCity = async () => {
-            const param = `/v2/weather/current?city=${city}`;
+            const param = `/weather/current?city=${city}`;
             const dataTop = await fetchWeather(param);
             setDataTop(dataTop);
 
-            const param1 = `/v2/weather/forecast-today?city=${city}`;
+            const param1 = `/weather/forecast-today?city=${city}`;
             const dataMiddle = await fetchWeather(param1);
             setDataMiddle(dataMiddle);
 
-            const param2 = `/v2/weather/forecast?city=${city}&days=5`;
+            const param2 = `/weather/forecast?city=${city}&days=5`;
             const dataBottom = await fetchWeather(param2);
             setDataBottom(dataBottom);
         };
 
         const fetchDataForLocation = async () => {
-            const param = `/v2/weather/current?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}`;
+            const param = `/weather/current?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}`;
             const dataTop = await fetchWeather(param);
             setDataTop(dataTop);
 
-            const param1 = `/v2/weather/forecast-today?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}`;
+            const param1 = `/weather/forecast-today?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}`;
             const dataMiddle = await fetchWeather(param1);
             setDataMiddle(dataMiddle);
 
-            const param2 = `/v2/weather/forecast?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}&days=5`;
+            const param2 = `/weather/forecast?lat=${userLocation?.latitude}&lon=${userLocation?.longitude}&days=5`;
             const dataBottom = await fetchWeather(param2);
             setDataBottom(dataBottom);
 
-          
+
         };
 
-        if(userLocation){
-           fetchDataForLocation()
-        }else{
+        if (userLocation) {
+            fetchDataForLocation()
+        } else {
             fetchDataForCity()
         }
-     
+
     }, [userLocation]);
 
 
@@ -109,18 +110,44 @@ export default function main() {
                 </div>
             </div> */}
 
-            <div className="mt-40 text-base  text-black h-full bg-White bg-fixed bg-no-repeat">
-                <main className="flex flex-wrap w-[90%] lg:w-[60%] mx-auto my-2 text-lg">
-                    <WeatherTop data={dataTop} />
-                </main>
-            </div>
-            <div className="flex flex-col justify-center items-center ">
 
-                <WeatherMiddle data={dataMiddle} />
-                
-                <WeatherBottom data={dataBottom} /> 
+            {error ? (
+                <div className="flex mt-20 flex-wrap justify-center text-red-500 text-2xl">
+                    <div class="grid h-screen place-content-center bg-white px-4">
+                        <div class="text-center">
+                            <img
+                                src="/assets/error.gif"
+                                alt=""
+                                className="mx-auto my-auto w-64 h-60 rounded-xl shadow-2xl"
+                            />
+                            <h1 class="mt-12 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                                Uh-oh!
+                            </h1>
 
-            </div>
+                            <p class="mt-4 text-gray-500">
+                                Temporary Service Interruption: Internal Server Error - We'll be back
+                                shortly to ensure seamless operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <>
+
+                    <div className="mt-40 text-base  text-black h-full bg-White bg-fixed bg-no-repeat">
+                        <main className="flex flex-wrap w-[90%] lg:w-[60%] mx-auto my-2 text-lg">
+                            <WeatherTop data={dataTop} />
+                        </main>
+                    </div>
+                    <div className="flex flex-col justify-center items-center ">
+
+                        <WeatherMiddle data={dataMiddle} />
+
+                        <WeatherBottom data={dataBottom} />
+
+                    </div>
+                </>
+            )}
         </>
     )
 }

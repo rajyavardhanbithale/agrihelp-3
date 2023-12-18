@@ -266,7 +266,7 @@ class BackendAPI:
         return runner.weatherForecast(city=city, days=days,lat=lat,lon=lon)
     
 
-    async def cropReccom(self, N, P, K, ph, rain, city):
+    async def cropReccom(self, N:float, P:float, K:float, ph:float, rain:float, city:str):
         from ml import crop_reco
         # runner = weather.Weather()
         # getData = runner.weatherToday(city=city,lat=None,lon=None)
