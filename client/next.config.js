@@ -8,8 +8,7 @@ const nextConfig = {
         ],
     },
     output: "standalone",
-    distDir: 'build',
-    output: 'export'
+
 
 
 }

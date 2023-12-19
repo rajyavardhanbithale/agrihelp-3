@@ -31,7 +31,16 @@ from pymongo import MongoClient
 from bson import ObjectId  # Import ObjectId from bson
 
 
-client = MongoClient("mongodb://localhost:27017")
+
+if (os.getenv("ENV") == "DEV"):
+    print("[*] DEV GLOBAL")
+    client = pymongo.MongoClient("mongodb://localhost:27017/")
+
+else:
+    print("[**] Production GLOBAL")
+    client = pymongo.MongoClient(
+        f"mongodb+srv://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@userdata.pbqqmqu.mongodb.net/?retryWrites=true&w=majority")
+
 db = client["agrihelp"]
 collection = db["shop"]
 getCartData = db["orders"]
@@ -168,7 +177,7 @@ class BackendAPI:
         primary_email = check_unique.check_unique(
             collection=self.collection, email=user.email)
         
-        print(primary_email , primary_user)
+       
 
         if not primary_user and not primary_email:
             
