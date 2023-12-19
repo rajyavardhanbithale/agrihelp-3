@@ -39,7 +39,7 @@ if (os.getenv("ENV") == "DEV"):
 else:
     print("[**] Production GLOBAL")
     client = pymongo.MongoClient(
-        f"mongodb+srv://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@userdata.pbqqmqu.mongodb.net/?retryWrites=true&w=majority")
+        f"mongodb+srv://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@cluster0.jhch7zd.mongodb.net/?retryWrites=true&w=majority")
 
 db = client["agrihelp"]
 collection = db["shop"]
@@ -113,7 +113,7 @@ class BackendAPI:
         else:
             print("[**] Production")
             self.client = pymongo.MongoClient(
-                f"mongodb+srv://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@userdata.pbqqmqu.mongodb.net/?retryWrites=true&w=majority")
+                f"mongodb+srv://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@cluster0.jhch7zd.mongodb.net/?retryWrites=true&w=majority")
 
         self.db = self.client["userData"]
 
