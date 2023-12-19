@@ -125,4 +125,4 @@ def sendMail(receiver,verification_url):
             return False
 
  
-sendMail(receiver="ramiwick5@gmail.com",verification_url="")
+# sendMail(receiver="ramiwick5@gmail.com",verification_url="")

@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 
 
-export default function checkout() {
+export default function Checkout() {
   const [shippingData, setShippingData] = useState({});
   const [order, setOrder] = useState(false);
   const [confirmOrder, setConfirmOrder] = useState(false);

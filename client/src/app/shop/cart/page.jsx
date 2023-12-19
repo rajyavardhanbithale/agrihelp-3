@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
-function Cart() {
+export default function Cart() {
 
     const [data, setData] = useState(null)
     const [productData, setProductData] = useState([]);
@@ -140,7 +140,7 @@ function Cart() {
                         <div className="mt-28 flex flex-col items-end justify-end">
                             <div className="bg-white shadow-xl rounded-lg p-6 w-full max-w-md text-center">
                                 <h1 className="text-3xl font-semibold mb-4">Empty Cart</h1>
-                                <p className="text-gray-600 mb-8">There's nothing to show on this page.</p>
+                                <p className="text-gray-600 mb-8">There&apos;s nothing to show on this page.</p>
                                 <IonIcon icon={cartOutline} className="text-9xl text-teal-600"></IonIcon>
                                 <br />
                                 <br />
@@ -154,9 +154,9 @@ function Cart() {
 
                     <table className="w-full">
                         <tbody>
-                            {productData.map((item) => (
+                            {productData.map((item,idx) => (
 
-                                <tr className="h-[100px]">
+                                <tr className="h-[100px]" key={idx}>
                                     <td className="flex w-full border px-4 py-4">
                                         <img
                                             className="self-start object-contain"
@@ -250,5 +250,3 @@ function Cart() {
         </>
     );
 }
-
-export default Cart;

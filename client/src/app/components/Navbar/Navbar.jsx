@@ -42,6 +42,9 @@ export default function Navbar(props) {
     }, [])
     const handleLogout = () => {
         Cookies.remove("user")
+        Cookies.remove("next-auth.session-token")
+        Cookies.remove("next-auth.csrf-token")
+        Cookies.remove("next-auth.callback-url")
         window.location.href = "/"
     }
 

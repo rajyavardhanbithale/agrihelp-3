@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 
 
-export default function fertilizer() {
+export default function Fertilizer() {
     const [crop, setCrop] = useState(null)
     const [loading, setLoading] = useState(false)
     const [selectedCrop, setSelectedCrop] = useState('');

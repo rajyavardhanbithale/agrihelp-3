@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 
 
-export default function pest() {
+export default function Pest() {
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [apiData, setApiData] = useState(null);

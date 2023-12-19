@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers'
 import CryptoJS from "crypto-js"
 import "./App.css"
-import useAuth from "./hooks/useAuth"
+import useAuthUser from "./hooks/useAuthUser"
 
 
 
@@ -10,7 +10,7 @@ import useAuth from "./hooks/useAuth"
 
 export default async function Home() {
   const cookieStore = cookies()
-  const isLoggedIn =  useAuth()
+  const isLoggedIn =  useAuthUser()
 
 
   

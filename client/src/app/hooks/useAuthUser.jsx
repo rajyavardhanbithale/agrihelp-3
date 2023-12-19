@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import axios from 'axios';
 
 
-export default async function useAuth() {
+export default async function useAuthUser() {
   const cookieStore = cookies()
   const key = 'rar'
 

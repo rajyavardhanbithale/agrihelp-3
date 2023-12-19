@@ -80,7 +80,7 @@ export default function WeatherMiddle(props) {
     return (
         <>
             <div className="mt-10 w-full justify-between sm:max-w-[748px] lg:max-w-[70%] ">
-                <h2 className="heading text-black font-bold text-xl md:text-2xl md:mb-5 text-center ">Today's weather</h2>
+                <h2 className="heading text-black font-bold text-xl md:text-2xl md:mb-5 text-center ">Today&apos;s weather</h2>
 
                 {data ? (
                     <div className="w-[100%] ml-auto mr-auto">

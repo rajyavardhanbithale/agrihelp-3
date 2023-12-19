@@ -8,7 +8,7 @@ import EndpointError from '../components/EndpointError';
 
 
 
-export default function main() {
+export default function Weather() {
     const [dataTop, setDataTop] = useState(null)
     const [dataMiddle, setDataMiddle] = useState(null)
     const [dataBottom, setDataBottom] = useState(null)

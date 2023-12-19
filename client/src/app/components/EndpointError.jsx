@@ -15,7 +15,7 @@ export default function EndpointError() {
                         </h1>
 
                         <p className="mt-4 text-xl md:text-2xl text-gray-500">
-                            Temporary Service Interruption: Internal Server Error - We'll be back
+                            Temporary Service Interruption: Internal Server Error - We&apos;ll be back
                             shortly to ensure seamless operations.
                         </p>
                     </div>

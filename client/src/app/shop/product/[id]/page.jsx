@@ -15,7 +15,7 @@ import ShopHeader from "@/app/components/shop/ShopHeader";
 import PopUpModal from "@/app/components/shop/PopUpModal";
 
 
-export default function product() {
+export default function Product() {
   const productId = useParams();
 
   const [data, setData] = useState({})

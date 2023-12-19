@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server'
 
 import CryptoJS from 'crypto-js'
-import axios from 'axios'
-import EndpointError from './app/components/EndpointError'
-import useAuth from './app/hooks/useAuth'
+import useAuthUser from './app/hooks/useAuthUser'
 
-// This function can be marked `async` if using `await` inside
-export async function middleware(request) {
-    const isLog  = await useAuth()
+
+export default async function Middleware(request) {
+    const isLog  = await useAuthUser()
     const checkCookie = () => {
        
         try {
@@ -22,6 +20,7 @@ export async function middleware(request) {
             return false
         }
     }
+
 
     const checkEndpointStatus = async () => {
         try {
@@ -51,11 +50,11 @@ export async function middleware(request) {
     //     return NextResponse.redirect(new URL('/', request.nextUrl))
     // }
 
-    // if (path === '/error' && await checkEndpointStatus()) {
-    //     return NextResponse.redirect(new URL('/', request.nextUrl))
-    // }
+    if (path === '/error' && await checkEndpointStatus()) {
+        return NextResponse.redirect(new URL('/', request.nextUrl))
+    }
 
-    if (request.nextUrl.pathname.startsWith('/shop') && !await checkEndpointStatus()) {
+    if ((isPrivate || request.nextUrl.pathname.startsWith('/shop')) && !await checkEndpointStatus()) {
         return NextResponse.redirect(new URL('/error', request.nextUrl))
     }
 

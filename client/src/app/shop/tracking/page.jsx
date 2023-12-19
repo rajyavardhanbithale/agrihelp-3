@@ -137,7 +137,7 @@ const OrderTrackingPage = () => {
                     Your order <span className="font-semibold">{orderStatus?.orderID}</span> has been delivered. Enjoy your purchase!
                   </p>
                   <p>
-                    Need assistance? Contact our support team. Thank you for choosing <span className="font-semibold">RAGE's AGRIHELP</span>!
+                    Need assistance? Contact our support team. Thank you for choosing <span className="font-semibold">RAGE&apos;s AGRIHELP</span>!
                   </p>
                 </div>
               </div>

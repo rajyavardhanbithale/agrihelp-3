@@ -156,7 +156,7 @@ function Unverified(props) {
                   </div>
 
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-800">
-                    <p>Didn't receive the mail?</p>{" "}
+                    <p>Didn&apos;t receive the mail?</p>{" "}
                     <a
                       className="flex flex-row items-center text-blue-600"
                       href="http://"
