@@ -5,16 +5,16 @@ import { arrowDownCircle, arrowUpCircle, reloadOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import axios from 'axios';
 
-import {cityArr1,stateArr1}   from './region'
+import { cityArr1, stateArr1 } from './region'
 
 
 export default function Crop() {
-  
+
   const [crop, setCrop] = useState(null)
   const [loading, setLoading] = useState(false)
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
-  const [error,setError] = useState(null)
+  const [error, setError] = useState(null)
   const [formData, setFormData] = useState({
     Nitrogen: '',
     Phosphorus: '',
@@ -31,14 +31,14 @@ export default function Crop() {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}${param}`);
 
-      if (response.status === 200){
+      if (response.status === 200) {
         return response.data
       }
     } catch (error) {
       setError("Error in Fetching Data From Server")
     }
   }
- 
+
   const handleSubmit = async (e) => {
     setLoading(true)
     setError(null)
@@ -52,7 +52,7 @@ export default function Crop() {
       setLoading(false)
       return;
     }
- 
+
     const queryParams = `/crop/recommendation?N=${formData.Nitrogen}&P=${formData.Phosphorus}&K=${formData.Potassium}&ph=${formData.PHlevel}&rain=${formData.Rainfall}&city=${selectedCity}`;
 
     const response = await handleFetch(queryParams)
@@ -60,7 +60,7 @@ export default function Crop() {
     setLoading(false)
     document.getElementById("recommendation")?.scrollIntoView();
     setLoading(false)
-   
+
   };
 
   const handleInputChange = (e) => {
@@ -70,7 +70,7 @@ export default function Crop() {
       [name]: value,
     });
   };
-  
+
   let selectedStateIndex = stateArr.indexOf(selectedState);
   if (selectedStateIndex === -1) {
     selectedStateIndex = 0;
@@ -79,7 +79,7 @@ export default function Crop() {
   const handleStateChange = (event) => {
     const selectedState = event.target.value;
     setSelectedState(selectedState);
-    setSelectedCity(''); 
+    setSelectedCity('');
   };
 
   const handleCityChange = (event) => {
@@ -90,24 +90,24 @@ export default function Crop() {
   return (
     <>
       <div>
-        <div className="flex sm:h-fit md:h-screen overflow-hidden">
+        <div className="flex mix-h-screen md:h-screen overflow-hidden">
           <img
-            className="hidden lg:block w-1/2"
+            className="hidden lg:block w-full md:w-1/2"
             src="https://images.pexels.com/photos/326082/pexels-photo-326082.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt=""
           />
-          <div className="flex scale-125 flex-col items-center justify-center align-middle w-full lg:w-1/2 mx-5 my-3">
-            <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
+          <div className="w-full 2xl:scale-125 lg:scale-100 md:scale-125 lg:w-1/2 md:mx-5 my-3 flex flex-col justify-center ">
+            <form onSubmit={handleSubmit} className="mx-auto mt-16 sm:mt-20 max-w-xl">
               <div className="mx-auto max-w-2xl text-center">
-                <h2 className="text-5xl font-extrabold tracking-tight sm:text-4xl text-teal-900">
+                <h2 className="text-4xl md:text-4xl  mx-5 my-3 font-extrabold tracking-tight sm:text-4xl text-teal-900">
                   Crop Recommendation
                 </h2>
                 <p className="mt-2 text-lg leading-8 sm:text-2xl text-teal-900">
-                  Give The Required Information For Crop Recommendation
+                  Fill out the below form For Crop Recommendation
                 </p>
               </div>
               <br />
-              <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 py-2 px-5">
                 <div>
                   <input
                     type="text"
@@ -171,7 +171,7 @@ export default function Crop() {
 
                 <div className="relative inline-block text-left">
                   <label htmlFor="state" className="block text-gray-600 text-sm font-medium mb-2">
-                   
+
                   </label>
                   <select
                     id="state"
@@ -190,7 +190,7 @@ export default function Crop() {
 
                 <div className="relative inline-block text-left">
                   <label htmlFor="city" className="block text-gray-600 text-sm font-medium mb-2">
-                   
+
                   </label>
                   <select
                     id="city"
@@ -223,7 +223,7 @@ export default function Crop() {
                 </button>
               </div>
             </form>
-                <span className="text-red-500 animate-fade text-xl">{error}</span>
+            <span className="text-red-500 animate-fade text-xl">{error}</span>
           </div>
         </div>
 

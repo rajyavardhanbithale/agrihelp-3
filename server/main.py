@@ -526,11 +526,13 @@ class BackendAPI:
 app = FastAPI()
 
 # Replace with your allowed origins
-origins = ["http://localhost:3000", "http://192.168.29.82:3000"]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://192.168.29.82:3000",
+        "https://agrihelp-3.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
