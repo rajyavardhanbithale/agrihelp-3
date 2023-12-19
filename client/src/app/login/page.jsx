@@ -18,7 +18,7 @@ export default function Login() {
 
   const redirect = useSearchParams()
   
-  const session = useSession()
+  const { data: session, status } = useSession();
   const [isLogin, setIsLogin] = useState(false)
   const [showErrors, setShowErrors] = useState(false);
   const [postError, setPostError] = useState("");
@@ -139,9 +139,9 @@ export default function Login() {
 
   
 
-  if (session.status === "authenticated") {
-
-    postGoogleLogin(session.data)
+  if (status === "authenticated") {
+    
+    postGoogleLogin(session)
   }
 
   return (

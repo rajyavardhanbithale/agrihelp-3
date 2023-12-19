@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-
+import { signOut } from 'next-auth/react';
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import CryptoJS from "crypto-js";
@@ -45,7 +45,7 @@ export default function Navbar(props) {
         Cookies.remove("next-auth.session-token")
         Cookies.remove("next-auth.csrf-token")
         Cookies.remove("next-auth.callback-url")
-        window.location.href = "/"
+        signOut()
     }
 
     // console.log(user);

@@ -212,20 +212,3 @@ export default function Product() {
 
 
 
-
-function ProductDetails() {
-  return (
-    <section className="container mx-auto max-w-[1200px] px-5 py-5 lg:py-10">
-      <h2 className="text-xl">Product details</h2>
-      <p className="mt-4 lg:w-3/4">
-        {/* Product details content */}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque tempore neque debitis nihil esse unde ipsam ducimus numquam explicabo eaque itaque nulla, officiis odio minus, ea vitae ab ullam accusamus. Quaerat iusto et reiciendis? Libero ab totam officiis magni error voluptatum ipsam, reiciendis, fugit aspernatur inventore harum blanditiis accusantium maiores!
-      </p>
-      <table className="mt-7 w-full table-auto divide-x divide-y lg:w-1/2">
-        <tbody className="divide-x border">
-          {/* Table rows */}
-        </tbody>
-      </table>
-    </section>
-  );
-}
