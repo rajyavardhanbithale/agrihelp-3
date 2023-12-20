@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-export default function main() {
+export default function Progress() {
     const [showTimeline, setShowTimeline] = useState(false)
     const [showDiv, setShowDiv] = useState(false)
     const [animation, setAnimation] = useState(false)
