@@ -27,12 +27,13 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
-/* *{
-  outline: red solid 1px;
-} */
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   /* outline: red solid 1px; */
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 
