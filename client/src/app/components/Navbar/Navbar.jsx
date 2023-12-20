@@ -61,7 +61,7 @@ export default function Navbar() {
                 <nav class="w-full flex items-center justify-between p-6 lg:px-8" aria-label="Global drop-shadow-2xl">
                     <div class="w-[10%] flex lg:flex-1">
                         <a href="#" class="-m-1.5 p-1.5 flex ">
-                            <span class="sr-only">Vedant</span>
+                            <span class="sr-only">RAGE</span>
                             <img class="h-14 w-auto" src="/assets/nav.png" alt="" />
                         </a>
                     </div>
@@ -74,7 +74,7 @@ export default function Navbar() {
                             </li>
                             <li onClick={() => { setfOpen(true) }}
                                 class="flex justify-center items-center text-xl font-bold hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
-                                Feature's
+                                Feature&apos;s
                                 <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
