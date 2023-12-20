@@ -86,7 +86,7 @@ export default function GovScheme() {
                             <input
                                 type="text"
                                 className="w-full border-gray-600 border-2 h-10 pl-4 pr-10 text-sm rounded-full focus:outline-none focus:shadow-outline"
-                                placeholder="Search products..."
+                                placeholder="Search Financial Aid..."
                                 value={null}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />

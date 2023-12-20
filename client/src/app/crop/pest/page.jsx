@@ -62,16 +62,16 @@ export default function Pest() {
     return (
         <>
             <div>
-                <div className="flex sm:h-fit md:h-screen">
+                <div className="flex  md:h-screen">
                     <img
                         className="hidden lg:block w-1/2"
                         src="https://images.pexels.com/photos/689326/pexels-photo-689326.jpeg?auto=compress&cs=tinysrgb&w=600"
                         alt=""
                     />
                     <div className="flex  flex-col items-center py-56 w-full lg:w-1/2 mx-5 my-3">
-                        <div className="flex flex-col items-center justify-center h-screen tracking-wider">
+                        <div className="flex flex-col items-center justify-center md:h-screen tracking-wider">
                             <span className="text-5xl text-teal-900 font-bold">Pest Finder</span>
-                            <span className="text-3xl text-teal-900 capitalize mt-2">upload image of infected leaf </span>
+                            <span className="text-3xl text-teal-900 capitalize mt-2 text-center">upload image of infected leaf </span>
 
                             <div className="flex justify-center flex-col w-full p-6 bg-white mt-10 border border-gray-300 rounded-lg shadow-md">
                                 <label
@@ -129,7 +129,7 @@ export default function Pest() {
 
                 </div>
 
-                <div className="mt-20 w-3/4 mx-auto">
+                <div className="md:mt-20 md:w-3/4 mx-auto">
                     {apiData ? (
                         <div className="flex justify-center items-center mb-16 ">
                             <span className="w-1/2 bg-teal-950 py-6 px-5 text-white text-center text-3xl rounded-2xl font-bold ">RESULT</span>
@@ -137,7 +137,7 @@ export default function Pest() {
                     ) : null}
 
                     {apiData ? (
-                        <div className="w-full p-5 text-2xl text-center md:flex md:justify-between items-end">
+                        <div className="w-full md:p-5 p-4 text-2xl text-center md:flex md:justify-between items-end tracking-wide leading-relaxed">
                             <div dangerouslySetInnerHTML={{ __html: apiData }} />
                         </div>
                     ) : null}

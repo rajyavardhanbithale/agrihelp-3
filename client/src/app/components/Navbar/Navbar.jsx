@@ -1,14 +1,15 @@
 'use client'
-import Link from "next/link";
-import { signOut } from 'next-auth/react';
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
-import CryptoJS from "crypto-js";
+import React, { useEffect } from 'react';
 
-export default function Navbar(props) {
+import { useState } from 'react';
+import Link from 'next/link';
+import Cookies from 'js-cookie';
+import CryptoJS from 'crypto-js';
+
+export default function Navbar() {
     const [user, setUser] = useState()
-
     const [open, setOpen] = useState(false);
+    const [fopen, setfOpen] = useState(false);
 
     const handleClickToOpen = () => {
         setOpen(true);
@@ -16,6 +17,9 @@ export default function Navbar(props) {
 
     const handleToClose = () => {
         setOpen(false);
+    };
+    const handleToClosef = () => {
+        setfOpen(false);
     };
 
     useEffect(() => {
@@ -48,143 +52,236 @@ export default function Navbar(props) {
         signOut()
     }
 
-    // console.log(user);
+
+
     return (
+        <section>
+            <header class="bg-green-500 w-full h-16 absolute inset-x-0 top-0 z-50 flex justify-center items-center">
 
+                <nav class="w-full flex items-center justify-between p-6 lg:px-8" aria-label="Global drop-shadow-2xl">
+                    <div class="w-[10%] flex lg:flex-1">
+                        <a href="#" class="-m-1.5 p-1.5 flex ">
+                            <span class="sr-only">Vedant</span>
+                            <img class="h-14 w-auto" src="/assets/nav.png" alt="" />
+                        </a>
+                    </div>
 
-        <>
+                    <div class="w-[70%] hidden lg:flex lg:justify-center lg:gap-x-6 text-white">
+                        <ul class="hidden lg:flex lg:gap-x-6 text-white">
+                            <li
+                                class="text-xl font-bold hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100">
+                                Home
+                            </li>
+                            <li onClick={() => { setfOpen(true) }}
+                                class="flex justify-center items-center text-xl font-bold hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                Feature's
+                                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </li>
+                            <Link href={"/shop"}>
 
-            <section>
-                <header className=" bg-green-500 bg-opacity-70 m-2 rounded-full  absolute inset-x-0 top-0 z-50">
+                                <li
+                                    class="text-xl font-bold hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100">
+                                    Agri-Shop
+                                </li>
+                            </Link>
+                            <li
+                                class="text-xl font-bold hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100">
+                                Contact
+                            </li>
+                            <li
+                                class="text-xl font-bold hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100">
+                                About
+                            </li>
+                        </ul>
 
-                    <nav className="flex items-center justify-between p-3 lg:px-8" aria-label="Global drop-shadow-2xl">
-                        <div className="flex lg:flex-1">
-                            <a href="/" className="-m-1.5 p-1.5 flex ">
+                    </div>
+                    <div class="w-[20%] flex items-center lg:justify-around">
 
-                                <img className="h-8 w-auto" src="" alt="" />
-                            </a>
+                        <div
+                            class="hidden absolute inset-y-0 right-0 lg:flex lg:items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                            <button type="button"
+                                class="relative flex justify-center items-center bg-white border focus:outline-none shadow text-gray-600 rounded focus:ring ring-gray-200 group">
+                                <p class="px-4">Language</p>
+                                <span class="border-l p-2 hover:bg-gray-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                                        xmlns="https://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9l-7 7-7-7"></path>
+                                    </svg>
+                                </span>
+
+                                <div
+                                    class="absolute hidden group-focus:block top-full min-w-full w-max bg-white shadow-md mt-1 rounded">
+                                    <ul class="text-left border rounded">
+                                        <li class="px-4 py-1 hover:bg-gray-100 border-b">English </li>
+                                        <li class="px-4 py-1 hover:bg-gray-100 border-b">Hindi/हिंदी</li>
+                                        <li class="px-4 py-1 hover:bg-gray-100 border-b">Marathi/मराठी</li>
+                                        <li class="px-4 py-1 hover:bg-gray-100 border-b">Tamil/தமிழ்</li>
+                                        <li class="px-4 py-1 hover:bg-gray-100 border-b">Telugu/తెలుగు</li>
+                                        <li class="px-4 py-1 hover:bg-gray-100 border-b">Punjabi/ਪੰਜਾਬੀ</li>
+                                        <li class="px-4 py-1 hover:bg-gray-100 border-b">Assamese/অসমীয়া</li>
+                                    </ul>
+                                </div>
+                            </button>
                         </div>
-                        <div className="flex lg:hidden">
+
+                        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                            <a href="#"
+                                class="text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100">Log
+                                in <span aria-hidden="true">&rarr;</span></a>
+                        </div>
+                        <div class="flex fixed right-6 lg:hidden">
                             <button type="button" onClick={handleClickToOpen}
-                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white">
-                                <span className="sr-only">Open main menu</span>
-                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
-                                    aria-hidden="true">
+                                class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                                <span class="sr-only">Open main menu</span>
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                 </svg>
                             </button>
                         </div>
-                        <div className="hidden lg:flex lg:gap-x-6 text-white">
-                            <Link href={"/weather"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Weather</Link>
-                            <Link href={"/crop"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Crop Recomendation</Link>
-                            <Link href={"/crop/pest"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Pest Information</Link>
-                            <Link href={"/crop/fertilizer"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Fertilizer Recomendation</Link>
-                            <Link href={"/shop"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Shop</Link>
-                            <Link href={"/"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Chat</Link>
+                    </div>
 
-                            <Link href={"/gov-scheme"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Scheme</Link>
-                            <Link href={"/financial-aid"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">Finance</Link>
-                            <Link href={"/login"}
-                                className="text-xm font-semibold leading-6 px-1 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 hover:border-b-4 hover:border-green-700 text-center">About Us</Link>
-
-                        </div>
-                        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                            {user ? (
-                                <div onClick={handleLogout} className="text-xl font-semibold leading-6 px-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white">
-                                    Log Out
-                                </div>
-                            ) : (
-                                <Link href={"/login"}>
-                                    <div className="text-xl font-semibold leading-6 px-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white">
-                                        Log In
-                                    </div>
-                                </Link>
-                            )}
-
-                        </div>
-                    </nav>
+                </nav>
 
 
-                    <dialog open={open} onClose={handleToClose}>
-                        <div className="" role="dialog" aria-modal="true">
-                            <div className="fixed inset-0 z-50"></div>
-                            <div
-                                className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 bg-opacity-70 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                                <div className="flex items-center justify-between">
-                                    <a href={"/"} className="-m-1.5 p-1.5">
-                                        <span className="sr-only">AGRI-HELP</span>
-                                        <img className="h-8 w-auto" src="" alt="" />
-                                    </a>
+                <dialog open={open} onClose={handleToClose}>
+                    <div class="" role="dialog" aria-modal="true">
+                        <div class="fixed inset-0 z-50"></div>
+                        <div
+                            class={`${open && "animate-fade-left animate-duration-500"} fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10`}>
+                            <div class="flex items-center justify-between">
+                                <a href="#" class="-m-1.5 p-1.5">
+                                    <span class="sr-only text-white">AGRI-HELP</span>
+                                    <img class="h-8 w-auto" src="/assets/nav.png" alt="" />
+                                </a>
 
-                                    <button onClick={handleToClose} type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700">
-                                        <span className="sr-only">Close menu</span>
-                                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
-                                            aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </button>
+                                <button onClick={handleToClose} type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+                                    <span class="sr-only">Close menu</span>
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
 
-                                </div>
+                            </div>
 
-                                <div className="mt-6 flow-root">
-                                    <div className="-my-6 divide-y divide-gray-500/10">
+                            <div class="mt-6 flow-root">
+                                <div class="-my-6 divide-y divide-gray-500/10">
 
-                                        <div className="space-y-2 py-6">
-                                            <Link href={"/weather"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Weather</Link>
-                                            <Link href={"/crop"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Crop Recommendation</Link>
-                                            <Link href={"/crop/pest"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Pest Information</Link>
-                                            <Link href={"/crop/fertilizer"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Fertilizer Recommendation</Link>
-                                            <Link href={"/shop"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Shop</Link>
-                                            <Link href={"/gov-scheme"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Scheme</Link>
-                                            <Link href={"/financial-aid"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-green-900 ">Finance</Link>
-                                            <Link href={"/weather"}
-                                                className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-100 hover:bg-white ">About</Link>
-
-
-
-
-                                        </div>
-
-                                        <div className="py-6">
-
-
-                                            {user ? (
-                                                <div onClick={handleLogout} className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-200 hover:bg-green-900 ">
-                                                    Log Out
-                                                </div>
-                                            ) : (
-                                                <Link href={"/login"}>
-                                                    <div className="block h-14 text-center rounded-lg px-3 pt-4  font-semibold leading-7  text-gray-200 hover:bg-green-900 ">
-                                                        Log In
-                                                    </div>
-                                                </Link>
-                                            )}
-                                        </div>
+                                    <div class="space-y-2 py-6">
+                                        <Link href="/weather"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            Weather</Link>
+                                        <Link href="/crop"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            Crop Recommendation</Link>
+                                        <Link href="/crop/pest"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            Pest Information</Link>
+                                        <Link href="/crop/fertilizer"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            Fertilizer Recommendation</Link>
+                                        <Link href="/shop"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            Shop</Link>
+                                        <Link href="/chat"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            Chat</Link>
+                                        <Link href="#"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            Feedback</Link>
+                                        <Link href="#"
+                                            class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                            About</Link>
 
                                     </div>
+                                    <div class="py-6">
+                                        {user ? (
+
+                                            <div class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                                <span onClick={handleLogout}>
+
+                                                    Log in
+                                                </span>
+                                            </div>
+
+                                        ) : (
+                                            <Link href="/login"
+                                                class="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-bold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-1 hover:scale-110 duration-100 ">
+                                                Login</Link>
+                                        )}
+
+
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-                    </dialog>
-                </header>
-            </section>
+                    </div>
+                </dialog>
+                {/* features box */}
+                <dialog open={fopen} onClose={() => setfOpen(false)} >
+                    <div class={`hidden lg:block w-48 fixed top-16 left-[38%] mt-1  text-xm font-bold text-white bg-green-500 border-2 border-green-500 rounded-lg `}>
+                        <Link href="/weather">
+                            <button type="button"
+                                class="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                Weather
+                            </button>
+                        </Link>
+                        <Link href="/crop">
+                            <button type="button"
+                                class="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                Crop Recommendation
+                            </button>
+                        </Link>
+                        <Link href="/crop/pest">
+                            <button type="button"
+                                class="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                Pest Information
+                            </button>
+                        </Link>
+                        <Link href="/crop/fertilizer">
+                            <button type="button"
+                                class="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                Fertilizer Recommendation
+                            </button>
+                        </Link>
+                        <Link href="/chat">
+                            <button type="button"
+                                class="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                Chat
+                            </button>
+                        </Link>
+                        <Link href="/financial-aid">
+                            <button type="button"
+                                class="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                Finance
+                            </button>
+                        </Link>
+                        <Link href="/scheme">
+                            <button type="button"
+                                class="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                Scheme
+                            </button>
+                        </Link>
 
-        </>
+                        <button onClick={handleToClosef} type="button"
+                            class="w-full px-4 py-2 font-medium  text-xl text-center rtl:text-right  border-white  cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                            X
+                        </button>
+
+
+                    </div>
+                </dialog>
+            </header>
+
+        </section>
+
     );
 }

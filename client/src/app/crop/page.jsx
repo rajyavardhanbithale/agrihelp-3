@@ -32,6 +32,7 @@ export default function Crop() {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}${param}`);
 
       if (response.status === 200) {
+        ;
         return response.data
       }
     } catch (error) {
@@ -87,6 +88,7 @@ export default function Crop() {
     setSelectedCity(selectedCity);
   };
 
+  
   return (
     <>
       <div>
@@ -227,7 +229,7 @@ export default function Crop() {
           </div>
         </div>
 
-        {crop?.typeOfCrop && <Result crop={crop} />}
+      {crop?.typeOfCrop && <Result crop={crop} />}
       </div>
     </>
   );
@@ -237,7 +239,7 @@ const CollapsibleSection = ({ title, content }) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="w-full bg-gray-200 px-6 py-2   `">
+    <div className="w-full md:w-10/12 md:mx-auto bg-gray-200 px-6 py-2">
       <button
         onClick={() => setVisible(!visible)}
         className="w-full flex justify-between text-slate-900   text-left text-lg px-4 py-2 mt-2 rounded focus:outline-none"
@@ -267,23 +269,25 @@ function Result(crop) {
 
   return (
     <>
-      <div className="mt-20 w-3/4 mx-auto" id="recommendation">
-        <div className="flex justify-center items-center mb-16 ">
-          <span className="w-1/2 bg-teal-950 py-6 px-5  text-white text-center text-3xl rounded-2xl font-bold ">RESULT</span>
+      <div className="mt-20 lg:w-[90%] mx-auto" id="recommendation">
+        <div className="flex justify-center items-center md:mb-16 mb-4 ">
+          <span className="w-1/2 bg-teal-950 md:py-6 lg:py-3 py-4 px-5 lg:px-0  text-white text-center md:text-3xl text-2xl rounded-2xl font-bold ">RESULT</span>
         </div>
-        <div className="w-full p-5  md:flex md:justify-between items-center">
+        <div className="w-full lg:p-5 md:px-5 p-1 md:flex md:justify-between items-center">
 
-          <div className="flex justify-center flex-col items-center text-left  p-5 border-solid border-gray-600 rounded-2xl lg:pr-10 text-2xl sm:w-full md:w-2/3">
-            <div className='font-bold text-teal-800 text-3xl capitalize'>
+          <div className="flex justify-center flex-col items-center text-left  p-5 border-solid border-gray-600 rounded-2xl lg:pr-10 text-2xl sm:w-full md:w-10/11 lg:w-2/3">
+
+            <div className='font-bold text-teal-800 md:text-3xl text-2xl md:text-start text-center  capitalize'>
               growing &nbsp;
-              <span className="text-4xl text-teal-950 font-bold">
+              <span className="md:text-4xl text-3xl text-teal-950 font-bold ">
                 {crop?.crop?.typeOfCrop}
               </span>
               &nbsp;
               is a good fit for you.
             </div>
-            <p className='text-left mt-5'>{crop?.crop?.name?.information?.introduction}</p>
-            <ul className="marker:text-teal-700 ist-outside list-disc mt-5 text-lg">
+            <img className='lg:hidden py-2 md:py-5 rounded-2xl h-full  sm:w-full md:w-1/2' src={crop?.crop?.name?.images?.[0]} alt="" />
+            <p className='md:text-left  mt-5 text-justify text-xl'>{crop?.crop?.name?.information?.introduction}</p>
+            <ul className="marker:text-teal-700 ist-outside list-disc mt-5 text-lg ml-3">
               {crop?.crop?.name?.information?.varieties.map((variety, idx) => (
                 <li key={idx}>
                   <span className="font-bold">
@@ -296,34 +300,38 @@ function Result(crop) {
             </ul>
           </div>
 
-          <img className='rounded-2xl h-full  sm:w-full md:w-1/3' src={crop?.crop?.name?.images?.[0]} alt="" />
+          <img className='hidden lg:block rounded-2xl h-full  sm:w-full md:w-1/3' src={crop?.crop?.name?.images?.[0]} alt="" />
 
         </div>
-        <div className="w-full p-5 flex md:flex md:justify-between items-center">
-          <img className='rounded-2xl h-full sm:w-full md:w-1/3' src={crop?.crop?.name?.images?.[1]} alt="" />
-          <div className="flex justify-center flex-col items-center p-5 text-2xl sm:w-full md:w-2/3">
-            <div className="ml-8">
-              How to Grow {crop?.crop?.typeOfCrop}
-              <ul className="marker:text-teal-700 list-disc mt-5 text-lg">
+        <div className="lg:p-5 lg:flex lg:justify-between md:items-center leading-loose tracking-tight">
+          <img className='rounded-2xl h-full w-3/4 md:w-1/3 mx-auto lg:mx-0' src={crop?.crop?.name?.images?.[1]} alt="" />
+          <div className="flex justify-center px-9 flex-col items-center md:p-5 py-5 lg:py-0 text-2xl  lg:w-2/3">
+            <div className="md:ml-8 ml-0.5`">
+              <div className='w-full mt-5 text-center'>
+
+                <span className='text-3xl md:text-4xl  font-semibold'>
+                  How to Grow {crop?.crop?.typeOfCrop}
+                </span>
+              </div>
+              <ul className="marker:text-teal-800 list-disc mt-5 text-lg">
                 {crop?.crop?.name?.tutorial?.cultivationSteps.map((step, idx) => (
                   <li key={idx}>
                     {step}
                   </li>
                 ))}
               </ul>
-              <span className="text-lg">
 
-              </span>
             </div>
           </div>
         </div>
 
-        <div className='mb-48'>
-          <span className="w-1/2 bg-teal-950 py-4 px-5 mt-10
-             text-white text-center text-2xl rounded-2xl font-bold  capitalize">
+        <div className='md:mb-48 mb-10 mt-5 w-full'>
+          <span className="md:w-1/2 w-3/4 bg-teal-950 py-4 px-5 mt-10 mx-auto 
+             text-white text-center md:text-2xl text-xl rounded-2xl font-bold  capitalize block">
             frequently asked questions
           </span>
-          <div className="mt-10">
+
+          <div className="mt-5 md:p-0 p-4">
 
             <CollapsibleSection
               title={`Difficulty While Growing ${crop?.crop?.typeOfCrop}`}
@@ -364,10 +372,6 @@ function Result(crop) {
 
           </div>
         </div>
-
-
-
-
       </div>
     </>
   )

@@ -15,9 +15,9 @@ export default function Fertilizer() {
     const cropList = ['rice', 'maize', 'chickpea', 'kidneybeans', 'pigeonpeas', 'mothbeans', 'mungbean', 'blackgram', 'lentil', 'pomegranate', 'banana', 'mango', 'grapes', 'watermelon', 'muskmelon', 'apple', 'orange', 'papaya', 'coconut', 'cotton', 'jute', 'coffee']
 
     const [formData, setFormData] = useState({
-        Nitrogen: 200,
-        Phosphorus: 200,
-        Potassium: 220,
+        Nitrogen: '',
+        Phosphorus: '',
+        Potassium: '',
 
     });
 
@@ -64,20 +64,20 @@ export default function Fertilizer() {
     return (
         <>
             <div>
-                <div className="flex sm:h-fit md:h-screen">
+                <div className="md:flex md:h-screen">
                 <img
                         className="hidden lg:block w-1/2 object-cover"
                         src="https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         alt=""
                     />
-                    <div className="flex scale-[1.2] flex-col items-center justify-center align-middle w-full lg:w-1/2 mx-5 my-3">
-                        <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
+                    <div className="md:flex p-5 md:scale-[1.2] md:flex-col md:items-center md:justify-center md:align-middle md:w-full lg:w-1/2 md:mx-5 my-3">
+                        <form onSubmit={handleSubmit} className="md:mx-auto mt-16 max-w-xl">
                             <div className="mx-auto max-w-2xl text-center">
-                                <h2 className="text-5xl font-extrabold tracking-tight sm:text-4xl text-teal-900">
+                                <h2 className="md:text-5xl text-4xl font-extrabold tracking-tight sm:text-4xl text-teal-900">
                                     Fertilizer Recommendation
                                 </h2>
-                                <p className="mt-2 text-lg leading-8 sm:text-2xl text-teal-900">
-                                    Give The Required Information For Crop Recommendation
+                                <p className="mt-2 text-lg leading-8  text-teal-900">
+                                    Give The Required Information For Fertilizer Recommendation
                                 </p>
                             </div>
                             <br />
@@ -151,7 +151,7 @@ export default function Fertilizer() {
 
                 </div>
 
-                <div className="mt-20 w-3/4 mx-auto">
+                <div className="mt-20 lg:w-3/4 mx-auto">
                     {crop ? (
                         <div className="flex justify-center items-center mb-16 ">
                             <span className="w-1/2 bg-teal-950 py-6 px-5 text-white text-center text-3xl rounded-2xl font-bold ">RESULT</span>

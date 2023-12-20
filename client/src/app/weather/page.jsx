@@ -113,6 +113,7 @@ export default function Weather() {
                 </div>
             ) : (
                 <>
+                    <div className="overflow-x-hidden">
 
                     <div className="mt-40 text-base  text-black h-full bg-White bg-fixed bg-no-repeat">
                         <main className="flex flex-wrap w-[90%] lg:w-[60%] mx-auto my-2 text-lg">
@@ -125,6 +126,7 @@ export default function Weather() {
 
                         <WeatherBottom data={dataBottom} />
 
+                    </div>
                     </div>
                 </>
             )}
