@@ -1,5 +1,6 @@
 import subprocess
 subprocess.run(['pip', 'install', 'torch', 'torchvision', 'fastapi', 'uvicorn', '--index-url', 'https://download.pytorch.org/whl/cpu'])
+
 import uvicorn
 from fastapi import FastAPI,UploadFile,File
 from fastapi.middleware.cors import CORSMiddleware
