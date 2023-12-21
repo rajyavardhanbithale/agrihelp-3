@@ -1,3 +1,6 @@
+import subprocess
+subprocess.run(['pip', 'install', 'torch', 'torchvision', 'fastapi', 'uvicorn', '--index-url', 'https://download.pytorch.org/whl/cpu'])
+import uvicorn
 from fastapi import FastAPI,UploadFile,File
 from fastapi.middleware.cors import CORSMiddleware
 import time
@@ -118,6 +121,4 @@ async def cropDefect(file: UploadFile = File(...)):
 
 
 if __name__ == '__main__':
-    import uvicorn,subprocess
-    subprocess.run(['pip', 'install', 'torch', 'torchvision', 'fastapi', 'uvicorn', '--index-url', 'https://download.pytorch.org/whl/cpu'])
     uvicorn.run(app,host="0.0.0.0", port=8181)
