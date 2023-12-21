@@ -1,4 +1,4 @@
-uvicorn==0.23.2 
+uvicorn
 gunicorn==20.1.0 
 fastapi==0.101.0
 -i https://download.pytorch.org/whl/cpu 
