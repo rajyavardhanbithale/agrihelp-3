@@ -3,6 +3,6 @@
 set -e
 
 echo "-----> Installing dependencies"
-pip install -r requirements.txt
+pip install uvirorn gunicorn fastapi  torch torchvision -i https://download.pytorch.org/whl/cpu
 
 echo "-----> Build successful"
