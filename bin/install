@@ -5,7 +5,7 @@ VENV_NAME=venv
 python -m venv "${VENV_NAME}"
 source "${VENV_NAME}/bin/activate"
 python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+python -m pip install fastapi uvicron torch torchvision  --index-url https://download.pytorch.org/whl/cpu
 
 cat << EOF_INSTALL
 
