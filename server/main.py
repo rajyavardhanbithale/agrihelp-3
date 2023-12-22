@@ -1,14 +1,19 @@
+from multiprocessing import process
+from turtle import update
 from fastapi import FastAPI, APIRouter, Request, HTTPException, UploadFile, File
 
 import os
 
 from fastapi.middleware.cors import CORSMiddleware
+from numpy import insert
 import pymongo
 import json
 import time
 
 import random
 import time
+
+from pyparsing import col
 
 # custom import
 import base_models
@@ -104,7 +109,10 @@ class BackendAPI:
             f"/{self.app_version}/" + "financial-aid", self.financialAid, methods=["GET"])
 
         self.router.add_api_route(
-            f"/{self.app_version}/" + "ping", self.ping, methods=["GET"])
+            f"/{self.app_version}/" + "ping", self.ping, methods=["GET"]) 
+        
+        self.router.add_api_route(
+            f"/{self.app_version}/" + "progress", self.progress, methods=["POST"])
 
         if (os.getenv("ENV") == "DEV"):
             print("[*] DEV")
@@ -519,6 +527,48 @@ class BackendAPI:
 
         return records_list
 
+    async def progress(self,method:str,progress:base_models.Progress):
+        user = self.collection.find_one({"email": progress.email})
+        collectionProgress = db["cropProgress"] 
+        scheme = {
+            "email": progress.email,
+            
+        }
+        if user and not collectionProgress.find_one({"email":progress.email}):
+            collectionProgress.insert_one(scheme)
+        
+        if method == "update":
+            query = {"email": progress.email, "progress.name": progress.name}
+            result = collectionProgress.find_one(query)
+            
+            if not result:
+                query_criteria = {"email": progress.email}
+                update_query = {
+                "$push": {
+                    "progress": {
+                        "name": progress.name,
+                        "stage": [False]*10
+                        },
+                    }
+                }
+                collectionProgress.update_one(query_criteria, update_query)
+               
+               
+
+
+            result = collectionProgress.find_one(query)
+            if False in result["progress"][0]["stage"][0:progress.stageIndex]:
+                raise HTTPException(status_code=401,detail="unable to update value")
+
+            else:
+                query = {"email": progress.email, f"progress.name": progress.name}
+                update = {"$set": {f"progress.$.stage.{progress.stageIndex}": progress.stage}}
+                collectionProgress.update_one(query, update)
+                raise HTTPException(status_code=200,detail="ok")
+            
+            
+        return None
+    
     async def ping(self):
         raise HTTPException(status_code=200, detail="PING - PONG")
 

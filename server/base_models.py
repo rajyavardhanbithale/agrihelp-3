@@ -89,7 +89,11 @@ class PlaceOrder(BaseModel):
         ]
     }
     
-    
+class Progress(BaseModel):
+    email:str
+    name:str
+    stage:bool 
+    stageIndex:int 
     
 
 def DatabaseScheme(**kwargs):

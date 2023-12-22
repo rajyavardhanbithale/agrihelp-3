@@ -1,3 +1,0 @@
-[[buildpacks]]
-id = "your_username/fastapi"
-version = "0.1.0"
