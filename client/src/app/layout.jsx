@@ -11,6 +11,7 @@ const poppins = Poppins({
 
 
 import AuthProvider from './components/AuthProvider/AuthProvider'
+import Footer from './components/Footer/Footer';
 
 
 export const metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
             <Navbar></Navbar>
             {/* <div className='mt-24'></div> */}
             {children}
+            <Footer></Footer>
           </body>
 
         </AuthProvider>
