@@ -537,6 +537,15 @@ class BackendAPI:
         if user and not collectionProgress.find_one({"email":progress.email}):
             collectionProgress.insert_one(scheme)
         
+        if method == "get":
+            cropDB = db["cropProgressData"]
+            result = cropDB.find_one({progress.name:{"$exists":True}})
+            if result : result["_id"] = str(result["_id"])
+            return result
+        
+        # if method == "update":
+            # return collectionProgress.delete_one
+            
         if method == "update":
             query = {"email": progress.email, "progress.name": progress.name}
             result = collectionProgress.find_one(query)
@@ -564,7 +573,12 @@ class BackendAPI:
                 query = {"email": progress.email, f"progress.name": progress.name}
                 update = {"$set": {f"progress.$.stage.{progress.stageIndex}": progress.stage}}
                 collectionProgress.update_one(query, update)
-                raise HTTPException(status_code=200,detail="ok")
+                
+                # Fetching 
+                ret = collectionProgress.find_one({"email":progress.email,"progress.name": progress.name})
+
+                
+                raise HTTPException(status_code=200,detail=ret["progress"][0]["stage"])
             
             
         return None
