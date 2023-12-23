@@ -80,8 +80,8 @@ const OrderTrackingPage = () => {
     <>
 
       {(orderNumber && !error1) ?
-        (<div className="bg-white">
-          <div className="p-4 mt-24">
+        (<div className="bg-white -mt-10 md:mt-0">
+          <div className="md:p-5 p-8">
             <h1 className="text-4xl text-center font-semibold mb-6 ml-5">Package Status</h1>
             <div className="container flex flex-col justify-center lg:w-1/3 ml-auto mr-auto">
               <div className="flex flex-col md:grid grid-cols-12 ">
@@ -149,7 +149,7 @@ const OrderTrackingPage = () => {
         </div>
         ) : (
           <div className={`flex justify-center items-center mt-56 bg-white ${isUrl ? "opacity-0" : "opacity-100"}`}>
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-xl border border-gray-300">
+            <div className="bg-white p-8 rounded-lg shadow-lg md:w-full w-10/12 max-w-xl border border-gray-300">
               <h1 className="text-4xl font-semibold mb-6 text-gray-800">Track Your Order</h1>
               <div className="mb-6">
                 <label htmlFor="orderNumber" className="text-lg font-medium text-gray-600 block mb-2">

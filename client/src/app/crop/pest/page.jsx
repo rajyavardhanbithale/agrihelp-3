@@ -61,7 +61,7 @@ export default function Pest() {
 
     return (
         <>
-            <div>
+            <div className="-mt-20">
                 <div className="flex  md:h-screen">
                     <img
                         className="hidden lg:block w-1/2"

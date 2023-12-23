@@ -2,7 +2,7 @@
 import ShopHeader from '@/app/components/shop/ShopHeader';
 import { IonIcon } from '@ionic/react';
 import axios from 'axios';
-import { cartOutline, cart } from 'ionicons/icons';
+import { cartOutline, cart, caretForward, caretForwardOutline } from 'ionicons/icons';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -94,39 +94,36 @@ export default function Cart() {
             <ShopHeader />
             <div className="flex flex-col items-center border-b mt-10 bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
                 <a href="#" className="text-2xl font-bold text-gray-800">&nbsp; Shopping Cart Items <IonIcon icon={cart}></IonIcon></a>
+
                 <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
+
                     <div className="relative">
-                        <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
-
-
+                        <ul className="relative flex md:w-full w-[90%] items-center justify-center mx-auto space-x-2 sm:space-x-4">
+                            <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">1</a>
+                                <span className="font-semibold text-gray-900">Cart</span>
+                            </li>
+                            <IonIcon icon={caretForwardOutline}></IonIcon>
 
                             <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">3</a>
+                                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white" href="#">2</a>
                                 <span className="font-semibold text-gray-900">Checkout</span>
                             </li>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-
+                            <IonIcon icon={caretForwardOutline}></IonIcon>
                             <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">2</a>
-                                <span className="font-semibold text-gray-500">Shipping & Payment</span>
+                                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white" href="#">3</a>
+                                <span className="font-semibold text-gray-900">Confirmation</span>
                             </li>
 
+                            
 
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
 
-                            <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">2</a>
-                                <span className="font-semibold text-gray-500">Confirmation</span>
-                            </li>
 
                         </ul>
                     </div>
+
                 </div>
+
             </div>
 
             <section className={`md:flex mt-10 ${isHidden ? 'opacity-0' : 'opacity-100'}`}>
@@ -154,7 +151,7 @@ export default function Cart() {
 
                     <table className="w-full">
                         <tbody>
-                            {productData.map((item,idx) => (
+                            {productData.map((item, idx) => (
 
                                 <tr className="h-[100px]" key={idx}>
                                     <td className="flex w-full border px-4 py-4">

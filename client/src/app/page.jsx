@@ -1,6 +1,7 @@
 
 
 import "./App.css"
+import FullPageLoader from "./components/Loader/FullPageLoader";
 
 export default async function Home() {
 
@@ -16,7 +17,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className=" flex flex-col items-center justify-center h-screen w-full sm:text-x-xm md:text-5xl">
+      <div className="-mt-16 flex flex-col items-center justify-center h-screen w-full sm:text-x-xm md:text-5xl">
 
         <div className="-mt-10 fixed top-[40%]   text-center z-40 font-bold text-white lg:text-5xl transform -translate-y-1/2">
           <img className="h-36 md:h-56 md:full mx-auto p-5 bg-gray-700/60 rounded-2xl" src="/assets/nav_white.png" alt="" />
@@ -33,7 +34,7 @@ export default async function Home() {
 
       </div>
 
-
+     
     </>
 
   )

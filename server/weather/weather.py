@@ -26,6 +26,7 @@ class Weather:
         if (lat!=None and lon!=None):
             fetch1 = requests.get("{url}?appid={key}&lat={lat}&lon={lon}".format(url=self.baseUrlWeather,key=self.OpenKey,lat=lat,lon=lon))
             parseFetch1 = fetch1.json()
+            # print("{url}?appid={key}&lat={lat}&lon={lon}".format(url=self.baseUrlWeather,key=self.OpenKey,lat=lat,lon=lon))
             
             fetch2 = requests.get("{url}?key={key}&q={lat},{lon}&days={days}".format(url=self.urlForecast,key=self.key,lat=lat,lon=lon,days=1))
             parseFetch2 = fetch2.json()

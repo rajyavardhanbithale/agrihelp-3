@@ -12,10 +12,10 @@ function ShopHeader() {
   const [buttonPopup,setbuttonPopup]=useState(false);
 
   return (
-    <header className="mx-auto mt-16 flex h-16 max-w-[1200px] items-center justify-between px-5">
+    <header className="mx-auto -mt-16  flex h-16 max-w-[1200px] items-center justify-between p-5">
       <a href="/shop">
         <img
-          className="cursor-pointer w-20"
+          className="cursor-pointer h-12 w-full"
           src="/assets/nav.png"
           alt="company logo"
         />

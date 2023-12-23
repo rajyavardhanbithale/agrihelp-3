@@ -38,8 +38,8 @@ export default function Progress() {
                 return response.data
             }
         } catch (error) {
-            console.log(error)
             setError("error")
+            return null
         }
 
     }
@@ -53,7 +53,9 @@ export default function Progress() {
             "stageIndex": 0
         }
         const response = await handlefetch("?method=get", body)
-        setCropData(response?.[cropName])
+        if (response){
+            setCropData(response?.[cropName])
+        }
         body = {
             "email": email,
             "name": cropName,
@@ -61,11 +63,10 @@ export default function Progress() {
             "stageIndex": 0
         }
         const response1 = await handlefetch("?method=update", body)
-        setProgressStage(response1.detail)
-
-
+        if (response1){
+            setProgressStage(response1.detail)
+        }
     }
-    console.log(progressStage)
     const handleUpdateCrop = async (cropName, index) => {
         let body = {
             "email": email,
@@ -119,10 +120,9 @@ export default function Progress() {
 
 
             {(cropData && progressStage) ? (
-                <div className="mt-40 lg:flex lg:flex-col lg:items-center lg:justify-center lg:h-full">
+                <div className="lg:flex lg:flex-col lg:items-center lg:justify-center lg:h-full">
                     <div className="flex">
-
-                        <span className="mx-auto text-4xl font-semibold capitalize">Roadmap to Cultivate {cropName}</span>
+                        <span className="mx-auto text-4xl text-center font-semibold capitalize">Roadmap to Cultivate {cropName}</span>
                     </div>
                     <div className="md:p-16 p-7 w-full lg:w-1/2 lg:mx-auto">
                         <ol className="relative border-l-8 border-gray-200 bg-white">
@@ -156,7 +156,7 @@ export default function Progress() {
                                                     {progressStage[idx] ? (
                                                         <>
                                                             <div className="flex w-full justify-center align-middle items-center">
-                                                                <ConfettiExplosion particleSize={10} particleCount={200} force={0.3} />
+                                                                <ConfettiExplosion particleSize={5} particleCount={80} force={0.6} />
                                                             </div>
                                                             <button className={`${progressStage[idx] ? "bg-green-950" : "bg-gray-800"}  py-2 px-4 rounded-2xl mx-2 my-4`}>Completed</button>
                                                         </>

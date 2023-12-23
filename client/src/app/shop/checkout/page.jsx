@@ -1,6 +1,6 @@
 'use client'
 import { IonIcon } from '@ionic/react';
-import { cardOutline, mail, mailOutline, personOutline, tabletLandscapeOutline } from 'ionicons/icons';
+import { cardOutline, caretForwardOutline, mail, mailOutline, personOutline, tabletLandscapeOutline } from 'ionicons/icons';
 import React, { use, useEffect, useState } from 'react';
 import CryptoJS from 'crypto-js';
 import Cookies from 'js-cookie';
@@ -160,7 +160,7 @@ function OrderSummary(props) {
 
     }
 
-    
+
     handleQuantityChange(postRequest)
     handleOrder()
     handleUsers()
@@ -235,8 +235,8 @@ function OrderSummary(props) {
 
   return (
     <>
-    
-      <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+
+      <div className="flex flex-col items-center border-b bg-white sm:flex-row sm:px-10 lg:px-20 xl:px-32">
         <img
           className="cursor-pointer w-16"
           src="/assets/nav.png"
@@ -245,34 +245,22 @@ function OrderSummary(props) {
         <a href="#" className="text-2xl font-bold text-gray-800">&nbsp; AGRIHELP</a>
         <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
           <div className="relative">
-            <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
-
-
+            <ul className="relative flex md:w-full w-[90%] items-center justify-center mx-auto space-x-2 sm:space-x-4">
+              <li className="flex items-center space-x-3 text-left sm:space-x-4">
+                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white " href="#">1</a>
+                <span className="font-semibold text-gray-900">Cart</span>
+              </li>
+              <IonIcon icon={caretForwardOutline}></IonIcon>
 
               <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">1</a>
-                <span className="font-semibold text-gray-500">Checkout</span>
+                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">2</a>
+                <span className="font-semibold text-gray-900">Checkout</span>
               </li>
-
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-
+              <IonIcon icon={caretForwardOutline}></IonIcon>
               <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">2</a>
-                <span className="font-semibold text-gray-900">Shipping & Payment</span>
+                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white" href="#">3</a>
+                <span className="font-semibold text-gray-900">Confirmation</span>
               </li>
-
-
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-
-              <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">3</a>
-                <span className="font-semibold text-gray-500">Confirmation</span>
-              </li>
-
             </ul>
           </div>
         </div>
@@ -353,8 +341,8 @@ function OrderSummary(props) {
                     type="text"
                     className="capitalize w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     value={`${user?.firstname} ${user?.lastname}` || ''}
-                    
-                   
+
+
                   />
                   <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                     <IonIcon icon={personOutline}></IonIcon>
@@ -367,7 +355,7 @@ function OrderSummary(props) {
                     type="text"
                     className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     value={user?.email || ''}
-                   
+
                   />
                   <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                     <IonIcon icon={mailOutline}></IonIcon>
@@ -485,34 +473,22 @@ function OrderConfirmation(props) {
         <a href="#" className="text-2xl font-bold text-gray-800">&nbsp; AGRIHELP</a>
         <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
           <div className="relative">
-            <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
-
-
-
+            <ul className="relative flex md:w-full w-[90%] items-center justify-center mx-auto space-x-2 sm:space-x-4">
               <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">1</a>
-                <span className="font-semibold text-gray-500">Checkout</span>
+                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white " href="#">1</a>
+                <span className="font-semibold text-gray-900">Cart</span>
               </li>
-
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
+              <IonIcon icon={caretForwardOutline}></IonIcon>
 
               <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">2</a>
-                <span className="font-semibold text-gray-500">Shipping & Payment</span>
+                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white " href="#">2</a>
+                <span className="font-semibold text-gray-900">Checkout</span>
               </li>
-
-
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-
+              <IonIcon icon={caretForwardOutline}></IonIcon>
               <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">3</a>
+                <a className="flex md:h-6 md:w-6 h-4 w-4 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">3</a>
                 <span className="font-semibold text-gray-900">Confirmation</span>
               </li>
-
             </ul>
           </div>
         </div>

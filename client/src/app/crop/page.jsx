@@ -91,7 +91,7 @@ export default function Crop() {
   
   return (
     <>
-      <div>
+      <div className="-mt-20">
         <div className="flex mix-h-screen md:h-screen overflow-hidden">
           <img
             className="hidden lg:block w-full md:w-1/2"
@@ -269,7 +269,7 @@ function Result(crop) {
 
   return (
     <>
-      <div className="mt-20 lg:w-[90%] mx-auto" id="recommendation">
+      <div className="lg:w-[90%] mx-auto" id="recommendation">
         <div className="flex justify-center items-center md:mb-16 mb-4 ">
           <span className="w-1/2 bg-teal-950 md:py-6 lg:py-3 py-4 px-5 lg:px-0  text-white text-center md:text-3xl text-2xl rounded-2xl font-bold ">RESULT</span>
         </div>

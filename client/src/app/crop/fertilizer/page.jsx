@@ -63,7 +63,7 @@ export default function Fertilizer() {
 
     return (
         <>
-            <div>
+            <div className="-mt-20">
                 <div className="md:flex md:h-screen">
                 <img
                         className="hidden lg:block w-1/2 object-cover"
