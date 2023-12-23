@@ -543,9 +543,11 @@ class BackendAPI:
             if result : result["_id"] = str(result["_id"])
             return result
         
-        # if method == "update":
-            # return collectionProgress.delete_one
-            
+        if method == "delete":
+            try:
+                return collectionProgress.update_one({"email": progress.email}, {'$pull': {'progress': {'name': progress.name}}})
+            except:
+                pass
         if method == "update":
             query = {"email": progress.email, "progress.name": progress.name}
             result = collectionProgress.find_one(query)

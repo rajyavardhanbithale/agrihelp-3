@@ -1,8 +1,10 @@
 'use client'
 
 import axios from "axios"
-import Confetti from 'react-confetti'
-import { useState } from "react"
+crypto
+import Cookies from "js-cookie"
+
+import { useEffect, useState } from "react"
 import ConfettiExplosion from "react-confetti-explosion"
 
 export default function Progress() {
@@ -14,6 +16,12 @@ export default function Progress() {
     const [error, setError] = useState(null)
     const [cropName, setCropName] = useState(null)
 
+    useEffect(()=>{
+        const getEncryptedCookie = Cookies.get("user")
+        const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie.value, key).toString(CryptoJS.enc.Utf8) 
+        const jsonDecrypt = JSON.parse(parseEncryptedCookie)
+        console.log(jsonDecrypt);
+    },[])
 
     const handlefetch = async (param, body) => {
         try {
@@ -49,7 +57,7 @@ export default function Progress() {
 
 
     }
-
+    console.log(progressStage)
     const handleUpdateCrop = async (cropName, index) => {
         let body = {
             "email": "ramiwick5@gmail.com",
@@ -58,15 +66,27 @@ export default function Progress() {
             "stageIndex": index
         }
         const response = await handlefetch("?method=update", body)
-        console.log(index);
-        setProgressStage(prevProgressStage => {
-            const updatedProgressStage = [...prevProgressStage];
-            updatedProgressStage[index] = true;
-            return updatedProgressStage;
-        });
+        if (response) {
+            setProgressStage(prevProgressStage => {
+                const updatedProgressStage = [...prevProgressStage];
+                updatedProgressStage[index] = true;
+                return updatedProgressStage;
+            });
+        }
+
+
+    }
+    const handleReset = async () => {
+        let body = {
+            "email": "ramiwick5@gmail.com",
+            "name": cropName,
+            "stage": true,
+            "stageIndex": 0
+        }
+        const response = await handlefetch("?method=delete", body)
+        window.location.href = "/progress"
     }
 
-    console.log(progressStage);
 
     const handleToggle = (stage) => {
         setShowTimeline(prevState => ({
@@ -81,8 +101,7 @@ export default function Progress() {
         setAnimation(!animation)
     }
     const availableCrop = ["rice", "wheat"]
-    const width = window.innerWidth / 2
-    const height = window.innerHeight / 2
+
     return (
         <>
 
@@ -90,8 +109,12 @@ export default function Progress() {
 
 
             {(cropData && progressStage) ? (
-                <div className="lg:flex lg:items-center lg:justify-center lg:h-full">
-                    <div className="p-16 lg:w-1/2 lg:mx-auto">
+                <div className="mt-40 lg:flex lg:flex-col lg:items-center lg:justify-center lg:h-full">
+                    <div className="flex">
+
+                        <span className="mx-auto text-4xl font-semibold capitalize">Roadmap to Cultivate {cropName}</span>
+                    </div>
+                    <div className="md:p-16 p-7 w-full lg:w-1/2 lg:mx-auto">
                         <ol className="relative border-l-8 border-gray-200 bg-white">
                             {cropData?.map((stage, idx) => (
 
@@ -102,7 +125,7 @@ export default function Progress() {
                                         {stage.timeline}
                                     </span>
                                     <div className={`${progressStage[idx] ? "bg-green-600" : "bg-gray-600"}  mt-4 flex flex-col items-center justify-between p-4 border rounded-lg shadow-sm sm:flex `}>
-                                        <div onClick={() => handleToggle(stage.title)} className="cursor-pointer text-2xl capitalize w-full text-center font-bold text-white">
+                                        <div onClick={() => handleToggle(stage.title)} className="cursor-pointer md:text-2xl text-xl capitalize w-full text-center font-bold text-white">
                                             {stage.title.replace(/_/g, ' ')}
                                         </div>
                                         <div onClick={() => handleToggle(stage.title)} className={`${progressStage[idx] ? "bg-green-800" : "bg-gray-800"} cursor-pointer text-lg mt-4 capitalize rounded-2xl text-center font-semibold text-white px-4 py-2`}>
@@ -110,7 +133,7 @@ export default function Progress() {
                                         </div>
 
                                         {showDiv[stage.title] && (
-                                            <div className={` text-white w-full text-center text-xl p-4 ${animation ? "animate-fade-down ease-out" : ""}`}>
+                                            <div className={` text-white w-full text-center text-xl md:p-4 p-2 ${animation ? "animate-fade-down ease-out" : ""}`}>
                                                 <ul>
                                                     {showTimeline[stage.title] && stage.tasks.map((task, taskIdx) => (
                                                         <div key={idx}>
@@ -139,6 +162,9 @@ export default function Progress() {
                                 </li>
                             ))}
                         </ol>
+                        <div className="flex justify-center">
+                            <button onClick={handleReset} className={`w-1/3 bg-red-500 text-white py-3 text-xl font-semibold px-4 rounded-2xl mx-2 my-4`}>Reset Progress</button>
+                        </div>
                     </div>
                 </div>
 
@@ -152,7 +178,7 @@ export default function Progress() {
 
                         <div className=" flex flex-col w-full justify-center gap-8 items-center em text-center p-8 ">
                             {availableCrop.map((crop, idx) => (
-                                <span onClick={() => handleCropButton(crop)} className="py-2 px-5 w-36 bg-green-800 text-white capitalize rounded-3xl shadow-2xl transition duration-300 hover:scale-110" key={idx}>{crop}</span>
+                                <span onClick={() => handleCropButton(crop)} className="cursor-pointer py-2 px-5 w-36 bg-green-800 text-white capitalize rounded-3xl shadow-2xl transition duration-300 hover:scale-110" key={idx}>{crop}</span>
                             ))}
                         </div>
                     </div>
