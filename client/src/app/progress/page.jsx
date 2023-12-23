@@ -1,7 +1,7 @@
 'use client'
 
 import axios from "axios"
-crypto
+import CryptoJS from "crypto-js"
 import Cookies from "js-cookie"
 
 import { useEffect, useState } from "react"
@@ -15,14 +15,21 @@ export default function Progress() {
     const [progressStage, setProgressStage] = useState(null)
     const [error, setError] = useState(null)
     const [cropName, setCropName] = useState(null)
+    const [email, setEmail] = useState(null)
 
     useEffect(()=>{
-        const getEncryptedCookie = Cookies.get("user")
-        const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie.value, key).toString(CryptoJS.enc.Utf8) 
-        const jsonDecrypt = JSON.parse(parseEncryptedCookie)
-        console.log(jsonDecrypt);
+        const getEncryptedCookie = Cookies.get("user") || null
+        if (getEncryptedCookie){
+            const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie, 'rar').toString(CryptoJS.enc.Utf8)
+            const jsonDecrypt = JSON.parse(parseEncryptedCookie)
+            setEmail(jsonDecrypt?.email)
+        }else{
+            window.location.href = "/login?callback=/progress"
+        }
+        
     },[])
 
+    console.log(email);
     const handlefetch = async (param, body) => {
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/progress${param}`, body)
@@ -39,7 +46,7 @@ export default function Progress() {
     const handleCropButton = async (cropName) => {
         setCropName(cropName)
         let body = {
-            "email": "ramiwick5@gmail.com",
+            "email": email,
             "name": cropName,
             "stage": true,
             "stageIndex": 0
@@ -47,7 +54,7 @@ export default function Progress() {
         const response = await handlefetch("?method=get", body)
         setCropData(response?.[cropName])
         body = {
-            "email": "ramiwick5@gmail.com",
+            "email": email,
             "name": cropName,
             "stage": true,
             "stageIndex": 0
@@ -60,7 +67,7 @@ export default function Progress() {
     console.log(progressStage)
     const handleUpdateCrop = async (cropName, index) => {
         let body = {
-            "email": "ramiwick5@gmail.com",
+            "email": email,
             "name": cropName,
             "stage": true,
             "stageIndex": index
@@ -78,7 +85,7 @@ export default function Progress() {
     }
     const handleReset = async () => {
         let body = {
-            "email": "ramiwick5@gmail.com",
+            "email": email,
             "name": cropName,
             "stage": true,
             "stageIndex": 0
