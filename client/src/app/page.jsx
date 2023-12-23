@@ -19,13 +19,13 @@ export default async function Home() {
       <div className=" flex flex-col items-center justify-center h-screen w-full sm:text-x-xm md:text-5xl">
 
         <div className="-mt-10 fixed top-[40%]   text-center z-40 font-bold text-white lg:text-5xl transform -translate-y-1/2">
-          <img className="h-36 md:full mx-auto p-5 bg-gray-700/60 rounded-2xl" src="/assets/nav_white.png" alt="" />
+          <img className="h-36 md:h-56 md:full mx-auto p-5 bg-gray-700/60 rounded-2xl" src="/assets/nav_white.png" alt="" />
         </div>
 
         <div className="-mt-10 fixed top-[65%] md:top-[60%]  text-center z-40 font-bold text-white lg:text-5xl transform -translate-y-1/2">
           <div className="mt-10">
-            <h2 className="drop-shadow-[0_10px_5px_#1e1e1e] text-2xl px-5">Revolutionizing Farming With Innovative Technology Solutions</h2>
-            <h2 className="drop-shadow-[0_10px_5px_#1e1e1e] text-2xl px-5">A Helping Hand For Farmers 🙏</h2>
+            <h2 className="drop-shadow-[0_10px_5px_#1e1e1e] md:text-5xl text-2xl px-5">Revolutionizing Farming With Innovative Technology Solutions</h2>
+            <h2 className="drop-shadow-[0_10px_5px_#1e1e1e] md:text-5xl text-2xl px-5">A Helping Hand For Farmers 🙏</h2>
           </div>
         </div>
 
