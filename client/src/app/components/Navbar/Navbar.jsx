@@ -5,6 +5,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import CryptoJS from 'crypto-js';
+import { IonIcon } from '@ionic/react';
+import { bug, caretDown, caretDownOutline, cart, cartOutline, chatbubble, closeCircle, cloudy, cloudyOutline, compass, compassOutline, flask, home, homeOutline, leaf, mailOpen, mailOpenOutline, peopleCircleOutline, reader, wallet } from 'ionicons/icons';
+
 
 export default function Navbar() {
     const [user, setUser] = useState()
@@ -62,7 +65,7 @@ export default function Navbar() {
                         <span className="sr-only">RAGE</span>
                         <Link href={"/"}>
 
-                        <img className="h-16 w-full p-3" src="/assets/nav_white.png" alt="" />
+                            <img className="h-16 w-full p-3" src="/assets/nav_white.png" alt="" />
                         </Link>
                     </div>
 
@@ -71,68 +74,35 @@ export default function Navbar() {
                             <Link href={"/"}>
 
                                 <li
-                                    className="text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
-                                    Home
+                                    className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
+                                    <IonIcon icon={homeOutline} className="mr-1 mt-1"></IonIcon> Home
                                 </li>
                             </Link>
 
                             <li onMouseEnter={() => { setfOpen(true) }} onClick={() => { setfOpen(true) }}
                                 className="flex justify-center items-center text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
-                                Feature&apos;s
-                                <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
+                                <IonIcon icon={compassOutline} className="mr-1 mt-0.5"></IonIcon> Explore
+                                <IonIcon icon={caretDownOutline} className="ml-1 mt-1 text-base"></IonIcon>
                             </li>
                             <Link href={"/shop"}>
 
                                 <li
-                                    className="text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
-                                    Agri-Shop
+                                    className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
+                                    <IonIcon icon={cartOutline} className="mr-1 mt-1"></IonIcon> AgriShop
                                 </li>
                             </Link>
                             <li
-                                className="text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
-                                Contact
+                                className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
+                                <IonIcon icon={mailOpenOutline} className="mr-1 mt-1"></IonIcon> Contact
                             </li>
                             <li
-                                className="text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
-                                About
+                                className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
+                                <IonIcon icon={peopleCircleOutline} className="mr-1 mt-1"></IonIcon> About Us
                             </li>
                         </ul>
 
                     </div>
-                    <div className="w-[20%] flex items-center lg:justify-around">
-
-                        {/* <div
-                            className="hidden absolute inset-y-0 right-0 lg:flex lg:items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            <button type="button"
-                                className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-gray-600 rounded focus:ring ring-gray-200 group">
-                                <p className="px-4">Language</p>
-                                <span className="border-l p-2 hover:bg-gray-100">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"
-                                        xmlns="https://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 9l-7 7-7-7"></path>
-                                    </svg>
-                                </span>
-
-                                <div
-                                    className="absolute hidden group-focus:block top-full min-w-full w-max bg-white shadow-md mt-1 rounded">
-                                    <ul className="text-left border rounded">
-                                        <li className="px-4 py-1 hover:bg-gray-100 border-b">English </li>
-                                        <li className="px-4 py-1 hover:bg-gray-100 border-b">Hindi/हिंदी</li>
-                                        <li className="px-4 py-1 hover:bg-gray-100 border-b">Marathi/मराठी</li>
-                                        <li className="px-4 py-1 hover:bg-gray-100 border-b">Tamil/தமிழ்</li>
-                                        <li className="px-4 py-1 hover:bg-gray-100 border-b">Telugu/తెలుగు</li>
-                                        <li className="px-4 py-1 hover:bg-gray-100 border-b">Punjabi/ਪੰਜਾਬੀ</li>
-                                        <li className="px-4 py-1 hover:bg-gray-100 border-b">Assamese/অসমীয়া</li>
-                                    </ul>
-                                </div>
-                            </button>
-                        </div> */}
-
+                    <div className="w-[15%] flex items-center lg:justify-around">
                         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                             <Link href="/login">
                                 <span className="text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">Log
@@ -162,7 +132,7 @@ export default function Navbar() {
                     <div className="" role="dialog" aria-modal="true">
                         <div className="fixed inset-0 z-50"></div>
                         <div
-                            className={`${open && "animate-fade-left animate-duration-500"} fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10`}>
+                            className={`${open && "animate-fade-left animate-duration-100 animate-ease-out"} fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10`}>
                             <div className="flex items-center justify-between">
 
                                 <Link href={"/"}>
@@ -235,53 +205,53 @@ export default function Navbar() {
                 </dialog>
                 {/* features box */}
                 <dialog open={fopen} onClose={() => setfOpen(false)} >
-                    <div className={`animate-fade-down animate hidden lg:block w-48 fixed top-16 left-[38%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 rounded-lg `}>
+                    <div className={`animate-fade-down animate hidden lg:block w-48 fixed top-16 left-[39%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 rounded-lg `}>
                         <Link href="/weather">
                             <button type="button"
-                                className="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                Weather
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                <IonIcon icon={cloudy} className="mr-1 mt-1"></IonIcon> Weather                              
                             </button>
                         </Link>
                         <Link href="/crop">
                             <button type="button"
-                                className="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                Crop Recommendation
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                               <IonIcon icon={leaf} className="mr-1 mt-1"></IonIcon>  Crop Suggestion
                             </button>
                         </Link>
                         <Link href="/crop/pest">
                             <button type="button"
-                                className="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                Pest Information
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                <IonIcon icon={bug} className="mr-1 mt-1"></IonIcon> Pest Information
                             </button>
                         </Link>
                         <Link href="/crop/fertilizer">
                             <button type="button"
-                                className="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                Fertilizer Recommendation
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                               <IonIcon icon={flask} className="mr-1 mt-1"></IonIcon>Fertilizer Advice
                             </button>
                         </Link>
                         <Link href="https://agrotech-278f8.firebaseapp.com/">
                             <button type="button"
-                                className="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                Chat
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                <IonIcon icon={chatbubble} className="mr-1 mt-1"></IonIcon> Chat
                             </button>
                         </Link>
                         <Link href="/financial-aid">
                             <button type="button"
-                                className="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                Finance
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                <IonIcon icon={wallet} className="mr-1 mt-1"></IonIcon>  Finance
                             </button>
                         </Link>
                         <Link href="/scheme">
                             <button type="button"
-                                className="w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                Scheme
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                <IonIcon icon={reader} className="mr-1 mt-1"></IonIcon>  Scheme
                             </button>
                         </Link>
 
                         <button onClick={handleToClosef} type="button"
-                            className="w-full px-4 py-2 font-medium  text-xl text-center rtl:text-right  border-white  cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                            Close X
+                            className="flex justify-center w-full px-4 py-2 font-medium  text-xl text-center rtl:text-right  border-white  cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                            Close <IonIcon icon={closeCircle} className="ml-2 mt-1"></IonIcon> 
                         </button>
 
 
