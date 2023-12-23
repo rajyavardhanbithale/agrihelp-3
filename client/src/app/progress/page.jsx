@@ -3,9 +3,9 @@
 import axios from "axios"
 import CryptoJS from "crypto-js"
 import Cookies from "js-cookie"
-
 import { useEffect, useState } from "react"
 import ConfettiExplosion from "react-confetti-explosion"
+import AuthNotiy from "../components/Sections/AuthNotify"
 
 export default function Progress() {
     const [showTimeline, setShowTimeline] = useState(false)
@@ -17,19 +17,20 @@ export default function Progress() {
     const [cropName, setCropName] = useState(null)
     const [email, setEmail] = useState(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         const getEncryptedCookie = Cookies.get("user") || null
-        if (getEncryptedCookie){
+        if (getEncryptedCookie) {
             const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie, 'rar').toString(CryptoJS.enc.Utf8)
             const jsonDecrypt = JSON.parse(parseEncryptedCookie)
             setEmail(jsonDecrypt?.email)
-        }else{
+
+        } else {
             window.location.href = "/login?callback=/progress"
         }
-        
-    },[])
 
-    console.log(email);
+    }, [])
+
+    
     const handlefetch = async (param, body) => {
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/progress${param}`, body)
@@ -111,7 +112,9 @@ export default function Progress() {
 
     return (
         <>
-
+            {email &&
+                <AuthNotiy value={""}></AuthNotiy>
+            }
 
 
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -96,11 +96,8 @@ export default function Login() {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/signup`, constructData)
 
       if (response.status == 200) {
-        
       }
-
     } catch (error) {
-
       const constructLogin = {
         "email": constructData?.email,
         "password": constructData?.password
@@ -132,12 +129,11 @@ export default function Login() {
       }
 
     }
-
-
-
   }
 
-  
+  useEffect(()=>{
+    Cookies.remove("__fnotify")
+  },[])  
 
   if (status === "authenticated") {
     

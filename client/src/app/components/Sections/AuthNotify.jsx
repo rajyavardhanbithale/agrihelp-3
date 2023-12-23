@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 export default function AuthNotiy(props) {
     const notify = () => {
 
-        toast.success("Hello " + props.value + ", you are now logged in.", {
+        toast.success("Hello " + props.value + "you are now logged in.", {
             style: {
                 background: "#303849",
             },
