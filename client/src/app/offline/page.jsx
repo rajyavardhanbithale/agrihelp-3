@@ -20,7 +20,7 @@ export default function Offline() {
             <div className="-mt-20 flex flex-col items-center justify-center h-screen bg-gradient-to-r text-gray-600">
                 <div className="text-center">
                     <h1 className="text-5xl font-extrabold mb-4">Uh-oh, you&apos;re offline!</h1>
-                    <p className="text-lg mb-10">It's like a field without rain.</p>
+                    <p className="text-lg mb-10">It&apos;s like a field without rain.</p>
                     <div className="animate-bounce animate-duration-[1000ms] animate-ease-linear">
                         <span className="text-5xl"> {AgricultureEmojis[currentIndex]}</span>
                     </div>
