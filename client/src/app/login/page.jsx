@@ -14,6 +14,7 @@ import CryptoJS from 'crypto-js';
 import { signIn, useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import FullPageLoader from '../components/Loader/FullPageLoader';
+import Facebook from 'next-auth/providers/facebook';
 
 export default function Login() {
 
@@ -24,9 +25,9 @@ export default function Login() {
   const [showErrors, setShowErrors] = useState(false);
   const [postError, setPostError] = useState("");
   const [sessionName, setSessionName] = useState("");
-  const [loading, setLoading] = useState(false);
   const secretKey = 'rar'
-
+  
+  const [loading, setLoading] = useState(false);
   const callbackRoutes = ['/shop/checkout', '/progress']
 
 
@@ -57,8 +58,8 @@ export default function Login() {
             }
             const encrypt = CryptoJS.AES.encrypt(JSON.stringify(constructCookie), secretKey).toString()
             Cookies.set("user", encrypt, { expires: 5 })
-            setLoading(false)
             window.location.href = callbackRoutes.includes(redirect?.get("callback")) ? redirect?.get("callback") : "/"
+            setLoading(false)
           }
         } catch (error) {
           setPostError(error.response.data.detail)
@@ -125,8 +126,8 @@ export default function Login() {
           }
           const encrypt = CryptoJS.AES.encrypt(JSON.stringify(constructCookie), secretKey).toString()
           Cookies.set("user", encrypt, { expires: 5 })
-          setLoading(false)
           window.location.href = callbackRoutes.includes(redirect?.get("callback")) ? redirect?.get("callback") : "/"
+          setLoading(false)
 
         }
       } catch (error) {
@@ -151,7 +152,7 @@ export default function Login() {
       {loading ? (
         <FullPageLoader />
       ) : (
-        <div className={` -mt-32 overflow-hidden flex items-center justify-center h-screen flex-col leading-relaxed tracking-wide`}>
+        <div className={`md:-mt-32 -mt-28 overflow-hidden flex items-center justify-center h-screen flex-col leading-relaxed tracking-wide`}>
           <div className="w-full lg:flex">
             <div className="w-full lg:w-1/2 flex flex-col justify-center items-center align-middle lg:scale-125 2xl:lg:scale-110 md:scale-110 scale-[0.85]">
               <>
@@ -161,7 +162,7 @@ export default function Login() {
                     <span className="text-gray-800 text-3xl font-bold mt-8 mb-2">Login</span>
                     <span className="text-gray-800 text-sm font-semibold mb-10 items-center">Please Login To Continue</span>
                   </div>
-                  <div className="flex flex-col gap-5 w-72">
+                  <div className="flex flex-col justify-center items-center gap-5 w-72 mx-auto">
 
                     <div className="relative">
                       <div className="flex flex-row">
@@ -219,10 +220,10 @@ export default function Login() {
                       )}
 
                   </div>
-                  <div className="flex w-full justify-center mt-5 ">
+                  <div className="flex w-full justify-center md:mt-5 mt-3 ">
                     {postError ? <span>Invalid Username or Password</span> : ""}
                   </div>
-                  <div className="flex flex-col items-center justify-center mt-10">
+                  <div className="flex flex-col items-center justify-center md:mt-10 mt-3">
                     <button type="submit" onClick={handleSignUp} className="bg-teal-800 hover:bg-teal-950 text-gray-200 text-xl px-10 py-3 rounded-full flex items-center space-x-2 font-semibold transition ease-in-out duration-500">
 
                       {!isLogin ?
@@ -236,11 +237,11 @@ export default function Login() {
 
                     </button>
 
-                    <span className="text-teal-900 hover:text-teal-950 transition duration-500 ease-in-out font-medium mt-4 cursor-pointer">
+                    <span className="text-teal-900 hover:text-teal-950 transition duration-500 ease-in-out font-medium md:mt-4 mt-2 cursor-pointer">
                       Forgot Password ?
                     </span>
 
-                    <span className="text-gray-900/95 font-medium mt-5 mb-5">
+                    <span className="text-gray-900/95 font-medium md:mt-5 mt-2 mb-2">
                       Dont have an account ?
                       <Link href="/signup" className="text-teal-900 hover:text-teal-950 transition duration-500 ease-in-out">
                         &nbsp; SignUp
@@ -253,23 +254,23 @@ export default function Login() {
 
                 </form>
                 <hr />
-                <div className="flex justify-center items-center ">
-
-                  <button onClick={() => signIn("google")} className="text-white mt-6 bg-teal-800 px-5 py-2 rounded-xl font-semibold ">
+                <div className="flex md:flex-row flex-col justify-center items-center text-base md:text-lg gap-3">
+                      <span className="md:hidden block">OR</span>
+                  <button onClick={() => signIn("google")} className="text-white md:mt-6 mt-0 bg-teal-800 md:px-5 px-2 py-2 rounded-xl font-semibold ">
                     <IonIcon
                       icon={logoGoogle}
                       className=" text-white align-middle mb-0.5 px-2"
                     />
                     Login With Google
                   </button>
-
-                  {/* <button onClick={() => signIn("facebook")} className="mt-6 bg-slate-200 px-5 py-2 rounded-xl font-semibold ">
-                  <IonIcon
-                    icon={logoFacebook}
-                    className=" text-gray-900 align-middle mb-0.5 px-2"
-                  />
-                  Login With facebook
-                </button> */}
+                  <button onClick={() => signIn("facebook")} className=" text-white md:mt-6 mt-0 bg-teal-800 md:px-5 px-2 py-2 rounded-xl font-semibold ">
+                    <IonIcon
+                      icon={logoFacebook}
+                      className=" text-white align-middle mb-0.5 px-2"
+                    />
+                    Login With Facebook
+                  </button>
+      
                 </div>
               </>
             </div>

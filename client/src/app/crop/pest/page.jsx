@@ -65,7 +65,7 @@ export default function Pest() {
                 <div className="flex  md:h-screen">
                     <img
                         className="hidden lg:block w-1/2"
-                        src="https://images.pexels.com/photos/689326/pexels-photo-689326.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        src="/assets/crop/pest.webp"
                         alt=""
                     />
                     <div className="flex  flex-col items-center py-56 w-full lg:w-1/2 mx-5 my-3">

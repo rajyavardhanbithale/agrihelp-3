@@ -8,12 +8,12 @@ import "../../App.css"
 import Link from 'next/link';
 function ProductCarousel() {
   const images = [
-    'https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg',
-    'https://images.pexels.com/photos/259280/pexels-photo-259280.jpeg',
-    'https://images.pexels.com/photos/55766/pexels-photo-55766.jpeg',
-    'https://images.pexels.com/photos/8919791/pexels-photo-8919791.jpeg',
-    'https://images.pexels.com/photos/10838610/pexels-photo-10838610.jpeg',
-    'https://images.pexels.com/photos/14242188/pexels-photo-14242188.jpeg'
+    '/assets/shop/shop1.webp',
+    '/assets/shop/shop2.webp',
+    '/assets/shop/shop3.webp',
+    '/assets/shop/shop4.webp',
+    '/assets/shop/shop5.webp',
+    '/assets/shop/shop6.webp'
 
   ];
 
@@ -38,9 +38,9 @@ function ProductCarousel() {
       /> */}
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div key={index}>
-            <img src={image} alt={`Slide ${index + 1}`} className="w-full object-cover brightness-[0.3] filter lg:h-[500px]" />
-          </div>
+         
+            <img key={index} src={image} alt={`Slide ${index + 1}`} className="w-full h-1/2 object-cover brightness-[0.3] filter lg:h-[500px]" />
+         
         ))}
       </Slider>
 

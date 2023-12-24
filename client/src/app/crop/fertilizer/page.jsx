@@ -67,7 +67,7 @@ export default function Fertilizer() {
                 <div className="md:flex md:h-screen">
                 <img
                         className="hidden lg:block w-1/2 object-cover"
-                        src="https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        src="/assets/crop/fertilizer.webp"
                         alt=""
                     />
                     <div className="md:flex p-5 md:scale-[1.2] md:flex-col md:items-center md:justify-center md:align-middle md:w-full lg:w-1/2 md:mx-5 my-3">

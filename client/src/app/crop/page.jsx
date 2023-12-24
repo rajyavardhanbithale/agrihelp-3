@@ -95,7 +95,7 @@ export default function Crop() {
         <div className="flex mix-h-screen md:h-screen overflow-hidden">
           <img
             className="hidden lg:block w-full md:w-1/2"
-            src="https://images.pexels.com/photos/326082/pexels-photo-326082.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src="/assets/crop/crop.webp"
             alt=""
           />
           <div className="w-full 2xl:scale-125 lg:scale-100 md:scale-125 lg:w-1/2 md:mx-5 my-3 flex flex-col justify-center ">

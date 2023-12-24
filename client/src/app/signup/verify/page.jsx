@@ -129,7 +129,7 @@ function Unverified(props) {
   };
   return (
     <>
-      <div className="relative flex min-h-screen flex-col justify-center overflow-hidden py-12">
+      <div className=" relative flex min-h-screen flex-col justify-center overflow-hidden py-12">
         <div className="relative bg-slate-300 px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
           <div className="mx-auto flex w-full max-w-md flex-col space-y-6">
             <div className="flex flex-col items-center justify-center text-center space-y-2">

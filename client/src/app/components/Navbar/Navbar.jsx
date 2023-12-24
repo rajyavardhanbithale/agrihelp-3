@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Cookies from 'js-cookie';
 import CryptoJS from 'crypto-js';
 import { IonIcon } from '@ionic/react';
-import { bug, caretDownOutline,cartOutline, chatbubble, closeCircle, cloudy, compassOutline, flask, homeOutline, leaf, mailOpenOutline, map, peopleCircleOutline, reader, wallet } from 'ionicons/icons';
+import { arrowForward, bug, caretDownOutline, cartOutline, chatbubble, closeCircle, cloudy, compassOutline, flask, homeOutline, leaf, mailOpenOutline, map, peopleCircleOutline, reader, wallet } from 'ionicons/icons';
 import { signOut } from 'next-auth/react';
 
 export default function Navbar() {
@@ -104,13 +104,21 @@ export default function Navbar() {
                     </div>
                     <div className="w-[15%] flex items-center lg:justify-around">
                         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                            <Link href="/login">
-                                <span className="text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">Log
-                                    in <span aria-hidden="true">&rarr;</span>
+                            {user ? (
 
-                                </span>
+                                <div className="text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
+                                    <span onClick={handleLogout}>
 
-                            </Link>
+                                        Log Out
+                                    </span>
+                                </div>
+
+                            ) : (
+                                <Link href="/login"
+                                    className="flex justify-center align-middle items-center text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
+                                    Login <IonIcon icon={arrowForward} className="ml-1"></IonIcon>
+                                    </Link>
+                            )}
                         </div>
                         <div className="flex fixed right-6 lg:hidden">
                             <button type="button" onClick={handleClickToOpen}
@@ -170,7 +178,7 @@ export default function Navbar() {
                                             Shop</Link>
                                         <Link href="/progress"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
-                                            Roadmap</Link>  
+                                            Roadmap</Link>
                                         <Link href="https://agrotech-278f8.firebaseapp.com/"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                             Chat</Link>
@@ -188,7 +196,7 @@ export default function Navbar() {
                                             <div className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                                 <span onClick={handleLogout}>
 
-                                                    Log in
+                                                    Log Out
                                                 </span>
                                             </div>
 
@@ -208,17 +216,17 @@ export default function Navbar() {
                 </dialog>
                 {/* features box */}
                 <dialog open={fopen} onClose={() => setfOpen(false)} >
-                    <div className={`animate-fade-down animate hidden lg:block w-48 fixed top-16 left-[39%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 rounded-lg `}>
+                    <div className={`animate-fade-down animate-duration-200 hidden lg:block w-48 fixed top-16 md:left-[26%] lg:left-[37%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 rounded-lg `}>
                         <Link href="/weather">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                <IonIcon icon={cloudy} className="mr-1 mt-1"></IonIcon> Weather                              
+                                <IonIcon icon={cloudy} className="mr-1 mt-1"></IonIcon> Weather
                             </button>
                         </Link>
                         <Link href="/crop">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                               <IonIcon icon={leaf} className="mr-1 mt-1"></IonIcon>  Crop Suggestion
+                                <IonIcon icon={leaf} className="mr-1 mt-1"></IonIcon>  Crop Suggestion
                             </button>
                         </Link>
                         <Link href="/crop/pest">
@@ -230,7 +238,7 @@ export default function Navbar() {
                         <Link href="/crop/fertilizer">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                               <IonIcon icon={flask} className="mr-1 mt-1"></IonIcon>Fertilizer Advice
+                                <IonIcon icon={flask} className="mr-1 mt-1"></IonIcon>Fertilizer Advice
                             </button>
                         </Link>
                         <Link href="/progress">
@@ -239,7 +247,7 @@ export default function Navbar() {
                                 <IonIcon icon={map} className="mr-1 mt-1"></IonIcon> Roadmap
                             </button>
                         </Link>
-                        
+
                         <Link href="/financial-aid">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
@@ -255,7 +263,7 @@ export default function Navbar() {
 
                         <button onClick={handleToClosef} type="button"
                             className="flex justify-center w-full px-4 py-2 font-medium  text-xl text-center rtl:text-right  border-white  cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                            Close <IonIcon icon={closeCircle} className="ml-2 mt-1"></IonIcon> 
+                            Close <IonIcon icon={closeCircle} className="ml-2 mt-1"></IonIcon>
                         </button>
 
 
