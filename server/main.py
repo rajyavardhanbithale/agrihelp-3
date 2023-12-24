@@ -133,7 +133,7 @@ class BackendAPI:
             self.otp_len: int = int(os.getenv("OTP", 5))
             self.otp_time: int = int(os.getenv("OTP_TIME", 5))
 
-        self.fernet_key = os.getenv("FERNET_KEY", None)
+        self.fernet_key = os.getenv("FERNET_KEY", "None")
         self.host_name = os.getenv("HOST", None)
         self.host_main = os.getenv("MAINHOST", None)
 
@@ -141,7 +141,7 @@ class BackendAPI:
         verify_login_data = login_manager.checkData(
             username=user.username, email=user.email)
         
-        print(verify_login_data)
+     
         # print(verify_login_data)
         if (verify_login_data):
             login = login_manager.doLogin(collection=self.collection, username=user.username,
@@ -252,7 +252,7 @@ class BackendAPI:
             collection=self.collection, collection_delete=self.collection_delete, ip=client, email=user.email, password=user.password)
 
     async def getUser(self, user: base_models.GetUser):
-
+        
         try:
             if user.validationKey == os.getenv("VALIDATIONKEY"):
                 if user.username:

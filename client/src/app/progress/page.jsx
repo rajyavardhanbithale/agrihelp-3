@@ -6,6 +6,9 @@ import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import ConfettiExplosion from "react-confetti-explosion"
 import AuthNotiy from "../components/Sections/AuthNotify"
+import { IonIcon } from "@ionic/react"
+import { reload, trashBin } from "ionicons/icons"
+
 
 export default function Progress() {
     const [showTimeline, setShowTimeline] = useState(false)
@@ -14,6 +17,7 @@ export default function Progress() {
     const [cropData, setCropData] = useState(null)
     const [progressStage, setProgressStage] = useState(null)
     const [error, setError] = useState(null)
+    const [loading,setLoading] = useState(false)
     const [cropName, setCropName] = useState(null)
     const [email, setEmail] = useState(null)
 
@@ -32,13 +36,17 @@ export default function Progress() {
 
     
     const handlefetch = async (param, body) => {
+        setLoading(true)
+        setError(null)
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/progress${param}`, body)
             if (response.status === 200) {
+                setLoading(false)
                 return response.data
             }
         } catch (error) {
             setError("error")
+            setLoading(false)
             return null
         }
 
@@ -117,10 +125,8 @@ export default function Progress() {
                 <AuthNotiy value={""}></AuthNotiy>
             }
 
-
-
             {(cropData && progressStage) ? (
-                <div className="lg:flex lg:flex-col lg:items-center lg:justify-center lg:h-full">
+                <div className=" lg:flex lg:flex-col lg:items-center lg:justify-center lg:h-full">
                     <div className="flex">
                         <span className="mx-auto text-4xl text-center font-semibold capitalize">Roadmap to Cultivate {cropName}</span>
                     </div>
@@ -156,15 +162,18 @@ export default function Progress() {
                                                     {progressStage[idx] ? (
                                                         <>
                                                             <div className="flex w-full justify-center align-middle items-center">
-                                                                <ConfettiExplosion particleSize={5} particleCount={80} force={0.6} />
+                                                                <ConfettiExplosion particleSize={6} particleCount={150} force={0.6} />
                                                             </div>
                                                             <button className={`${progressStage[idx] ? "bg-green-950" : "bg-gray-800"}  py-2 px-4 rounded-2xl mx-2 my-4`}>Completed</button>
+                                                            
                                                         </>
                                                     ) : (
-                                                        <button onClick={() => handleUpdateCrop(cropName, idx)} className={`${progressStage[idx] ? "bg-green-800" : "bg-gray-800"}  py-2 px-4 rounded-2xl mx-2 my-4`}>Mark As Done</button>
+                                                        <button onClick={() => handleUpdateCrop(cropName, idx)} className={`${progressStage[idx] ? "bg-green-800" : "bg-gray-800"} inline-flex justify-center align-middle items-center  py-2 px-4 rounded-2xl mx-2 my-4`}>Mark As Done {loading && <IonIcon icon={reload} className="ml-2 text-lg animate-spin"></IonIcon>} </button>
                                                     )}
 
-                                                    <button className={`${progressStage[idx] ? "bg-green-800" : "bg-gray-800"}  py-2 px-4 rounded-2xl mx-2 my-4`}>Shop Product</button>
+                                                    <button className={`${progressStage[idx] ? "bg-green-800" : "bg-gray-800"} inline-flex justify-center align-middle items-center  py-2 px-4 rounded-2xl mx-2 my-4`}>Shop Product</button>
+                                                    {error && <p className="text-red-100 animate-pulse">Complete the Previous Steps First</p>
+                                                    }
                                                 </ul>
                                             </div>
                                         )}
@@ -173,13 +182,13 @@ export default function Progress() {
                             ))}
                         </ol>
                         <div className="flex justify-center">
-                            <button onClick={handleReset} className={`w-1/3 bg-red-500 text-white py-3 text-xl font-semibold px-4 rounded-2xl mx-2 my-4`}>Reset Progress</button>
+                            <button onClick={handleReset} className={`flex justify-center align-middle items-center w-1/3 bg-red-500 text-white py-3 text-xl font-semibold px-4 rounded-2xl mx-2 my-4`}>Reset Progress <IonIcon icon={trashBin} className="ml-2 text-lg"></IonIcon></button>
                         </div>
                     </div>
                 </div>
 
             ) : (
-                <div className="mt-26 flex mix-h-screen md:h-screen overflow-hidden">
+                <div className="-mt-28 flex mix-h-screen md:h-screen overflow-hidden">
                     <img className="hidden lg:block w-1/2 object-contain rounded-xl" src="https://storage.icograms.com/templates/preview/farm-smartphone.png" alt="" />
                     <div className="flex flex-col w-full leading-10 tracking-wider justify-center align-middle">
                         <span className="text-5xl text-center font-semibold">Crop Cultivation Guide</span>
@@ -188,7 +197,9 @@ export default function Progress() {
 
                         <div className=" flex flex-col w-full justify-center gap-8 items-center em text-center p-8 ">
                             {availableCrop.map((crop, idx) => (
-                                <span onClick={() => handleCropButton(crop)} className="cursor-pointer py-2 px-5 w-36 bg-green-800 text-white capitalize rounded-3xl shadow-2xl transition duration-300 hover:scale-110" key={idx}>{crop}</span>
+                                <span onClick={() => handleCropButton(crop)} className="flex items-center text-center justify-center cursor-pointer py-2 px-5 w-36 bg-green-800 text-white capitalize rounded-3xl shadow-2xl transition duration-300 hover:scale-110" key={idx}>
+                                {crop} {loading && crop===cropName && <IonIcon icon={reload} className="ml-1 animate-spin"></IonIcon>} 
+                                </span>
                             ))}
                         </div>
                     </div>

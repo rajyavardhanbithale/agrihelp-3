@@ -6,8 +6,8 @@ import Link from 'next/link';
 import Cookies from 'js-cookie';
 import CryptoJS from 'crypto-js';
 import { IonIcon } from '@ionic/react';
-import { bug, caretDown, caretDownOutline, cart, cartOutline, chatbubble, closeCircle, cloudy, cloudyOutline, compass, compassOutline, flask, home, homeOutline, leaf, mailOpen, mailOpenOutline, peopleCircleOutline, reader, wallet } from 'ionicons/icons';
-
+import { bug, caretDownOutline,cartOutline, chatbubble, closeCircle, cloudy, compassOutline, flask, homeOutline, leaf, mailOpenOutline, map, peopleCircleOutline, reader, wallet } from 'ionicons/icons';
+import { signOut } from 'next-auth/react';
 
 export default function Navbar() {
     const [user, setUser] = useState()
@@ -168,6 +168,9 @@ export default function Navbar() {
                                         <Link href="/shop"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                             Shop</Link>
+                                        <Link href="/progress"
+                                            className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
+                                            Roadmap</Link>  
                                         <Link href="https://agrotech-278f8.firebaseapp.com/"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                             Chat</Link>
@@ -230,12 +233,13 @@ export default function Navbar() {
                                <IonIcon icon={flask} className="mr-1 mt-1"></IonIcon>Fertilizer Advice
                             </button>
                         </Link>
-                        <Link href="https://agrotech-278f8.firebaseapp.com/">
+                        <Link href="/progress">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
-                                <IonIcon icon={chatbubble} className="mr-1 mt-1"></IonIcon> Chat
+                                <IonIcon icon={map} className="mr-1 mt-1"></IonIcon> Roadmap
                             </button>
                         </Link>
+                        
                         <Link href="/financial-aid">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
