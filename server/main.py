@@ -121,7 +121,7 @@ class BackendAPI:
         else:
             print("[**] Production")
             self.client = pymongo.MongoClient(
-                f"mongodb+srv://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@cluster0.jhch7zd.mongodb.net/?retryWrites=true&w=majority")
+                f"mongodb+srv://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@{os.getenv('MONGO_CLUSTER')}/?retryWrites=true&w=majority")
 
         self.db = self.client["userData"]
 
