@@ -12,7 +12,7 @@ import { reload, trashBin } from "ionicons/icons"
 import FullPageLoader from "@/app/components/Loader/FullPageLoader"
 import AuthNotiy from "@/app/components/Sections/AuthNotify"
 
-export default function main() {
+export default function RoadmapDynamic() {
     const cropParam = useParams()["id"]
     const [showTimeline, setShowTimeline] = useState(false)
     const [showDiv, setShowDiv] = useState(false)
