@@ -34,8 +34,9 @@ from shop import scheme
 from weather import weather
 from pymongo import MongoClient
 from bson import ObjectId  # Import ObjectId from bson
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 if (os.getenv("ENV") == "DEV"):
     print("[*] DEV GLOBAL")
