@@ -48,7 +48,7 @@ function ProductCarousel() {
         <h1 className="text-4xl font-bold sm:text-5xl lg:text-left">
           Best Product &ldquo;Farmer&apos;s Choice&ldquo;
         </h1>
-        <p className="pt-3 text-xs lg:w-3/5 lg:pt-5 lg:text-left lg:text-base">
+        <p className="md:block hidden pt-3 text-xs lg:w-3/5 lg:pt-5 lg:text-left lg:text-base">
           &ldquo;Farmer&apos;ss Choice&ldquo; offers superior agricultural products,
           handpicked by dedicated farmers. Embrace the exceptional quality and
           freshness of our carefully cultivated selection, delivering the essence
@@ -56,7 +56,7 @@ function ProductCarousel() {
         </p>
         <Link href={"/shop/search"}>
 
-        <button className="mx-auto mt-5 w-1/2 bg-teal-600 rounded-xl p-5 text-gray-50 transition duration-500 flex items-center  hover:bg-teal-600 lg:mx-0 lg:h-10 lg:w-2/12 justify-center">
+        <button className="mx-auto mt-5 w-1/2 bg-teal-800 rounded-xl md:p-5 p-3 text-gray-50 transition duration-500 flex items-center  hover:bg-teal-600 lg:mx-0 lg:h-10 lg:w-2/12 justify-center">
           Order Now
         </button>
         </Link>

@@ -6,6 +6,7 @@ import { IonIcon } from '@ionic/react';
 import axios from 'axios';
 
 import { cityArr1, stateArr1 } from './region'
+import Image from 'next/image';
 
 
 export default function Crop() {

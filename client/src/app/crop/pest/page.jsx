@@ -4,6 +4,7 @@
 import { IonIcon } from "@ionic/react";
 import axios from "axios";
 import { imageOutline, reloadOutline } from "ionicons/icons";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 

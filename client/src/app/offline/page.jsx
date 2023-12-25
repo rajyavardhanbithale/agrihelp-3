@@ -12,7 +12,7 @@ export default function Offline() {
         }, 1050);
 
         return () => clearInterval(intervalId);
-    }, []); // Empty dependency array to run effect only once on mount
+    }, []); 
 
 
     return (

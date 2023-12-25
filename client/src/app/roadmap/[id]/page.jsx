@@ -1,23 +1,26 @@
 'use client'
 
+import { useParams } from "next/navigation"
+
 import axios from "axios"
 import CryptoJS from "crypto-js"
 import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import ConfettiExplosion from "react-confetti-explosion"
-import AuthNotiy from "../components/Sections/AuthNotify"
 import { IonIcon } from "@ionic/react"
 import { reload, trashBin } from "ionicons/icons"
+import FullPageLoader from "@/app/components/Loader/FullPageLoader"
+import AuthNotiy from "@/app/components/Sections/AuthNotify"
 
-
-export default function Progress() {
+export default function main() {
+    const cropParam = useParams()["id"]
     const [showTimeline, setShowTimeline] = useState(false)
     const [showDiv, setShowDiv] = useState(false)
     const [animation, setAnimation] = useState(false)
     const [cropData, setCropData] = useState(null)
     const [progressStage, setProgressStage] = useState(null)
-    const [error, setError] = useState(null)
-    const [loading,setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [cropName, setCropName] = useState(null)
     const [email, setEmail] = useState(null)
 
@@ -29,23 +32,29 @@ export default function Progress() {
             setEmail(jsonDecrypt?.email)
 
         } else {
-            window.location.href = "/login?callback=/progress"
+            window.location.href = "/login?callback=/roadmap"
         }
 
     }, [])
 
-    
+    useEffect(() => {
+        console.log(cropParam);
+        handleCropButton(cropParam)
+        setError(false)
+    }, [email])
+
+
     const handlefetch = async (param, body) => {
         setLoading(true)
-        setError(null)
+        setError(false)
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/progress${param}`, body)
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/roadmap${param}`, body)
             if (response.status === 200) {
                 setLoading(false)
                 return response.data
             }
         } catch (error) {
-            setError("error")
+            setError(true)
             setLoading(false)
             return null
         }
@@ -61,7 +70,7 @@ export default function Progress() {
             "stageIndex": 0
         }
         const response = await handlefetch("?method=get", body)
-        if (response){
+        if (response) {
             setCropData(response?.[cropName])
         }
         body = {
@@ -70,11 +79,16 @@ export default function Progress() {
             "stage": true,
             "stageIndex": 0
         }
+        
         const response1 = await handlefetch("?method=update", body)
-        if (response1){
+
+        if (response1) {
             setProgressStage(response1.detail)
+            
         }
     }
+
+
     const handleUpdateCrop = async (cropName, index) => {
         let body = {
             "email": email,
@@ -82,6 +96,7 @@ export default function Progress() {
             "stage": true,
             "stageIndex": index
         }
+
         const response = await handlefetch("?method=update", body)
         if (response) {
             setProgressStage(prevProgressStage => {
@@ -90,9 +105,10 @@ export default function Progress() {
                 return updatedProgressStage;
             });
         }
-
-
     }
+
+  
+
     const handleReset = async () => {
         let body = {
             "email": email,
@@ -101,7 +117,7 @@ export default function Progress() {
             "stageIndex": 0
         }
         const response = await handlefetch("?method=delete", body)
-        window.location.href = "/progress"
+        window.location.href = "/roadmap"
     }
 
 
@@ -117,16 +133,13 @@ export default function Progress() {
         }));
         setAnimation(!animation)
     }
-    const availableCrop = ["rice", "wheat"]
-
     return (
         <>
-            {email &&
+        {email &&
                 <AuthNotiy value={""}></AuthNotiy>
             }
-
-            {(cropData && progressStage) ? (
-                <div className=" lg:flex lg:flex-col lg:items-center lg:justify-center lg:h-full">
+        {(cropData && progressStage) ? (
+                <div className="lg:flex lg:flex-col lg:items-center lg:justify-center lg:h-full">
                     <div className="flex">
                         <span className="mx-auto text-4xl text-center font-semibold capitalize">Roadmap to Cultivate {cropName}</span>
                     </div>
@@ -162,8 +175,10 @@ export default function Progress() {
                                                     {progressStage[idx] ? (
                                                         <>
                                                             <div className="flex w-full justify-center align-middle items-center">
-                                                                <ConfettiExplosion particleSize={6} particleCount={150} force={0.6} />
+                                                                <ConfettiExplosion particleSize={5} particleCount={50} force={0.3}  />
+                                                              
                                                             </div>
+
                                                             <button className={`${progressStage[idx] ? "bg-green-950" : "bg-gray-800"}  py-2 px-4 rounded-2xl mx-2 my-4`}>Completed</button>
                                                             
                                                         </>
@@ -182,34 +197,16 @@ export default function Progress() {
                             ))}
                         </ol>
                         <div className="flex justify-center">
-                            <button onClick={handleReset} className={`flex justify-center align-middle items-center w-1/3 bg-red-500 text-white py-3 text-xl font-semibold px-4 rounded-2xl mx-2 my-4`}>Reset Progress <IonIcon icon={trashBin} className="ml-2 text-lg"></IonIcon></button>
+                            <button onClick={handleReset} className={`flex justify-center align-middle items-center md:w-1/3 bg-red-500 text-white py-3 text-xl font-semibold px-4 rounded-2xl mx-2 my-4`}>Reset Progress <IonIcon icon={trashBin} className="ml-2 text-lg"></IonIcon></button>
                         </div>
                     </div>
                 </div>
 
             ) : (
-                <div className="-mt-28 flex mix-h-screen md:h-screen overflow-hidden">
-                    <img className="hidden lg:block w-1/2 object-contain rounded-xl" src="https://storage.icograms.com/templates/preview/farm-smartphone.png" alt="" />
-                    <div className="flex flex-col w-full leading-10 tracking-wider justify-center align-middle">
-                        <span className="text-5xl text-center font-semibold">Crop Cultivation Guide</span>
-                        <span className="text-lg text-center font-light mt-4 p-2">Navigate the Path to Abundant Harvests with Expert Tips and Proven Techniques</span>
-                        <span className="text-2xl text-center  mt-8 p-2 font-semibold">Select Crop</span>
-
-                        <div className=" flex flex-col w-full justify-center gap-8 items-center em text-center p-8 ">
-                            {availableCrop.map((crop, idx) => (
-                                <span onClick={() => handleCropButton(crop)} className="flex items-center text-center justify-center cursor-pointer py-2 px-5 w-36 bg-green-800 text-white capitalize rounded-3xl shadow-2xl transition duration-300 hover:scale-110" key={idx}>
-                                {crop} {loading && crop===cropName && <IonIcon icon={reload} className="ml-1 animate-spin"></IonIcon>} 
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+               
+                   <FullPageLoader/>
             )}
-
-
-
-
-
+           
 
         </>
     )

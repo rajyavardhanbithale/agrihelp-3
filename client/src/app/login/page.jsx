@@ -28,7 +28,7 @@ export default function Login() {
   const secretKey = 'rar'
   
   const [loading, setLoading] = useState(false);
-  const callbackRoutes = ['/shop/checkout', '/progress']
+  const callbackRoutes = ['/shop/checkout', '/roadmap']
 
 
   const formik = useFormik({

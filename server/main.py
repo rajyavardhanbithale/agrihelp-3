@@ -112,7 +112,7 @@ class BackendAPI:
             f"/{self.app_version}/" + "ping", self.ping, methods=["GET"]) 
         
         self.router.add_api_route(
-            f"/{self.app_version}/" + "progress", self.progress, methods=["POST"])
+            f"/{self.app_version}/" + "roadmap", self.roadmap, methods=["POST"])
 
         if (os.getenv("ENV") == "DEV"):
             print("[*] DEV")
@@ -317,19 +317,6 @@ class BackendAPI:
         # return file.filename
         return disease_pred.predict_image(f"crop_image/{unique}"+file.filename)
 
-    # def generate_messages(self):
-    #     import g4f
-    #     res = g4f.ChatCompletion.create(
-    #         model="gpt-4",
-    #         messages=[{"role": "user", "content": crop_reco.msg}],
-    #         stream=True
-    #     )
-    #     for msg in res:
-    #         yield f"{msg}".encode("utf-8")
-
-    # def main(self):
-    #     return EventSourceResponse(self.generate_messages(), media_type='text/event-stream')
-
     async def shopItem(self, item: int, category: str):
         random_records = list(collection.aggregate([
             {"$match": {"categories": category}},
@@ -527,7 +514,8 @@ class BackendAPI:
 
         return records_list
 
-    async def progress(self,method:str,progress:base_models.Progress):
+    async def roadmap(self,method:str,progress:base_models.Progress):
+        
         user = self.collection.find_one({"email": progress.email})
         collectionProgress = db["cropProgress"] 
         scheme = {
@@ -564,9 +552,6 @@ class BackendAPI:
                 }
                 collectionProgress.update_one(query_criteria, update_query)
                
-               
-
-
             result = collectionProgress.find_one(query)
             if False in result["progress"][0]["stage"][0:progress.stageIndex]:
                 raise HTTPException(status_code=401,detail="unable to update value")
@@ -575,12 +560,15 @@ class BackendAPI:
                 query = {"email": progress.email, f"progress.name": progress.name}
                 update = {"$set": {f"progress.$.stage.{progress.stageIndex}": progress.stage}}
                 collectionProgress.update_one(query, update)
-                
                 # Fetching 
-                ret = collectionProgress.find_one({"email":progress.email,"progress.name": progress.name})
+                result = collectionProgress.find({
+                    "email": progress.email,
+                    'progress': {'$elemMatch': {'name': progress.name}}
+                })
+                for document in result: 
+                    filtered_progress = next(item for item in document['progress'] if item['name'] == progress.name)
 
-                
-                raise HTTPException(status_code=200,detail=ret["progress"][0]["stage"])
+                raise HTTPException(status_code=200,detail=filtered_progress["stage"])
             
             
         return None

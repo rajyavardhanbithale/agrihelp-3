@@ -5,32 +5,32 @@ function Categories() {
   const category = {
     "seed": {
       "name": "seed",
-      "image": "https://www.poshtik.in/cdn/shop/products/sunflower_seeds.jpg",
+      "image": "/assets/shop/category/seeds.webp",
       "href": "/shop/search?category=seed"
     },
     "fertilizer": {
       "name": "fertilizer",
-      "image": "https://www.tradeindia.com/_next/image/?url=https%3A%2F%2Ftiimg.tistatic.com%2Ffp%2F1%2F007%2F569%2Fpromoting-healthy-and-strong-growth-urea-source-of-nitrogen-granular-fertilizer-215.jpg&w=750&q=75",
+      "image": "/assets/shop/category/fertilizer.webp",
       "href": "/shop/search?category=fertilizer"
     },
     "pump": {
       "name": "pump",
-      "image": "https://www.inverter.com/images/thumbs/0000849_5-hp-horizontal-centrifugal-pump_550.jpeg",
+      "image": "/assets/shop/category/pump.webp",
       "href": "/shop/search?category=pump"
     },
     "pesticide": {
       "name": "pesticide",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbgCja6fMyaL1N3cixVyTMxsApzOxc7D86j-15WMMAd_Ip1VxJBfGziYzEKL37Opyd8NU&usqp=CAU",
+      "image": "/assets/shop/category/pesticide.webp",
       "href": "/shop/search/?category=Pesticide"
     },
     "equipment": {
       "name": "equipment",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMgh4nphvHBpQJF1l7PMT7_kyt3hyXYnwYB7X7UgKGzkOWuV-rhyZjzC8Lsb3EwfFdOLY&usqp=CAU",
+      "image": "/assets/shop/category/equipment.webp",
       "href": "/shop/search?category=equipment"
     },
     "organicProducts": {
       "name": "Organic Products",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSonkaWy730goAUAO_deInGd5rGTBI4GZOmoZSxxfJxJNm0DlYRicqu5llfgUYnvpcWA6c&usqp=CAU",
+      "image": "/assets/shop/category/organic.webp",
       "href": "/shop/search?category=organic"
     },
 
