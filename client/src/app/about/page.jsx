@@ -1,7 +1,36 @@
+'use client'
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function About() {
+    const images = [
+        '/about/webp/page1.webp',
+        '/about/webp/page2.webp',
+        '/about/webp/page3.webp',
+        '/about/webp/page4.webp',
+        '/about/webp/page5.webp',
+        '/about/webp/page6.webp',
+        '/about/webp/page7.webp',
+
+    ];
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 800,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        autoplay: true,      // Enable autoplay
+        autoplaySpeed: 3000, // Set the interval (in milliseconds)
+
+
+    };
     return (
+
         <>
+
             <div class="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
                 <div class="absolute inset-0 -z-10 overflow-hidden">
                     <svg class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]" aria-hidden="true">
@@ -27,8 +56,17 @@ export default function About() {
                         </div>
                     </div>
                     <div class="-ml-12 -mt-12 p-12 lg:sticky lg:top-36 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-                        <img class="md:w-[48rem] hidden md:block w-[120%]  max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10" src="/about/page1.png" alt="" />
-                        <img class="md:hidden block md:w-[48rem] w-[60%] mx-auto mr-10   max-w-none rounded-xl bg-gray-900 shadow-2xl ring-1 ring-gray-400/10" src="/about/mobile.png" alt="" />
+                        {/* <img class="md:w-[48rem] hidden md:block w-[120%]  max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10" src="/about/page1.png" alt="" />
+                       */}
+                       <img class="md:hidden block md:w-[48rem] w-[60%] mx-auto mr-10   max-w-none rounded-xl bg-gray-900 shadow-2xl ring-1 ring-gray-400/10" src="/about/webp/mobile.webp" alt="" /> 
+                        <div className="hidden md:block">
+
+                            <Slider {...settings}>
+                                {images.map((image, index) => (
+                                    <img key={index} src={image} alt={`Slide ${index + 1}`} className=" md:w-[48rem] hidden md:block w-[120%]  max-w-none rounded-xl bg-gray-900 shadow-2xl ring-1 ring-gray-400/10" />
+                                ))}
+                            </Slider>
+                        </div>
                     </div>
                     <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2  lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                         <div class="lg:pr-4">
@@ -72,7 +110,7 @@ export default function About() {
                                     </li>
 
                                     <li class="flex gap-x-3">
-                                        <span><strong class="font-bold text-gray-900 tracking-normal text-xl">Secure Your Farm's Financial Future with Financial Aid Hub
+                                        <span><strong class="font-bold text-gray-900 tracking-normal text-xl">Secure Your Farm&apos;s Financial Future with Financial Aid Hub
                                         </strong>
                                             <br /><span className="text-base"> We offer Financial Assistance, a comprehensive tool designed to help farmers access and manage financial support. Seamlessly respond to grants, loans and financial assistance to ensure economic stability and growth.</span></span>
                                     </li>

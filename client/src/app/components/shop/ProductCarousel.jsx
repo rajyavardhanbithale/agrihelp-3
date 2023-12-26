@@ -1,5 +1,4 @@
 import React from 'react';
-import imageSrc from './assets/Carousel.jpeg'; // Replace with the correct image source
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

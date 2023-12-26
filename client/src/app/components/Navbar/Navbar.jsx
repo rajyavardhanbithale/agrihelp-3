@@ -246,6 +246,12 @@ export default function Navbar() {
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
                                 <IonIcon icon={map} className="mr-1 mt-1"></IonIcon> Roadmap
                             </button>
+                        </Link>                        
+                        <Link href="https://agrotech-278f8.firebaseapp.com/">
+                            <button type="button"
+                                className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
+                                <IonIcon icon={chatbubble} className="mr-1 mt-1"></IonIcon> Chat
+                            </button>
                         </Link>
 
                         <Link href="/financial-aid">
