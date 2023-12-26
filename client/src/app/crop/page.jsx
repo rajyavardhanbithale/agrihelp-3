@@ -272,7 +272,7 @@ function Result(crop) {
     <>
       <div className="lg:w-[90%] mx-auto" id="recommendation">
         <div className="flex justify-center items-center md:mb-16 mb-4 ">
-          <span className="w-1/2 bg-teal-950 md:py-6 lg:py-3 py-4 px-5 lg:px-0  text-white text-center md:text-3xl text-2xl rounded-2xl font-bold ">RESULT</span>
+          <span className="w-1/2 bg-teal-950 md:py-6 mt-10 lg:py-3 py-4 px-5 lg:px-0  text-white text-center md:text-3xl text-2xl rounded-2xl font-bold ">RESULT</span>
         </div>
         <div className="w-full lg:p-5 md:px-5 p-1 md:flex md:justify-between items-center">
 

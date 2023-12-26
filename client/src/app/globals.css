@@ -38,11 +38,11 @@ html {
 
 
 /* /* body { */
-  /* font-family: var(--font-poppins); */
+/* font-family: var(--font-poppins); */
 
-  /* background: #181c25; */
-  /* background: radial-gradient(circle, rgba(24, 28, 37, 1) 0%, rgba(28, 32, 43, 1) 100%); */
- 
+/* background: #181c25; */
+/* background: radial-gradient(circle, rgba(24, 28, 37, 1) 0%, rgba(28, 32, 43, 1) 100%); */
+
 
 .logo {
   height: 6em;
@@ -119,16 +119,32 @@ html {
 
 
 @keyframes shake {
-  0% { transform: translateX(0) rotate(0) scale(1); }
-  25% { transform: translateX(-5px) rotate(-45deg) scale(1.2); }
-  50% { transform: translateX(5px) rotate(45deg) scale(1.2); }
-  75% { transform: translateX(-5px) rotate(-45deg) scale(1.2); }
-  100% { transform: translateX(0) rotate(0) scale(1); }
+  0% {
+    transform: translateX(0) rotate(0) scale(1);
+  }
+
+  25% {
+    transform: translateX(-5px) rotate(-45deg) scale(1.2);
+  }
+
+  50% {
+    transform: translateX(5px) rotate(45deg) scale(1.2);
+  }
+
+  75% {
+    transform: translateX(-5px) rotate(-45deg) scale(1.2);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0) scale(1);
+  }
 }
 
 .shake-once {
-  animation: shake 2s ease-in-out; /* Adjust the duration as needed */
-  animation-iteration-count: 1; /* Set to 1 for only one iteration */
+  animation: shake 2s ease-in-out;
+  /* Adjust the duration as needed */
+  animation-iteration-count: 1;
+  /* Set to 1 for only one iteration */
 }
 
 .indexedStep {
@@ -151,14 +167,24 @@ html {
   overflow-x: auto;
   display: flex;
   scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS devices */
+  -webkit-overflow-scrolling: touch;
+  /* Enable momentum scrolling on iOS devices */
 }
 
 .swipe-item {
   flex: 0 0 auto;
   scroll-snap-align: start;
-  padding: 0 8px; /* Adjust padding as needed */
+  padding: 0 8px;
+  /* Adjust padding as needed */
 }
 
 
 
+.main-logo-page {
+  background: rgba( 55, 65, 81, 0.45 );
+  box-shadow: 0 4px 16px 0 rgba(55, 65, 81, 0.6);
+  backdrop-filter: blur( 10.5px );
+  -webkit-backdrop-filter: blur( 10.5px );
+  border-radius: 16px;
+
+}
