@@ -95,10 +95,13 @@ export default function Navbar() {
                                 className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
                                 <IonIcon icon={mailOpenOutline} className="mr-1 mt-1"></IonIcon> Contact
                             </li>
+                            <Link href={"/about"}>
+
                             <li
                                 className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
                                 <IonIcon icon={peopleCircleOutline} className="mr-1 mt-1"></IonIcon> About Us
                             </li>
+                            </Link>
                         </ul>
 
                     </div>
@@ -185,7 +188,7 @@ export default function Navbar() {
                                         <Link href="#"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                             Feedback</Link>
-                                        <Link href="#"
+                                        <Link href="/about"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                             About</Link>
 
