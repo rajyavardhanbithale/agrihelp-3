@@ -4,18 +4,52 @@ import React, { useState, useEffect } from 'react';
 
 export default function main() {
     const [seconds, setSeconds] = useState(45);
+    const [isServerResponsive, setIsServerResponsive] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds((prevSeconds) => prevSeconds - 1);
-      } else {
-        clearInterval(interval);
-      }
-    }, 1000);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (seconds > 0) {
+                setSeconds((prevSeconds) => prevSeconds - 1);
+            } else {
+                clearInterval(interval);
+            }
+        }, 1000);
 
-    return () => clearInterval(interval);
-  }, [seconds]);
+        return () => clearInterval(interval);
+    }, [seconds]);
+
+    const checkEndpointStatus = async () => {
+        const maxAttempts = 10; 
+        const timeout = 1000; 
+
+        let attempts = 0;
+
+        while (attempts < maxAttempts) {
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/ping`);
+                const data = await response.json();
+                if (response.status === 200) {
+                    setIsServerResponsive(true);
+                    window.location.href = '/';
+                    return;
+                }
+            } catch (error) {
+            }
+
+            attempts++;
+            await new Promise(resolve => setTimeout(resolve, timeout));
+        }
+        setIsServerResponsive(false);
+    };
+
+    useEffect(() => {
+        checkEndpointStatus();
+        const intervalId = setInterval(() => {
+            checkEndpointStatus();
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
 
     return (
@@ -27,7 +61,7 @@ export default function main() {
                     <p className="text-lg md:text-xl lg:text-2xl text-gray-500 my-12">Waking Up the Server Just for You.</p>
                 </div>
                 <div className="md:w-1/2 w-10/12 -mt-10 md:-mt-10 flex lg:items-end justify-center md:p-4">
-                  <img src="/assets/wakeup-call/server.gif" className="-ml-12 md:-ml-0"></img>
+                    <img src="/assets/wakeup-call/server.gif" className="-ml-12 md:-ml-0"></img>
                 </div>
             </div>
         </>

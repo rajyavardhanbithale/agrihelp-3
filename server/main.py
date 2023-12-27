@@ -575,7 +575,7 @@ class BackendAPI:
         return None
     
     async def ping(self):
-        time.sleep(5)
+        
         raise HTTPException(status_code=200, detail="PING - PONG")
 
 

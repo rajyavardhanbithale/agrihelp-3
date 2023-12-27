@@ -5,9 +5,9 @@ import useAuthUser from './app/hooks/useAuthUser'
 
 
 export default async function Middleware(request) {
-    const isLog  = await useAuthUser()
+    const isLog = await useAuthUser()
     const checkCookie = () => {
-       
+
         try {
             const getEncryptedCookie = request.cookies.get('user')?.value
             const parseEncryptedCookie = CryptoJS.AES.decrypt(getEncryptedCookie, "rar").toString(CryptoJS.enc.Utf8)
@@ -37,7 +37,7 @@ export default async function Middleware(request) {
         }
     };
 
-   
+
 
     const path = request.nextUrl.pathname
     const isPrivate = path === '/login' || path === '/signup' || path === '/signup/verify'
@@ -50,7 +50,7 @@ export default async function Middleware(request) {
     //     return NextResponse.redirect(new URL('/', request.nextUrl))
     // }
 
-    if (path === '/error' && await checkEndpointStatus()) {
+    if ((path === '/error' || path === '/server-wakeup') && await checkEndpointStatus()) {
         return NextResponse.redirect(new URL('/', request.nextUrl))
     }
 
@@ -58,12 +58,14 @@ export default async function Middleware(request) {
         return NextResponse.redirect(new URL('/error', request.nextUrl))
     }
 
-   
-
     if (!isLog && path === '/shop/checkout') {
-
         return NextResponse.redirect(new URL('/login?callback=/shop/checkout', request.nextUrl))
-        
+    }
+
+
+    const wakePath = path === '/about' === '/components' === '/error' === '/hooks' === '/offline' === '/scheme ' === '/shop' === '/weather' === '/api' === '/crop' === '/financial-aid' === '/login' === '/roadmap' === '/server-wakeup' === '/signup'
+    if (!(await checkEndpointStatus()) && (request.nextUrl.pathname.startsWith('/crop') || request.nextUrl.pathname.startsWith('/shop') || wakePath)) {
+        return NextResponse.redirect(new URL('/server-wakeup', request.nextUrl))
     }
 
 
@@ -71,7 +73,7 @@ export default async function Middleware(request) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/login', '/signup', '/shop/checkout','/signup/verify', '/shop/:path*','/shop','/error']
+    matcher: ['/login', '/server-wakeup', '/signup', '/', '/shop/checkout', '/signup/verify', '/shop/:path*', '/shop', '/error', '/about', '/components', '/error', '/hooks', '/offline', '/scheme ', '/shop', '/weather', '/api', '/crop', '/financial-aid', '/login', '/roadmap', '/signup']
 }
 
 
