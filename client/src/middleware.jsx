@@ -42,6 +42,13 @@ export default async function Middleware(request) {
     const path = request.nextUrl.pathname
     const isPrivate = path === '/login' || path === '/signup' || path === '/signup/verify'
 
+
+    const wakePath = path === '/about' === '/components' === '/error' === '/hooks' === '/offline' === '/scheme ' === '/shop' === '/weather' === '/api' === '/crop' === '/financial-aid' === '/login' === '/roadmap' === '/server-wakeup' === '/signup'
+    if (!(await checkEndpointStatus()) && (request.nextUrl.pathname.startsWith('/crop') || request.nextUrl.pathname.startsWith('/shop') || wakePath || request.nextUrl.pathname.startsWith('/weather'))) {
+        return NextResponse.redirect(new URL('/server-wakeup', request.nextUrl))
+    }
+
+
     if (isLog && isPrivate) {
         console.log("==========login==========");
         return NextResponse.redirect(new URL('/', request.nextUrl))
@@ -63,10 +70,6 @@ export default async function Middleware(request) {
     }
 
 
-    const wakePath = path === '/about' === '/components' === '/error' === '/hooks' === '/offline' === '/scheme ' === '/shop' === '/weather' === '/api' === '/crop' === '/financial-aid' === '/login' === '/roadmap' === '/server-wakeup' === '/signup'
-    if (!(await checkEndpointStatus()) && (request.nextUrl.pathname.startsWith('/crop') || request.nextUrl.pathname.startsWith('/shop') || wakePath)) {
-        return NextResponse.redirect(new URL('/server-wakeup', request.nextUrl))
-    }
 
 
 }

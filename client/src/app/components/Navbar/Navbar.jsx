@@ -127,11 +127,11 @@ export default function Navbar() {
                             <button type="button" onClick={handleClickToOpen}
                                 className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white">
                                 <span className="sr-only">Open main menu</span>
-                                {/* <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                                </svg> */}
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -219,7 +219,7 @@ export default function Navbar() {
                 </dialog>
                 {/* features box */}
                 <dialog open={fopen} onClose={() => setfOpen(false)} >
-                    <div className={`animate-fade-down animate-duration-200 hidden lg:block w-48 fixed top-16 md:left-[26%] lg:left-[37%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 rounded-lg `}>
+                    <div className={`animate-fade-down animate-duration-200 hidden lg:block w-48 fixed top-16 md:left-[26%] lg:left-[37%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 shadow-2xl rounded-lg `}>
                         <Link href="/weather">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
@@ -284,8 +284,3 @@ export default function Navbar() {
 
     );
 }
-
-
-
-
-                                                                               
