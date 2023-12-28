@@ -19,7 +19,7 @@ export default function Navbar() {
     };
 
     const handleToClose = () => {
-        setOpen(false);
+        setOpen(!open);
     };
     const handleToClosef = () => {
         setfOpen(false);
@@ -97,10 +97,10 @@ export default function Navbar() {
                             </li>
                             <Link href={"/about"}>
 
-                            <li
-                                className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
-                                <IonIcon icon={peopleCircleOutline} className="mr-1 mt-1"></IonIcon> About Us
-                            </li>
+                                <li
+                                    className="flex text-xl font-semibold hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
+                                    <IonIcon icon={peopleCircleOutline} className="mr-1 mt-1"></IonIcon> About Us
+                                </li>
                             </Link>
                         </ul>
 
@@ -120,7 +120,7 @@ export default function Navbar() {
                                 <Link href="/login"
                                     className="flex justify-center align-middle items-center text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100">
                                     Login <IonIcon icon={arrowForward} className="ml-1"></IonIcon>
-                                    </Link>
+                                </Link>
                             )}
                         </div>
                         <div className="flex fixed right-6 lg:hidden">
@@ -143,7 +143,7 @@ export default function Navbar() {
                     <div className="" role="dialog" aria-modal="true">
                         <div className="fixed inset-0 z-50"></div>
                         <div
-                            className={`${open && "animate-fade-left animate-duration-100 animate-ease-out"} fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10`}>
+                            onClick={handleToClose} className={`${open && "animate-fade-left animate-duration-100 animate-ease-out"} fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-green-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10`}>
                             <div className="flex items-center justify-between">
 
                                 <Link href={"/"}>
@@ -185,6 +185,12 @@ export default function Navbar() {
                                         <Link href="https://agrotech-278f8.firebaseapp.com/"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                             Chat</Link>
+                                        <Link href="/scheme"
+                                            className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
+                                            Scheme</Link>
+                                        <Link href="/financial-aid"
+                                            className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
+                                            Finance</Link>
                                         <Link href="#"
                                             className="block h-14 text-center rounded-lg px-3 pt-4  text-xl font-semibold text-white  hover:text-green-800 transition ease-in-out  hover:-translate-y-0 hover:scale-[1.0] duration-100 ">
                                             Feedback</Link>
@@ -219,7 +225,7 @@ export default function Navbar() {
                 </dialog>
                 {/* features box */}
                 <dialog open={fopen} onClose={() => setfOpen(false)} >
-                    <div className={`animate-fade-down animate-duration-200 hidden lg:block w-48 fixed top-16 md:left-[26%] lg:left-[37%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 shadow-2xl rounded-lg `}>
+                    <div onClick={() => setfOpen(false)} className={`animate-fade-down animate-duration-200 hidden lg:block w-48 fixed top-16 md:left-[26%] lg:left-[37%] mt-1  text-xm font-semibold text-white bg-green-500 border-2 border-green-500 shadow-2xl rounded-lg `}>
                         <Link href="/weather">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
@@ -249,7 +255,7 @@ export default function Navbar() {
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">
                                 <IonIcon icon={map} className="mr-1 mt-1"></IonIcon> Roadmap
                             </button>
-                        </Link>                        
+                        </Link>
                         <Link href="https://agrotech-278f8.firebaseapp.com/">
                             <button type="button"
                                 className="flex justify-center w-full px-4 py-2 font-medium  text-center rtl:text-right border-b-2 border-white cursor-pointer hover:bg-green-100 rounded-sm dark:hover:bg-green-600 dark:hover:text-white ">

@@ -23,19 +23,28 @@ export default async function Middleware(request) {
 
 
     const checkEndpointStatus = async () => {
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/ping`);
-            const data = await response.json();
-            if (response.status === 200) {
-                return true
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
 
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/ping`, {
+                signal: controller.signal,
+            });
+
+            const data = await response.json();
+
+            if (response.status === 200) {
+                return true;
             } else {
-                return false
+                return false;
             }
         } catch (error) {
-            return false
+            return false;
+        } finally {
+            clearTimeout(timeoutId);
         }
     };
+
 
 
 
