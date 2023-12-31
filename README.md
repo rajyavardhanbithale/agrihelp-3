@@ -57,7 +57,7 @@
 </div>
 
 ### Farmer Paradise
-[AGRIHElP]
+AGRIHElP
 <br>
 Welcome to [AGRIHELP](https://agrihelp-3.vercel.app/) , your ultimate platform for agricultural solutions. AGRIHELP integrates cutting-edge technology with time-tested agricultural practices to empower farmers and agricultural businesses for success.
 
