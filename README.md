@@ -101,7 +101,7 @@ Visit [AGRIHELP](https://agrihelp-3.vercel.app/) to embark on a journey towards 
 ## Tech Stack
 ### Frontend:
 - [Next JS](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- [Tailwind ](https://tailwindcss.com/)
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [Ionic](https://ionicframework.com/)
 
@@ -129,7 +129,7 @@ Visit [AGRIHELP](https://agrihelp-3.vercel.app/) to embark on a journey towards 
 
 ## Developer 
 ### Rajyavardhan Bithale 
-#### NextJS, ReactJS, Python, FastAPI, Sklearn, MongoDB, FireBase, Redis
+#### NextJS, ReactJS, Python, FastAPI, Sklearn, Numpy, MongoDB, FireBase, Redis
 <a href="https://www.linkedin.com/in/rajyavardhan-bithale-999482258/" target="_blank">
   <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
 </a>
